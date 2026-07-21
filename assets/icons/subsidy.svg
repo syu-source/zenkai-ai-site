@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-labelledby="t">
+  <title id="t">補助金申請サポート</title>
+  <circle cx="12" cy="12" r="8.5"/>
+  <path d="M9 8l3 4.2L15 8"/>
+  <line x1="12" y1="12.2" x2="12" y2="16.5"/>
+  <line x1="9.3" y1="13.6" x2="14.7" y2="13.6"/>
+  <line x1="9.3" y1="15.4" x2="14.7" y2="15.4"/>
+</svg>

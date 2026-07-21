@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スタイルガイド｜ZENKAI AI パートナーズ</title>
+<meta name="description" content="ZENKAI AI パートナーズ 公式サイト共通デザインシステムの検証用ページ。">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../css/design-system.css">
+<style>
+  /* このページ限定の検証用スタイル（design-system.cssは改変しない） */
+  .sg-block { padding: var(--space-7) 0; border-bottom: 1px dashed var(--color-border); }
+  .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-4); }
+  .sg-swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); }
+  .sg-swatch-color { height: 64px; }
+  .sg-swatch-label { padding: var(--space-2) var(--space-3); font-size: 0.78rem; background: var(--color-base); }
+  .sg-icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--space-5); text-align: center; }
+  .sg-icon-tile { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+  .sg-icon-tile svg { width: 32px; height: 32px; margin: 0 auto var(--space-2); color: var(--color-accent); }
+  .sg-icon-tile span { font-size: 0.75rem; color: var(--color-text-muted); display: block; }
+  .sg-row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+  .sg-fuji-demo { position: relative; background: var(--gradient-navy); border-radius: var(--radius-lg); height: 200px; overflow: hidden; }
+  .sg-fuji-demo svg { position: absolute; bottom: 0; left: 0; width: 100%; color: var(--color-accent2); opacity: 0.3; }
+  .sg-logo-demo { padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); display: inline-block; }
+  .sg-logo-demo.dark { background: var(--color-navy); }
+  code.sg-code { background: var(--gray-100); padding: 0.15em 0.5em; border-radius: 4px; font-size: 0.85em; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
+      <img src="../assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
+    </a>
+    <nav class="nav-primary" aria-label="メインナビゲーション">
+      <ul>
+        <li><a href="../index.html">ホーム</a></li>
+        <li><a href="../index.html#services">サービス</a></li>
+        <li><a href="../index.html#industries">業界別</a></li>
+        <li><a href="../cases.html">導入事例</a></li>
+        <li><a href="../pricing.html">料金</a></li>
+        <li><a href="../company.html">会社概要</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="../contact.html" class="btn btn-primary btn-sm header-cta">無料相談</a>
+      <button type="button" class="hamburger" aria-label="メニューを開く" aria-controls="navMobile" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
+      <ul>
+        <li><a href="../index.html">ホーム</a></li>
+        <li><a href="../index.html#services">サービス</a></li>
+        <li><a href="../index.html#industries">業界別</a></li>
+        <li><a href="../cases.html">導入事例</a></li>
+        <li><a href="../pricing.html">料金</a></li>
+        <li><a href="../company.html">会社概要</a></li>
+      </ul>
+      <a href="../contact.html" class="btn btn-primary">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero + Fuji line デモ -->
+<section class="hero">
+  <img src="../assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
+  <div class="container hero-inner">
+    <span class="badge badge-on-navy">静岡発</span>
+    <h1 class="mt-4">スタイルガイド<br>ZENKAI AI パートナーズ デザインシステム</h1>
+    <p class="lead">このページは全ページ共通の css/design-system.css と js/main.js の検証用です。実際のコンテンツページではありません。</p>
+    <div class="cta-actions" style="justify-content:flex-start;">
+      <a href="#buttons" class="btn btn-primary">主要ボタンを見る</a>
+      <a href="#faq" class="btn btn-on-navy">FAQを見る</a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- カラー -->
+  <section class="sg-block" id="colors">
+    <div class="section-head is-left">
+      <span class="section-label">Colors</span>
+      <h2 class="section-title">カラーパレット</h2>
+    </div>
+    <div class="sg-swatches">
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-base);border-bottom:1px solid var(--color-border)"></div><div class="sg-swatch-label">--color-base<br><code class="sg-code">#FFFFFF</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-navy)"></div><div class="sg-swatch-label">--color-navy<br><code class="sg-code">#0B1E3A</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-accent)"></div><div class="sg-swatch-label">--color-accent<br><code class="sg-code">#0E7FC0</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-accent2)"></div><div class="sg-swatch-label">--color-accent2<br><code class="sg-code">#00B4D8</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-tea)"></div><div class="sg-swatch-label">--color-tea<br><code class="sg-code">#3E7C50</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gradient-accent)"></div><div class="sg-swatch-label">--gradient-accent</div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-100)"></div><div class="sg-swatch-label">--gray-100</div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-300)"></div><div class="sg-swatch-label">--gray-300</div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-500)"></div><div class="sg-swatch-label">--gray-500</div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-700)"></div><div class="sg-swatch-label">--gray-700</div></div>
+    </div>
+  </section>
+
+  <!-- タイポグラフィ -->
+  <section class="sg-block fade-in" id="typography">
+    <div class="section-head is-left">
+      <span class="section-label">Typography</span>
+      <h2 class="section-title">タイポグラフィ</h2>
+    </div>
+    <h1>見出し1（h1）現場を知っているAI会社</h1>
+    <h2 class="mt-4">見出し2（h2）AI導入コンサルティング</h2>
+    <h3 class="mt-4">見出し3（h3）静岡から日本の中小企業へ</h3>
+    <p class="mt-4">本文テキスト：ZENKAI AI パートナーズは、不動産・製造業の実業経験を持つチームが、AI導入の「何から始めればいいか分からない」を解決します。Noto Sans JP／Inter 1234567890</p>
+  </section>
+
+  <!-- セクション見出しパターン -->
+  <section class="sg-block fade-in" id="section-head">
+    <div class="section-head">
+      <span class="section-label">Service</span>
+      <h2 class="section-title">サービス一覧（見出しパターン中央寄せ例）</h2>
+      <p class="section-lead">英語小ラベル＋日本語大見出しの組み合わせ。全ページの導入部で使用する共通パターンです。</p>
+    </div>
+  </section>
+
+  <!-- ボタン -->
+  <section class="sg-block fade-in" id="buttons">
+    <div class="section-head is-left">
+      <span class="section-label">Buttons</span>
+      <h2 class="section-title">ボタン</h2>
+    </div>
+    <div class="sg-row">
+      <a href="#" class="btn btn-primary">btn btn-primary</a>
+      <a href="#" class="btn btn-secondary">btn btn-secondary</a>
+      <a href="#" class="btn btn-primary btn-sm">btn-primary btn-sm</a>
+      <a href="#" class="btn btn-secondary btn-sm">btn-secondary btn-sm</a>
+    </div>
+    <div class="sg-row mt-4" style="background:var(--color-navy);padding:var(--space-5);border-radius:var(--radius-md);">
+      <a href="#" class="btn btn-on-navy">btn btn-on-navy</a>
+    </div>
+  </section>
+
+  <!-- バッジ -->
+  <section class="sg-block fade-in" id="badges">
+    <div class="section-head is-left">
+      <span class="section-label">Badges</span>
+      <h2 class="section-title">徽章（バッジ）</h2>
+    </div>
+    <div class="sg-row">
+      <span class="badge badge-shizuoka">静岡発</span>
+      <span class="badge badge-accent">FDE型伴走支援</span>
+    </div>
+  </section>
+
+  <!-- パンくず -->
+  <section class="sg-block fade-in" id="breadcrumb">
+    <div class="section-head is-left">
+      <span class="section-label">Breadcrumb</span>
+      <h2 class="section-title">パンくずリスト</h2>
+    </div>
+    <nav class="breadcrumb" aria-label="パンくずリスト例">
+      <ol>
+        <li><a href="#">ホーム</a></li>
+        <li><a href="#">サービス</a></li>
+        <li aria-current="page">AI導入コンサルティング</li>
+      </ol>
+    </nav>
+  </section>
+
+  <!-- カード -->
+  <section class="sg-block fade-in" id="cards">
+    <div class="section-head is-left">
+      <span class="section-label">Cards</span>
+      <h2 class="section-title">カード</h2>
+    </div>
+    <div class="card-grid cols-3">
+      <div class="card">
+        <div class="card-icon"><img src="../assets/icons/consulting.svg" alt=""></div>
+        <p class="card-title">AI導入コンサルティング</p>
+        <p class="card-text">需要確定から、ソフト・ハード・開発環境の選定までを伴走支援します。</p>
+        <a href="#" class="card-link">詳しく見る &rsaquo;</a>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="../assets/icons/engineer.svg" alt=""></div>
+        <p class="card-title">AIエンジニア常駐・伴走支援</p>
+        <p class="card-text">日単位・週単位でAI人材を実地または遠隔で派遣します（FDE型支援）。</p>
+        <a href="#" class="card-link">詳しく見る &rsaquo;</a>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="../assets/icons/subsidy.svg" alt=""></div>
+        <p class="card-title">補助金申請サポート</p>
+        <p class="card-text">デジタル化・AI導入補助金など各種制度の活用を支援します。</p>
+        <a href="#" class="card-link">詳しく見る &rsaquo;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- アイコン一覧 -->
+  <section class="sg-block fade-in" id="icons">
+    <div class="section-head is-left">
+      <span class="section-label">Icons</span>
+      <h2 class="section-title">サービスアイコン（10種・24x24 stroke）</h2>
+    </div>
+    <div class="sg-icon-grid">
+      <div class="sg-icon-tile"><img src="../assets/icons/consulting.svg" alt="コンサルティング"><span>consulting</span></div>
+      <div class="sg-icon-tile"><img src="../assets/icons/engineer.svg" alt="エンジニア"><span>engineer</span></div>
+      <div class="sg-icon-tile"><img src="../assets/icons/tool.svg" alt="ツール開発"><span>tool</span></div>
+      <div class="sg-icon-tile"><img src="../assets/icons/dx.svg" alt="DX化支援"><span>dx</span></div>
+      <div class="sg-icon-tile"><img src="../assets/icons/sfa.svg" alt="SFA構築"><span>sfa</span></div>
+      <div class="sg-icon-tile"><img src="../assets/icons/iot.svg" alt="IoT導入"><span>iot</span></div>
+      <div class="sg-icon-tile"><img src="../assets/icons/training.svg" alt="研修"><span>training</span></div>
+      <div class="sg-icon-tile"><img src="../assets/icons/inspection.svg" alt="外観検査"><span>inspection</span></div>
+      <div class="sg-icon-tile"><img src="../assets/icons/realestate.svg" alt="不動産"><span>realestate</span></div>
+      <div class="sg-icon-tile"><img src="../assets/icons/subsidy.svg" alt="補助金"><span>subsidy</span></div>
+    </div>
+  </section>
+
+  <!-- ロゴ／Fuji line ／favicon -->
+  <section class="sg-block fade-in" id="brand-assets">
+    <div class="section-head is-left">
+      <span class="section-label">Brand Assets</span>
+      <h2 class="section-title">ロゴ／富士山ラインアート／Favicon</h2>
+    </div>
+    <div class="sg-row">
+      <div class="sg-logo-demo"><img src="../assets/logo.svg" alt="ロゴ（白背景用）" width="180"></div>
+      <div class="sg-logo-demo dark"><img src="../assets/logo-white.svg" alt="ロゴ（紺背景用）" width="180"></div>
+      <div class="sg-logo-demo"><img src="../assets/favicon.svg" alt="favicon" width="48" height="48"></div>
+    </div>
+    <div class="sg-fuji-demo mt-6">
+      <img src="../assets/fuji-line.svg" alt="富士山ラインアート">
+    </div>
+  </section>
+
+  <!-- テーブル -->
+  <section class="sg-block fade-in" id="table">
+    <div class="section-head is-left">
+      <span class="section-label">Table</span>
+      <h2 class="section-title">料金テーブル例</h2>
+    </div>
+    <div class="table-wrap">
+      <table class="ds-table">
+        <thead>
+          <tr><th>サービス</th><th>面向</th><th>料金目安</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>AI導入コンサルティング</td><td>全業種</td><td class="cell-accent">初回診断無料／顧問月額10万円〜</td></tr>
+          <tr><td>AIエンジニア常駐・伴走支援</td><td>全業種</td><td class="cell-accent">1日8万円〜（要相談）</td></tr>
+          <tr><td>業務自動化ツール開発</td><td>全業種</td><td class="cell-accent">30万円〜</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note mt-4">価格は目安です。最新の公募要領をご確認ください。</p>
+  </section>
+
+  <!-- フォーム -->
+  <section class="sg-block fade-in" id="form">
+    <div class="section-head is-left">
+      <span class="section-label">Form</span>
+      <h2 class="section-title">フォーム部品</h2>
+    </div>
+    <form>
+      <div class="form-row">
+        <label for="sg-company">会社名<span class="form-required">必須</span></label>
+        <input type="text" id="sg-company" class="form-control" placeholder="例）ZENKAI株式会社">
+      </div>
+      <div class="form-row">
+        <label for="sg-tel">電話番号<span class="form-optional">任意</span></label>
+        <input type="tel" id="sg-tel" class="form-control" placeholder="例）054-000-0000">
+      </div>
+      <div class="form-row">
+        <label for="sg-industry">業種<span class="form-required">必須</span></label>
+        <select id="sg-industry" class="form-control">
+          <option>製造業</option>
+          <option>不動産・建築業</option>
+          <option>その他</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="sg-message">ご相談内容<span class="form-optional">任意</span></label>
+        <textarea id="sg-message" class="form-control" placeholder="お気軽にご記入ください"></textarea>
+        <p class="form-hint">1営業日以内にご返信いたします。</p>
+      </div>
+      <button type="button" class="btn btn-primary btn-block">送信する</button>
+    </form>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sg-block fade-in" id="faq">
+    <div class="section-head is-left">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">よくある質問（アコーディオン）</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary><span><span class="faq-q-label">Q.</span>AIについて詳しくなくても相談できますか？</span></summary>
+        <p class="faq-answer">はい。専門知識がない状態からのご相談がほとんどです。現状の業務をヒアリングし、何から始めるべきかを整理します。</p>
+      </details>
+      <details class="faq-item" open>
+        <summary><span><span class="faq-q-label">Q.</span>補助金の活用は相談できますか？</span></summary>
+        <p class="faq-answer">デジタル化・AI導入補助金など各種制度の活用可能性についてご案内します。※最新の公募要領をご確認ください。</p>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="faq-q-label">Q.</span>対応エリアはどこですか？</span></summary>
+        <p class="faq-answer">静岡県内を中心に、全国対応（オンライン併用）しております。</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sg-block fade-in" id="cta">
+    <div class="section-head is-left">
+      <span class="section-label">CTA</span>
+      <h2 class="section-title">CTA大区块</h2>
+    </div>
+    <div class="cta-block">
+      <span class="section-label">Get Started</span>
+      <h2>まずは無料相談から</h2>
+      <p>現場を知っているAI会社が、貴社の課題に合わせてご提案します。</p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-primary">無料相談を予約する</a>
+        <a href="#" class="btn btn-on-navy">資料をダウンロード</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- section-dark -->
+  <section class="section section-dark fade-in" style="border-radius:var(--radius-lg);" id="section-dark">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">Dark Section</span>
+        <h2 class="section-title">暗色セクション（section-dark）</h2>
+        <p class="section-lead">導入事例や信頼性訴求など、白セクションとのメリハリをつけたい箇所に使用します。</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
+          <img src="../assets/logo-white.svg" alt="ZENKAI AI パートナーズ" width="150" height="32">
+        </a>
+        <p>現場を知っているAI会社。不動産・製造業の実業経験を活かし、静岡の中小企業のAI導入・DX化を伴走支援します。</p>
+        <span class="badge badge-shizuoka mt-4">静岡発</span>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">サービス</p>
+        <ul class="footer-links">
+          <li><a href="../services/consulting.html">AI導入コンサルティング</a></li>
+          <li><a href="../services/engineer.html">AIエンジニア常駐・伴走支援</a></li>
+          <li><a href="../services/tool.html">業務自動化ツール開発</a></li>
+          <li><a href="../services/dx.html">DX化支援</a></li>
+          <li><a href="../services/sfa.html">オーダーメイドSFA構築</a></li>
+          <li><a href="../services/iot.html">IoT機器導入支援</a></li>
+          <li><a href="../services/training.html">生成AI研修・社内定着支援</a></li>
+          <li><a href="../services/inspection.html">AI外観検査・図面認識</a></li>
+          <li><a href="../services/realestate.html">不動産AI活用パック</a></li>
+          <li><a href="../services/subsidy.html">補助金申請サポート</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">業界別・その他</p>
+        <ul class="footer-links">
+          <li><a href="../industries/manufacturing.html">製造業向け</a></li>
+          <li><a href="../industries/real-estate.html">不動産・建築業向け</a></li>
+          <li><a href="../industries/local.html">静岡地場産業向け</a></li>
+          <li><a href="../cases.html">導入事例</a></li>
+          <li><a href="../pricing.html">料金目安</a></li>
+          <li><a href="../company.html">会社概要</a></li>
+          <li><a href="../download.html">資料ダウンロード</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">運営会社</p>
+        <dl class="footer-company">
+          <dt>会社名</dt><dd>ZENKAI不動産株式会社</dd>
+          <dt>所在地</dt><dd>静岡市駿河区中田1-1-8<br>リブロBLDG 301</dd>
+          <dt>営業時間</dt><dd>9:00〜18:00（水曜定休）</dd>
+        </dl>
+        <ul class="footer-links mt-4">
+          <li><a href="../contact.html">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2026 ZENKAI不動産株式会社</p>
+      <div class="footer-legal">
+        <a href="../privacy.html">プライバシーポリシー</a>
+        <a href="../contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

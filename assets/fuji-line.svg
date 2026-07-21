@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMax slice" role="img" aria-hidden="true" focusable="false">
+  <title>富士山ラインアート</title>
+  <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 稜線本体 -->
+    <path d="M0,300 L430,60 L472,96 L512,54 L556,96 L600,44 L648,96 L690,58 L730,96 L1200,300" />
+    <!-- 山頂の雪冠ライン -->
+    <path d="M556,96 L580,80 L600,90 L618,78 L648,96" opacity="0.85" />
+    <path d="M512,54 L522,64 L534,58" opacity="0.6" />
+    <!-- 裾野の等高線（装飾） -->
+    <path d="M120,300 C260,250 340,240 430,220" opacity="0.35" />
+    <path d="M1080,300 C960,250 880,240 790,222" opacity="0.35" />
+    <!-- 水平線 -->
+    <line x1="0" y1="300" x2="1200" y2="300" opacity="0.25" />
+  </g>
+</svg>
