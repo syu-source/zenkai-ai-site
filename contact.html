@@ -20,8 +20,23 @@
 <!-- Favicon -->
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
+<!-- フォント（Google Fonts。design-system.css内の@importが本体を読み込むため
+     ここではpreconnectのみで接続を先行させる。オフライン時はシステムフォントへ自動フォールバック） -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <!-- 共通デザインシステム -->
 <link rel="stylesheet" href="css/design-system.css">
+
+<!-- three.js（ESモジュール専用配布のため importmap で解決。CDN到達不可の場合は
+     js/hero-bg.js 側の dynamic import が失敗し、静かにスキップされる） -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+  }
+}
+</script>
 
 <!-- 構造化データ（LocalBusiness） -->
 <script type="application/ld+json">
@@ -44,62 +59,89 @@
 </script>
 
 <style>
-  /* contact.html 専用スタイル（design-system.cssは改変しない） */
-  .ct-page-head {
-    padding: var(--space-8) 0 var(--space-7);
-    background: var(--gradient-navy);
-    color: var(--color-text-on-navy);
-    position: relative;
-    overflow: hidden;
-  }
-  .ct-page-head .hero-fuji { opacity: 0.14; }
-  .ct-page-head h1 { color: #fff; font-size: 1.9rem; font-weight: 900; }
-  .ct-page-head p { margin-top: var(--space-3); color: var(--color-text-on-navy-muted); max-width: 620px; }
-
+  /* contact.html 専用スタイル（design-system.cssは改変せず、V2トークンのみ使用） */
   .ct-promise {
     display: flex;
     align-items: center;
     gap: var(--space-3);
     margin-top: var(--space-5);
     padding: var(--space-4) var(--space-5);
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.25);
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-md);
     max-width: 560px;
     font-size: 0.9rem;
-    color: #fff;
+    color: var(--color-text-heading);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
-  .ct-promise svg { flex: none; width: 20px; height: 20px; color: var(--color-accent2); }
+  .ct-promise svg { flex: none; width: 20px; height: 20px; color: var(--color-cyan); }
 
   .ct-block { margin-bottom: var(--space-9); }
   .ct-block:last-child { margin-bottom: 0; }
 
+  /* フォーム/TimeRex埋め込み予定エリアを、目立つガラス説明ボックスに */
   .embed-placeholder {
-    border: 1px dashed var(--color-border);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-lg);
-    background: var(--gray-50);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     min-height: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: var(--space-6);
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
+    padding: var(--space-7) var(--space-6);
+    color: var(--color-text);
+    font-size: 0.92rem;
     line-height: 1.9;
   }
-  .embed-placeholder strong { display: block; color: var(--color-navy); font-size: 0.95rem; margin-bottom: var(--space-2); }
+  .embed-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: -30%;
+    z-index: -1;
+    background: var(--gradient-radial-indigo), var(--gradient-radial-cyan);
+    background-position: 20% 20%, 80% 80%;
+    background-repeat: no-repeat;
+    filter: blur(70px);
+    opacity: 0.5;
+  }
+  .embed-placeholder .embed-icon {
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.16), rgba(34, 211, 238, 0.10));
+    border: 1px solid var(--color-border);
+    color: var(--color-cyan);
+    margin-bottom: var(--space-4);
+  }
+  .embed-placeholder .embed-icon svg { width: 26px; height: 26px; }
+  .embed-placeholder strong {
+    display: block;
+    color: var(--color-text-heading);
+    font-size: 1rem;
+    margin-bottom: var(--space-2);
+  }
   .embed-placeholder code {
     display: inline-block;
-    margin-top: var(--space-3);
-    background: var(--gray-100);
-    border-radius: 4px;
-    padding: 0.2em 0.6em;
-    font-size: 0.78rem;
-    color: var(--color-text);
+    margin-top: var(--space-4);
+    max-width: 100%;
+    overflow-wrap: break-word;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.5em 0.8em;
+    font-size: 0.76rem;
+    color: var(--color-text-muted);
   }
 
+  /* 対応時間などのカード */
   .ct-other {
     display: grid;
     grid-template-columns: 1fr;
@@ -110,15 +152,15 @@
     .ct-other { grid-template-columns: 1fr 1fr; }
   }
   .ct-other .card { display: flex; flex-direction: column; }
-  .ct-other .card a.mail-link { font-weight: 700; word-break: break-all; }
+  .ct-other .card a.mail-link { font-weight: 700; word-break: break-all; color: var(--color-cyan); }
 </style>
 </head>
 <body>
 
 <!-- ==========================================================
-     ヘッダー（全ページ共通・page-template-root.htmlより複製）
+     ヘッダー（全ページ共通・templates/page-template-root.htmlより複製）
      ========================================================== -->
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
       <img src="assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
@@ -141,20 +183,23 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-
-    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="index.html#services">サービス</a></li>
-        <li><a href="index.html#industries">業界別</a></li>
-        <li><a href="cases.html">導入事例</a></li>
-        <li><a href="pricing.html">料金</a></li>
-        <li><a href="company.html">会社概要</a></li>
-      </ul>
-      <a href="contact.html" class="btn btn-primary">無料相談</a>
-    </nav>
   </div>
 </header>
+
+<!-- ==========================================================
+     モバイルナビゲーション（<header> の外・body直下に配置。理由はCSSコメント参照）
+     ========================================================== -->
+<nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション" data-lenis-prevent>
+  <ul>
+    <li><a href="index.html">ホーム</a></li>
+    <li><a href="index.html#services">サービス</a></li>
+    <li><a href="index.html#industries">業界別</a></li>
+    <li><a href="cases.html">導入事例</a></li>
+    <li><a href="pricing.html">料金</a></li>
+    <li><a href="company.html">会社概要</a></li>
+  </ul>
+  <a href="contact.html" class="btn btn-primary">無料相談</a>
+</nav>
 
 <!-- ==========================================================
      パンくずリスト
@@ -171,13 +216,16 @@
      ========================================================== -->
 <main>
 
-  <section class="ct-page-head">
-    <img src="assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
-    <div class="container" style="position:relative;z-index:1;">
-      <span class="badge badge-on-navy">無料相談・お問い合わせ</span>
-      <h1 class="mt-4">お問い合わせ</h1>
-      <p>AI導入・DX化に関するご相談を無料で承っています。まずはお気軽にご連絡ください。</p>
-      <div class="ct-promise">
+  <!-- ページヘッダー -->
+  <section class="section bg-glow" style="padding-bottom: var(--space-6);">
+    <div class="container">
+      <span class="badge badge-shizuoka" data-reveal>無料相談・お問い合わせ</span>
+      <div class="section-head is-left mt-4" data-reveal-group>
+        <span class="section-label" data-reveal>Contact</span>
+        <h1 class="section-title" style="font-size:clamp(2rem, 4vw + 1rem, 3.2rem);" data-reveal>お問い合わせ</h1>
+        <p class="section-lead" data-reveal data-reveal-delay="0.1">AI導入・DX化に関するご相談を無料で承っています。まずはお気軽にご連絡ください。</p>
+      </div>
+      <div class="ct-promise" data-reveal data-reveal-delay="0.18">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
         <span>1営業日以内にご返信します（営業時間9:00〜18:00、水曜定休）</span>
       </div>
@@ -189,14 +237,17 @@
     <div class="container">
 
       <div class="ct-block">
-        <div class="section-head is-left">
+        <div class="section-head is-left" data-reveal>
           <span class="section-label">Contact Form</span>
           <h2 class="section-title">フォームでお問い合わせ</h2>
           <p class="section-lead">会社名・お名前・メールアドレス・業種・ご相談内容などをご入力の上、送信してください。</p>
         </div>
 
         <!-- 要差し替え：GoogleフォームembedURL -->
-        <div class="embed-placeholder" role="img" aria-label="Googleフォーム埋め込み予定エリア">
+        <div class="embed-placeholder" role="img" aria-label="Googleフォーム埋め込み予定エリア" data-reveal>
+          <div class="embed-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="15" y2="17"></line></svg>
+          </div>
           <strong>【要差し替え：GoogleフォームembedURL】</strong>
           ここにGoogleフォームの埋め込み用iframeを設置してください。<br>
           （Googleフォーム編集画面 &rsaquo; 送信 &rsaquo; 埋め込み &lt;&gt; からURLを取得）
@@ -206,14 +257,17 @@
 
       <!-- 日程予約 -->
       <div class="ct-block">
-        <div class="section-head is-left">
+        <div class="section-head is-left" data-reveal>
           <span class="section-label">Book a Meeting</span>
           <h2 class="section-title">日程予約（オンライン相談）</h2>
           <p class="section-lead">ご都合の良い日時を選んで、そのままオンライン相談をご予約いただけます。</p>
         </div>
 
         <!-- 要差し替え：TimeRex埋め込みURL -->
-        <div class="embed-placeholder" role="img" aria-label="TimeRex日程予約埋め込み予定エリア">
+        <div class="embed-placeholder" role="img" aria-label="TimeRex日程予約埋め込み予定エリア" data-reveal>
+          <div class="embed-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </div>
           <strong>【要差し替え：TimeRex埋め込みURL】</strong>
           ここにTimeRexの予約ページ埋め込み用iframeを設置してください。<br>
           （TimeRex管理画面 &rsaquo; 予約ページ設定 &rsaquo; 埋め込みコードを取得）
@@ -223,13 +277,13 @@
 
       <!-- その他の連絡方法 -->
       <div class="ct-block">
-        <div class="section-head is-left">
+        <div class="section-head is-left" data-reveal>
           <span class="section-label">Other Ways</span>
           <h2 class="section-title">その他のご連絡方法</h2>
         </div>
 
-        <div class="ct-other">
-          <div class="card">
+        <div class="ct-other" data-reveal-group>
+          <div class="card" data-tilt data-reveal>
             <div class="card-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z" opacity="0"></path><path d="M22 6l-10 7L2 6"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
             </div>
@@ -237,7 +291,7 @@
             <p class="card-text">下記メールアドレス宛に、会社名・ご相談内容を添えてご連絡ください。</p>
             <a class="mail-link mt-4" href="mailto:【要差し替え：AI事業用メールアドレス】">【要差し替え：AI事業用メールアドレス】</a>
           </div>
-          <div class="card">
+          <div class="card" data-tilt data-reveal data-reveal-delay="0.1">
             <div class="card-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             </div>
@@ -253,7 +307,7 @@
 </main>
 
 <!-- ==========================================================
-     フッター（全ページ共通・page-template-root.htmlより複製）
+     フッター（全ページ共通・templates/page-template-root.htmlより複製）
      ========================================================== -->
 <footer class="site-footer">
   <div class="container">
@@ -318,6 +372,17 @@
   </div>
 </footer>
 
+<!-- ==========================================================
+     CDNライブラリ（jsdelivr固定バージョン）。読込失敗しても
+     js/main.js は無依存で動作し、effects.js / hero-bg.js は
+     typeof チェック / try-catch により機能を静かにスキップする。
+     ========================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis.min.js"></script>
+
 <script src="js/main.js"></script>
+<script src="js/effects.js"></script>
+<script type="module" src="js/hero-bg.js"></script>
 </body>
 </html>

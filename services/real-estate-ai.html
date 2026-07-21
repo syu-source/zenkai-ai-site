@@ -20,8 +20,19 @@
 <!-- Favicon -->
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <!-- 共通デザインシステム -->
 <link rel="stylesheet" href="../css/design-system.css">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+  }
+}
+</script>
 
 <!-- 構造化データ（LocalBusiness） -->
 <script type="application/ld+json">
@@ -44,74 +55,97 @@
 </script>
 <style>
   /* このページ限定のスタイル（design-system.cssは変更しない） */
-  .service-hero { padding: var(--space-8) 0 var(--space-7); }
-  .hero .section-label { color: var(--color-accent2); }
+  .page-head {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding: calc(var(--space-9) + var(--header-height-mobile)) 0 var(--space-7);
+  }
+  @media (min-width: 768px) {
+    .page-head { padding: calc(var(--space-10) + var(--header-height)) 0 var(--space-8); }
+  }
+  .page-head h1 {
+    color: var(--color-text-heading);
+    font-size: clamp(2rem, 4.5vw + 1rem, 3.6rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .page-head .lead {
+    margin-top: var(--space-5);
+    color: var(--color-text);
+    font-size: 1.05rem;
+    max-width: 660px;
+  }
   .service-hero-icon {
-    width: 60px; height: 60px;
+    width: 64px; height: 64px;
     display: flex; align-items: center; justify-content: center;
-    border-radius: var(--radius-md);
-    background: rgba(255,255,255,0.92);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(34, 211, 238, 0.12));
+    border: 1px solid var(--color-border);
+    box-shadow: var(--glow-accent-sm);
     margin-bottom: var(--space-5);
   }
-  .service-hero-icon img { width: 30px; height: 30px; }
-  .service-hero-tags { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-5) 0 0; }
-
-  .issue-list { display: flex; flex-direction: column; gap: var(--space-4); }
-  .issue-list li {
-    display: flex; gap: var(--space-4); align-items: flex-start;
-    padding: var(--space-5);
-    background: var(--gray-50);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+  .service-hero-icon img {
+    width: 32px; height: 32px;
+    filter: brightness(0) saturate(100%) invert(85%) sepia(35%) saturate(1000%) hue-rotate(140deg) brightness(1.05);
   }
+  .service-hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin: var(--space-6) 0 0; }
+
+  .issue-card { display: flex; gap: var(--space-4); align-items: flex-start; }
   .issue-mark {
-    flex: none; width: 28px; height: 28px; border-radius: 50%;
+    flex: none; width: 32px; height: 32px; border-radius: 50%;
     background: var(--gradient-accent); color: #fff;
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-en); font-weight: 700; font-size: 0.82rem;
+    font-family: var(--font-en); font-weight: 700; font-size: 0.85rem;
+    box-shadow: var(--glow-accent-sm);
   }
-  .issue-list p { color: var(--color-text); margin: 0; }
-
-  .process-list { display: flex; flex-direction: column; gap: var(--space-6); }
-  .process-step { display: flex; gap: var(--space-5); align-items: flex-start; }
-  .process-num {
-    flex: none; width: 40px; height: 40px; border-radius: 50%;
-    background: var(--gradient-accent); color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-en); font-weight: 700; font-size: 1rem;
-    box-shadow: var(--shadow-sm);
-  }
-  .process-step h3 { font-size: 1.05rem; color: var(--color-navy); margin-bottom: var(--space-2); }
-  .process-step p { color: var(--color-text-muted); font-size: 0.92rem; margin: 0; }
+  .issue-card p { color: var(--color-text); margin: 0; font-size: 0.95rem; }
 
   .deliverable-list { display: flex; flex-direction: column; gap: var(--space-4); }
-  .deliverable-list li {
-    padding: var(--space-5);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-base);
-  }
-  .deliverable-list strong { display: block; color: var(--color-navy); margin-bottom: var(--space-2); font-size: 0.98rem; }
-  .deliverable-list span { color: var(--color-text-muted); font-size: 0.9rem; }
+  .deliverable-item { padding: var(--space-5) var(--space-6); border-radius: var(--radius-lg); }
+  .deliverable-item strong { display: block; color: var(--color-text-heading); margin-bottom: var(--space-2); font-size: 1rem; }
+  .deliverable-item span { color: var(--color-text-muted); font-size: 0.92rem; }
 
+  .process-list { display: flex; flex-direction: column; }
+  .process-step { display: flex; gap: var(--space-5); align-items: flex-start; position: relative; padding-bottom: var(--space-7); }
+  .process-step:last-child { padding-bottom: 0; }
+  .process-step::before {
+    content: '';
+    position: absolute;
+    left: 23px; top: 48px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(var(--color-border), transparent);
+  }
+  .process-step:last-child::before { display: none; }
+  .process-num {
+    flex: none; width: 48px; height: 48px; border-radius: 50%;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-cyan);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-en); font-weight: 700; font-size: 1.1rem;
+    box-shadow: var(--glow-accent-sm);
+    position: relative; z-index: 1;
+  }
+  .process-step h3 { font-size: 1.08rem; color: var(--color-text-heading); margin-bottom: var(--space-2); }
+  .process-step p { color: var(--color-text-muted); font-size: 0.92rem; margin: 0; }
+
+  /* --- 自社実践box --- */
   .practice-box {
     margin-top: var(--space-6);
     padding: var(--space-6);
-    background: var(--color-base);
+    border-radius: var(--radius-lg);
+    background: var(--glass-bg);
     border: 1px solid var(--color-border);
-    border-left: 4px solid var(--color-tea);
-    border-radius: var(--radius-md);
   }
-  .practice-box strong { color: var(--color-navy); }
-  .practice-box p { color: var(--color-text-muted); font-size: 0.92rem; margin-top: var(--space-2); }
+  .practice-box strong { display: block; color: var(--color-text-heading); margin-bottom: var(--space-3); font-size: 0.98rem; }
+  .practice-box p { color: var(--color-text-muted); font-size: 0.9rem; line-height: 1.9; margin: 0; }
 </style>
 </head>
 <body>
 
-<!-- ==========================================================
-     ヘッダー（全ページ共通・改変時は他ページとの整合に注意）
-     ========================================================== -->
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="../index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
       <img src="../assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
@@ -134,24 +168,21 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-
-    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
-      <ul>
-        <li><a href="../index.html">ホーム</a></li>
-        <li><a href="../index.html#services">サービス</a></li>
-        <li><a href="../index.html#industries">業界別</a></li>
-        <li><a href="../cases.html">導入事例</a></li>
-        <li><a href="../pricing.html">料金</a></li>
-        <li><a href="../company.html">会社概要</a></li>
-      </ul>
-      <a href="../contact.html" class="btn btn-primary">無料相談</a>
-    </nav>
   </div>
 </header>
 
-<!-- ==========================================================
-     パンくずリスト
-     ========================================================== -->
+<nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション" data-lenis-prevent>
+  <ul>
+    <li><a href="../index.html">ホーム</a></li>
+    <li><a href="../index.html#services">サービス</a></li>
+    <li><a href="../index.html#industries">業界別</a></li>
+    <li><a href="../cases.html">導入事例</a></li>
+    <li><a href="../pricing.html">料金</a></li>
+    <li><a href="../company.html">会社概要</a></li>
+  </ul>
+  <a href="../contact.html" class="btn btn-primary">無料相談</a>
+</nav>
+
 <nav class="container breadcrumb" aria-label="パンくずリスト">
   <ol>
     <li><a href="../index.html">ホーム</a></li>
@@ -160,56 +191,77 @@
   </ol>
 </nav>
 
-<!-- ==========================================================
-     ▼▼▼ ページ本体 ▼▼▼
-     ========================================================== -->
 <main>
 
-<!-- 页头 -->
-<section class="hero service-hero">
-  <img src="../assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
-  <div class="container hero-inner">
-    <div class="service-hero-icon"><img src="../assets/icons/realestate.svg" alt=""></div>
-    <span class="badge badge-on-navy">対象：不動産同業各社</span>
-    <h1 class="mt-4">不動産AI活用パック</h1>
-    <p class="lead">AI査定・反響（物件広告への問い合わせ）自動応答・物件資料生成をまとめて支援します。運営元であるZENKAI不動産株式会社が自社の実務で導入・実践している知見をもとに伴走する点が特徴です。</p>
-    <div class="service-hero-tags">
-      <a href="#pricing" class="btn btn-on-navy btn-sm">料金目安を見る</a>
+<!-- ページ頭 -->
+<section class="page-head bg-glow">
+  <div class="container">
+    <div class="service-hero-icon" data-reveal><img src="../assets/icons/realestate.svg" alt=""></div>
+    <span class="eyebrow" data-reveal data-reveal-delay="0.06">REAL ESTATE AI</span>
+    <h1 class="mt-3" data-reveal data-reveal-delay="0.12">不動産<span class="text-gradient">AI活用パック</span></h1>
+    <p class="lead" data-reveal data-reveal-delay="0.18">AI査定・反響（物件広告への問い合わせ）自動応答・物件資料生成をまとめて支援します。運営元であるZENKAI不動産株式会社が自社の実務で導入・実践している知見をもとに伴走する点が特徴です。</p>
+    <div class="service-hero-tags" data-reveal data-reveal-delay="0.24">
+      <span class="badge badge-on-navy">対象：不動産同業各社</span>
+      <a href="#pricing" class="btn btn-secondary btn-sm">料金目安を見る</a>
     </div>
   </div>
 </section>
 
 <!-- こんな課題に -->
-<section class="section fade-in" id="issues">
+<section class="section" id="issues">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Challenges</span>
       <h2 class="section-title">こんな課題はありませんか</h2>
     </div>
-    <ul class="issue-list">
-      <li><span class="issue-mark">1</span><p>査定業務が担当者の経験や勘に頼っており、属人化している。</p></li>
-      <li><span class="issue-mark">2</span><p>問い合わせ（反響）への初動対応が遅く、機会損失につながっている。</p></li>
-      <li><span class="issue-mark">3</span><p>物件資料やマイソク（物件情報をまとめた販売図面）の作成に時間がかかっている。</p></li>
-      <li><span class="issue-mark">4</span><p>AI活用の必要性は感じているが、不動産会社向けの導入事例が少なく、何から始めればよいか判断しづらい。</p></li>
-    </ul>
+    <div class="card-grid cols-2" data-reveal-group>
+      <div class="card issue-card" data-reveal>
+        <span class="issue-mark">1</span>
+        <p>査定業務が担当者の経験や勘に頼っており、属人化している。</p>
+      </div>
+      <div class="card issue-card" data-reveal>
+        <span class="issue-mark">2</span>
+        <p>問い合わせ（反響）への初動対応が遅く、機会損失につながっている。</p>
+      </div>
+      <div class="card issue-card" data-reveal>
+        <span class="issue-mark">3</span>
+        <p>物件資料やマイソク（物件情報をまとめた販売図面）の作成に時間がかかっている。</p>
+      </div>
+      <div class="card issue-card" data-reveal>
+        <span class="issue-mark">4</span>
+        <p>AI活用の必要性は感じているが、不動産会社向けの導入事例が少なく、何から始めればよいか判断しづらい。</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- 提供内容 -->
-<section class="section section-muted fade-in" id="offer">
+<section class="section section-alt" id="offer">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">What We Provide</span>
       <h2 class="section-title">提供内容</h2>
     </div>
-    <ul class="deliverable-list">
-      <li><strong>AI査定モデルの構築・導入支援</strong><span>地域の取引データ等をもとに、査定業務を支える仕組みづくりを支援します。</span></li>
-      <li><strong>反響自動応答の仕組み構築</strong><span>問い合わせへの初動対応を自動化し、担当者の負荷軽減と対応スピード向上を図ります。</span></li>
-      <li><strong>物件資料・マイソク自動生成</strong><span>物件情報の入力から資料作成までの時間を短縮する仕組みを構築します。</span></li>
-      <li><strong>自社実践知見を踏まえた導入伴走</strong><span>ZENKAI不動産での実際の運用を通じて得た知見をもとに、現場目線で伴走します。</span></li>
+    <ul class="deliverable-list" data-reveal-group>
+      <li class="glass deliverable-item" data-reveal>
+        <strong>AI査定モデルの構築・導入支援</strong>
+        <span>地域の取引データ等をもとに、査定業務を支える仕組みづくりを支援します。</span>
+      </li>
+      <li class="glass deliverable-item" data-reveal>
+        <strong>反響自動応答の仕組み構築</strong>
+        <span>問い合わせへの初動対応を自動化し、担当者の負荷軽減と対応スピード向上を図ります。</span>
+      </li>
+      <li class="glass deliverable-item" data-reveal>
+        <strong>物件資料・マイソク自動生成</strong>
+        <span>物件情報の入力から資料作成までの時間を短縮する仕組みを構築します。</span>
+      </li>
+      <li class="glass deliverable-item" data-reveal>
+        <strong>自社実践知見を踏まえた導入伴走</strong>
+        <span>ZENKAI不動産での実際の運用を通じて得た知見をもとに、現場目線で伴走します。</span>
+      </li>
     </ul>
 
-    <div class="practice-box">
+    <div class="practice-box" data-reveal>
       <strong>自社実践について</strong>
       <p>当社（ZENKAI不動産株式会社）は、自社の不動産業務においてAI査定・反響自動応答・物件資料生成の活用に実際に取り組んでいます。国内の不動産業界全体でもAI査定・反響自動応答の実用化が進んでおり、内見率向上や対応効率化の事例が報告されていますが、当ページでは他社の実績数値を自社の成果として示すことはいたしません。具体的な導入効果は現場の条件により異なるため、貴社の状況に合わせて個別にご説明します。</p>
     </div>
@@ -217,26 +269,26 @@
 </section>
 
 <!-- 進め方 -->
-<section class="section fade-in" id="process">
+<section class="section" id="process">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Process</span>
       <h2 class="section-title">進め方</h2>
     </div>
-    <ol class="process-list">
-      <li class="process-step">
+    <ol class="process-list" data-reveal-group>
+      <li class="process-step" data-reveal>
         <span class="process-num">1</span>
         <div><h3>現状業務ヒアリング</h3><p>査定・反響対応・資料作成の現状フローと課題を確認します。</p></div>
       </li>
-      <li class="process-step">
+      <li class="process-step" data-reveal>
         <span class="process-num">2</span>
         <div><h3>活用領域の優先順位付け</h3><p>効果が見込みやすい領域から着手できるよう、優先順位を整理します。</p></div>
       </li>
-      <li class="process-step">
+      <li class="process-step" data-reveal>
         <span class="process-num">3</span>
         <div><h3>PoC導入</h3><p>限定した範囲でAI活用を試行し、現場での使い勝手を確認します。</p></div>
       </li>
-      <li class="process-step">
+      <li class="process-step" data-reveal>
         <span class="process-num">4</span>
         <div><h3>本格運用・改善</h3><p>PoCの結果をもとに本格運用へ移行し、継続的に改善します。</p></div>
       </li>
@@ -245,13 +297,13 @@
 </section>
 
 <!-- 料金目安 -->
-<section class="section section-muted fade-in" id="pricing">
+<section class="section section-alt" id="pricing">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Pricing</span>
       <h2 class="section-title">料金目安</h2>
     </div>
-    <div class="table-wrap">
+    <div class="table-wrap" data-reveal>
       <table class="ds-table">
         <thead><tr><th>内容</th><th>料金目安</th></tr></thead>
         <tbody>
@@ -259,27 +311,27 @@
         </tbody>
       </table>
     </div>
-    <p class="note mt-4">内容により変動します。まずは無料診断でお見積りください。</p>
+    <p class="note mt-4" data-reveal>内容により変動します。まずは無料診断でお見積りください。</p>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="section fade-in" id="faq">
+<section class="section" id="faq">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">FAQ</span>
       <h2 class="section-title">よくある質問</h2>
     </div>
-    <div class="faq-list">
-      <details class="faq-item" open>
+    <div class="faq-list" data-reveal-group>
+      <details class="faq-item" open data-reveal>
         <summary><span><span class="faq-q-label">Q.</span>本当に自社で使っているのですか。</span></summary>
         <p class="faq-answer">はい。運営元のZENKAI不動産株式会社にて、自社の不動産業務の中で実際に取り組んでいます。導入時に得た知見をもとに、貴社の状況に合わせてご提案します。</p>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-reveal>
         <summary><span><span class="faq-q-label">Q.</span>小規模な不動産会社でも導入できますか。</span></summary>
         <p class="faq-answer">はい。全ての機能を一度に導入する必要はなく、反響自動応答など優先度の高い部分から段階的に始めることができます。</p>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-reveal>
         <summary><span><span class="faq-q-label">Q.</span>査定の精度は保証されますか。</span></summary>
         <p class="faq-answer">査定精度は地域の取引データの量・質に左右されるため、一律の保証はいたしかねます。導入前に精度の見込みと限界について丁寧にご説明します。</p>
       </details>
@@ -288,26 +340,26 @@
 </section>
 
 <!-- 関連サービス -->
-<section class="section section-muted fade-in" id="related">
+<section class="section section-alt" id="related">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Related Services</span>
       <h2 class="section-title">関連サービス</h2>
     </div>
-    <div class="card-grid cols-3">
-      <div class="card">
+    <div class="card-grid cols-3" data-reveal-group>
+      <div class="card" data-tilt data-reveal>
         <div class="card-icon"><img src="../assets/icons/tool.svg" alt=""></div>
         <p class="card-title">業務自動化ツール開発</p>
         <p class="card-text">反響対応・資料作成以外の業務も自動化したい場合はこちら。</p>
         <a href="automation-tools.html" class="card-link">詳しく見る &rsaquo;</a>
       </div>
-      <div class="card">
+      <div class="card" data-tilt data-reveal>
         <div class="card-icon"><img src="../assets/icons/subsidy.svg" alt=""></div>
         <p class="card-title">補助金申請サポート</p>
         <p class="card-text">AI活用パック導入時に使える補助金についてもあわせてご相談ください。</p>
         <a href="subsidy.html" class="card-link">詳しく見る &rsaquo;</a>
       </div>
-      <div class="card">
+      <div class="card" data-tilt data-reveal>
         <div class="card-icon"><img src="../assets/icons/consulting.svg" alt=""></div>
         <p class="card-title">AI導入コンサルティング</p>
         <p class="card-text">不動産業務全体を俯瞰した導入計画を立てたい場合はこちら。</p>
@@ -318,26 +370,22 @@
 </section>
 
 <!-- CTA -->
-<section class="section fade-in" id="cta">
+<section class="section" id="cta">
   <div class="container">
-    <div class="cta-block">
+    <div class="cta-block" data-reveal>
       <span class="section-label">Get Started</span>
       <h2>まずは無料のAI診断から</h2>
       <p>自社実践の知見をもとに、貴社の業務に合わせた活用方法をご提案します。</p>
       <div class="cta-actions">
         <a href="../lp/index.html" class="btn btn-primary">無料AI診断を申し込む</a>
-        <a href="../contact.html" class="btn btn-on-navy">無料相談を予約する</a>
+        <a href="../contact.html" class="btn btn-secondary">無料相談を予約する</a>
       </div>
     </div>
   </div>
 </section>
 
 </main>
-<!-- ▲▲▲ ページ本体ここまで ▲▲▲ -->
 
-<!-- ==========================================================
-     フッター（全ページ共通・改変時は他ページとの整合に注意）
-     ========================================================== -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-top">
@@ -401,6 +449,17 @@
   </div>
 </footer>
 
+<!-- ==========================================================
+     CDNライブラリ（jsdelivr固定バージョン）。読込失敗しても
+     js/main.js は無依存で動作し、effects.js / hero-bg.js は
+     typeof チェック / try-catch により機能を静かにスキップする。
+     ========================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis.min.js"></script>
+
 <script src="../js/main.js"></script>
+<script src="../js/effects.js"></script>
+<script type="module" src="../js/hero-bg.js"></script>
 </body>
 </html>

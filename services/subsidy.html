@@ -20,8 +20,19 @@
 <!-- Favicon -->
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <!-- 共通デザインシステム -->
 <link rel="stylesheet" href="../css/design-system.css">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+  }
+}
+</script>
 
 <!-- 構造化データ（LocalBusiness） -->
 <script type="application/ld+json">
@@ -44,79 +55,116 @@
 </script>
 <style>
   /* このページ限定のスタイル（design-system.cssは変更しない） */
-  .service-hero { padding: var(--space-8) 0 var(--space-7); }
-  .hero .section-label { color: var(--color-accent2); }
+  .page-head {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    padding: calc(var(--space-9) + var(--header-height-mobile)) 0 var(--space-7);
+  }
+  @media (min-width: 768px) {
+    .page-head { padding: calc(var(--space-10) + var(--header-height)) 0 var(--space-8); }
+  }
+  .page-head h1 {
+    color: var(--color-text-heading);
+    font-size: clamp(2rem, 4.5vw + 1rem, 3.6rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .page-head .lead {
+    margin-top: var(--space-5);
+    color: var(--color-text);
+    font-size: 1.05rem;
+    max-width: 660px;
+  }
   .service-hero-icon {
-    width: 60px; height: 60px;
+    width: 64px; height: 64px;
     display: flex; align-items: center; justify-content: center;
-    border-radius: var(--radius-md);
-    background: rgba(255,255,255,0.92);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(34, 211, 238, 0.12));
+    border: 1px solid var(--color-border);
+    box-shadow: var(--glow-accent-sm);
     margin-bottom: var(--space-5);
   }
-  .service-hero-icon img { width: 30px; height: 30px; }
-  .service-hero-tags { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-5) 0 0; }
-
-  .issue-list { display: flex; flex-direction: column; gap: var(--space-4); }
-  .issue-list li {
-    display: flex; gap: var(--space-4); align-items: flex-start;
-    padding: var(--space-5);
-    background: var(--gray-50);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+  .service-hero-icon img {
+    width: 32px; height: 32px;
+    filter: brightness(0) saturate(100%) invert(85%) sepia(35%) saturate(1000%) hue-rotate(140deg) brightness(1.05);
   }
+  .service-hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin: var(--space-6) 0 0; }
+
+  .issue-card { display: flex; gap: var(--space-4); align-items: flex-start; }
   .issue-mark {
-    flex: none; width: 28px; height: 28px; border-radius: 50%;
+    flex: none; width: 32px; height: 32px; border-radius: 50%;
     background: var(--gradient-accent); color: #fff;
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-en); font-weight: 700; font-size: 0.82rem;
+    font-family: var(--font-en); font-weight: 700; font-size: 0.85rem;
+    box-shadow: var(--glow-accent-sm);
   }
-  .issue-list p { color: var(--color-text); margin: 0; }
-
-  .process-list { display: flex; flex-direction: column; gap: var(--space-6); }
-  .process-step { display: flex; gap: var(--space-5); align-items: flex-start; }
-  .process-num {
-    flex: none; width: 40px; height: 40px; border-radius: 50%;
-    background: var(--gradient-accent); color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-en); font-weight: 700; font-size: 1rem;
-    box-shadow: var(--shadow-sm);
-  }
-  .process-step h3 { font-size: 1.05rem; color: var(--color-navy); margin-bottom: var(--space-2); }
-  .process-step p { color: var(--color-text-muted); font-size: 0.92rem; margin: 0; }
+  .issue-card p { color: var(--color-text); margin: 0; font-size: 0.95rem; }
 
   .deliverable-list { display: flex; flex-direction: column; gap: var(--space-4); }
-  .deliverable-list li {
-    padding: var(--space-5);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-base);
-  }
-  .deliverable-list strong { display: block; color: var(--color-navy); margin-bottom: var(--space-2); font-size: 0.98rem; }
-  .deliverable-list span { color: var(--color-text-muted); font-size: 0.9rem; }
+  .deliverable-item { padding: var(--space-5) var(--space-6); border-radius: var(--radius-lg); }
+  .deliverable-item strong { display: block; color: var(--color-text-heading); margin-bottom: var(--space-2); font-size: 1rem; }
+  .deliverable-item span { color: var(--color-text-muted); font-size: 0.92rem; }
 
-  .program-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); margin-top: var(--space-6); }
-  @media (min-width: 768px) { .program-grid { grid-template-columns: repeat(3, 1fr); } }
+  .process-list { display: flex; flex-direction: column; }
+  .process-step { display: flex; gap: var(--space-5); align-items: flex-start; position: relative; padding-bottom: var(--space-7); }
+  .process-step:last-child { padding-bottom: 0; }
+  .process-step::before {
+    content: '';
+    position: absolute;
+    left: 23px; top: 48px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(var(--color-border), transparent);
+  }
+  .process-step:last-child::before { display: none; }
+  .process-num {
+    flex: none; width: 48px; height: 48px; border-radius: 50%;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-cyan);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-en); font-weight: 700; font-size: 1.1rem;
+    box-shadow: var(--glow-accent-sm);
+    position: relative; z-index: 1;
+  }
+  .process-step h3 { font-size: 1.08rem; color: var(--color-text-heading); margin-bottom: var(--space-2); }
+  .process-step p { color: var(--color-text-muted); font-size: 0.92rem; margin: 0; }
+
+  /* --- 活用可能な制度カード --- */
+  .program-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+  }
+  @media (min-width: 768px) {
+    .program-grid { grid-template-columns: repeat(3, 1fr); }
+  }
   .program-card {
     padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    background: var(--glass-bg);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-base);
   }
-  .program-card .program-tag {
-    display: inline-block; font-family: var(--font-en); font-size: 0.72rem;
-    font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--color-accent); margin-bottom: var(--space-2);
+  .program-tag {
+    display: inline-flex;
+    padding: 0.25em 0.85em;
+    border-radius: var(--radius-full);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--color-cyan);
+    background: rgba(34, 211, 238, 0.10);
+    border: 1px solid rgba(34, 211, 238, 0.30);
+    margin-bottom: var(--space-3);
   }
-  .program-card h3 { font-size: 1rem; color: var(--color-navy); margin-bottom: var(--space-2); }
-  .program-card p { color: var(--color-text-muted); font-size: 0.88rem; margin: 0; }
+  .program-card h3 { font-size: 1rem; color: var(--color-text-heading); margin-bottom: var(--space-2); }
+  .program-card p { font-size: 0.88rem; color: var(--color-text-muted); margin: 0; }
 </style>
 </head>
 <body>
 
-<!-- ==========================================================
-     ヘッダー（全ページ共通・改変時は他ページとの整合に注意）
-     ========================================================== -->
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="../index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
       <img src="../assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
@@ -139,24 +187,21 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-
-    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
-      <ul>
-        <li><a href="../index.html">ホーム</a></li>
-        <li><a href="../index.html#services">サービス</a></li>
-        <li><a href="../index.html#industries">業界別</a></li>
-        <li><a href="../cases.html">導入事例</a></li>
-        <li><a href="../pricing.html">料金</a></li>
-        <li><a href="../company.html">会社概要</a></li>
-      </ul>
-      <a href="../contact.html" class="btn btn-primary">無料相談</a>
-    </nav>
   </div>
 </header>
 
-<!-- ==========================================================
-     パンくずリスト
-     ========================================================== -->
+<nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション" data-lenis-prevent>
+  <ul>
+    <li><a href="../index.html">ホーム</a></li>
+    <li><a href="../index.html#services">サービス</a></li>
+    <li><a href="../index.html#industries">業界別</a></li>
+    <li><a href="../cases.html">導入事例</a></li>
+    <li><a href="../pricing.html">料金</a></li>
+    <li><a href="../company.html">会社概要</a></li>
+  </ul>
+  <a href="../contact.html" class="btn btn-primary">無料相談</a>
+</nav>
+
 <nav class="container breadcrumb" aria-label="パンくずリスト">
   <ol>
     <li><a href="../index.html">ホーム</a></li>
@@ -165,97 +210,118 @@
   </ol>
 </nav>
 
-<!-- ==========================================================
-     ▼▼▼ ページ本体 ▼▼▼
-     ========================================================== -->
 <main>
 
-<!-- 页头 -->
-<section class="hero service-hero">
-  <img src="../assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
-  <div class="container hero-inner">
-    <div class="service-hero-icon"><img src="../assets/icons/subsidy.svg" alt=""></div>
-    <span class="badge badge-on-navy">対象：全業種</span>
-    <h1 class="mt-4">補助金申請サポート</h1>
-    <p class="lead">デジタル化・AI導入補助金など各種制度の活用可能性を整理し、他のAI導入サービスと一体で申請までサポートします。AI活用にかかる実質負担を軽減する、全サービス共通の「潤滑剤」です。</p>
-    <div class="service-hero-tags">
-      <a href="#pricing" class="btn btn-on-navy btn-sm">料金目安を見る</a>
+<!-- ページ頭 -->
+<section class="page-head bg-glow">
+  <div class="container">
+    <div class="service-hero-icon" data-reveal><img src="../assets/icons/subsidy.svg" alt=""></div>
+    <span class="eyebrow" data-reveal data-reveal-delay="0.06">SUBSIDY SUPPORT</span>
+    <h1 class="mt-3" data-reveal data-reveal-delay="0.12">補助金<span class="text-gradient">申請サポート</span></h1>
+    <p class="lead" data-reveal data-reveal-delay="0.18">デジタル化・AI導入補助金など各種制度の活用可能性を整理し、他のAI導入サービスと一体で申請までサポートします。AI活用にかかる実質負担を軽減する、全サービス共通の「潤滑剤」です。</p>
+    <div class="service-hero-tags" data-reveal data-reveal-delay="0.24">
+      <span class="badge badge-on-navy">対象：全業種</span>
+      <a href="#pricing" class="btn btn-secondary btn-sm">料金目安を見る</a>
     </div>
   </div>
 </section>
 
 <!-- こんな課題に -->
-<section class="section fade-in" id="issues">
+<section class="section" id="issues">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Challenges</span>
       <h2 class="section-title">こんな課題はありませんか</h2>
     </div>
-    <ul class="issue-list">
-      <li><span class="issue-mark">1</span><p>補助金の種類が多く、自社がどの制度の対象になるのか分からない。</p></li>
-      <li><span class="issue-mark">2</span><p>申請書類の作成には時間と専門知識が必要で、通常業務と並行して進めるのが難しい。</p></li>
-      <li><span class="issue-mark">3</span><p>公募期間が短く、情報を追いきれないうちに募集が終わってしまう。</p></li>
-      <li><span class="issue-mark">4</span><p>AI導入の相談と補助金申請を別々の会社に依頼するのが手間になっている。</p></li>
-    </ul>
+    <div class="card-grid cols-2" data-reveal-group>
+      <div class="card issue-card" data-reveal>
+        <span class="issue-mark">1</span>
+        <p>補助金の種類が多く、自社がどの制度の対象になるのか分からない。</p>
+      </div>
+      <div class="card issue-card" data-reveal>
+        <span class="issue-mark">2</span>
+        <p>申請書類の作成には時間と専門知識が必要で、通常業務と並行して進めるのが難しい。</p>
+      </div>
+      <div class="card issue-card" data-reveal>
+        <span class="issue-mark">3</span>
+        <p>公募期間が短く、情報を追いきれないうちに募集が終わってしまう。</p>
+      </div>
+      <div class="card issue-card" data-reveal>
+        <span class="issue-mark">4</span>
+        <p>AI導入の相談と補助金申請を別々の会社に依頼するのが手間になっている。</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- 提供内容 -->
-<section class="section section-muted fade-in" id="offer">
+<section class="section section-alt" id="offer">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">What We Provide</span>
       <h2 class="section-title">提供内容</h2>
     </div>
-    <ul class="deliverable-list">
-      <li><strong>活用可能な補助金制度の整理・ご提案</strong><span>貴社の導入計画に合わせて、活用できそうな制度をご案内します。</span></li>
-      <li><strong>申請書類作成サポート</strong><span>事業計画書など申請に必要な書類の作成を支援します。</span></li>
-      <li><strong>他サービスと一体での申請設計</strong><span>AI導入コンサルティングやDX化支援など、他サービスの導入計画と一体で申請を設計します。</span></li>
-      <li><strong>相談窓口のご案内</strong><span>静岡県・静岡市の担当窓口など、制度に関する公的な相談先の情報をご案内します。</span></li>
+    <ul class="deliverable-list" data-reveal-group>
+      <li class="glass deliverable-item" data-reveal>
+        <strong>活用可能な補助金制度の整理・ご提案</strong>
+        <span>貴社の導入計画に合わせて、活用できそうな制度をご案内します。</span>
+      </li>
+      <li class="glass deliverable-item" data-reveal>
+        <strong>申請書類作成サポート</strong>
+        <span>事業計画書など申請に必要な書類の作成を支援します。</span>
+      </li>
+      <li class="glass deliverable-item" data-reveal>
+        <strong>他サービスと一体での申請設計</strong>
+        <span>AI導入コンサルティングやDX化支援など、他サービスの導入計画と一体で申請を設計します。</span>
+      </li>
+      <li class="glass deliverable-item" data-reveal>
+        <strong>相談窓口のご案内</strong>
+        <span>静岡県・静岡市の担当窓口など、制度に関する公的な相談先の情報をご案内します。</span>
+      </li>
     </ul>
 
-    <div class="program-grid">
-      <div class="program-card">
+    <div class="program-grid" data-reveal-group>
+      <div class="program-card" data-reveal>
         <span class="program-tag">国</span>
         <h3>デジタル化・AI導入補助金2026</h3>
         <p>中小企業のITツール・AI導入を後押しする国の制度です。</p>
       </div>
-      <div class="program-card">
+      <div class="program-card" data-reveal>
         <span class="program-tag">静岡県</span>
         <h3>収益力向上補助金 DX枠</h3>
         <p>県内中小企業のDX投資を支援する静岡県独自の制度です。</p>
       </div>
-      <div class="program-card">
+      <div class="program-card" data-reveal>
         <span class="program-tag">静岡市</span>
         <h3>デジタル活用事業補助金</h3>
         <p>静岡市内の中小企業のデジタル活用を後押しする市の制度です。</p>
       </div>
     </div>
-    <p class="note mt-4">各制度の概要をご紹介するものであり、対象要件・補助率・金額等の詳細は年度や公募回によって変わります。最新の公募要領をご確認ください。</p>
+    <p class="note mt-4" data-reveal>各制度の概要をご紹介するものであり、対象要件・補助率・金額等の詳細は年度や公募回によって変わります。最新の公募要領をご確認ください。</p>
   </div>
 </section>
 
 <!-- 進め方 -->
-<section class="section fade-in" id="process">
+<section class="section" id="process">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Process</span>
       <h2 class="section-title">進め方</h2>
     </div>
-    <ol class="process-list">
-      <li class="process-step">
+    <ol class="process-list" data-reveal-group>
+      <li class="process-step" data-reveal>
         <span class="process-num">1</span>
         <div><h3>現状・導入計画ヒアリング</h3><p>導入したい内容とスケジュールをお聞きします。</p></div>
       </li>
-      <li class="process-step">
+      <li class="process-step" data-reveal>
         <span class="process-num">2</span>
         <div><h3>活用可能制度の選定</h3><p>条件に合いそうな制度を整理し、優先順位をご提案します。</p></div>
       </li>
-      <li class="process-step">
+      <li class="process-step" data-reveal>
         <span class="process-num">3</span>
         <div><h3>申請書類作成支援</h3><p>事業計画書などの作成をサポートし、申請までを伴走します。</p></div>
       </li>
-      <li class="process-step">
+      <li class="process-step" data-reveal>
         <span class="process-num">4</span>
         <div><h3>申請・報告サポート</h3><p>申請後の手続きや、採択後の実績報告についてもご相談いただけます。</p></div>
       </li>
@@ -264,13 +330,13 @@
 </section>
 
 <!-- 料金目安 -->
-<section class="section section-muted fade-in" id="pricing">
+<section class="section section-alt" id="pricing">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Pricing</span>
       <h2 class="section-title">料金目安</h2>
     </div>
-    <div class="table-wrap">
+    <div class="table-wrap" data-reveal>
       <table class="ds-table">
         <thead><tr><th>内容</th><th>料金目安</th></tr></thead>
         <tbody>
@@ -278,27 +344,27 @@
         </tbody>
       </table>
     </div>
-    <p class="note mt-4">内容により変動します。まずは無料診断でお見積りください。</p>
+    <p class="note mt-4" data-reveal>内容により変動します。まずは無料診断でお見積りください。</p>
   </div>
 </section>
 
 <!-- FAQ -->
-<section class="section fade-in" id="faq">
+<section class="section" id="faq">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">FAQ</span>
       <h2 class="section-title">よくある質問</h2>
     </div>
-    <div class="faq-list">
-      <details class="faq-item" open>
+    <div class="faq-list" data-reveal-group>
+      <details class="faq-item" open data-reveal>
         <summary><span><span class="faq-q-label">Q.</span>補助金申請だけの相談も可能ですか。</span></summary>
         <p class="faq-answer">はい。AI導入の他サービスとセットでなくても、補助金申請サポート単体でのご相談を承っております。</p>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-reveal>
         <summary><span><span class="faq-q-label">Q.</span>不採択になった場合の費用はどうなりますか。</span></summary>
         <p class="faq-answer">費用の考え方は契約形態（成功報酬型か着手金型かなど）によって異なります。ご契約前に条件を明確にご説明します。</p>
       </details>
-      <details class="faq-item">
+      <details class="faq-item" data-reveal>
         <summary><span><span class="faq-q-label">Q.</span>どの補助金が使えるか自社では分かりません。</span></summary>
         <p class="faq-answer">多くのお客様が同じ状況からご相談いただいています。まずは導入したい内容をお聞かせいただければ、活用可能性のある制度を整理してご案内します。</p>
       </details>
@@ -307,26 +373,26 @@
 </section>
 
 <!-- 関連サービス -->
-<section class="section section-muted fade-in" id="related">
+<section class="section section-alt" id="related">
   <div class="container">
-    <div class="section-head is-left">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Related Services</span>
       <h2 class="section-title">関連サービス</h2>
     </div>
-    <div class="card-grid cols-3">
-      <div class="card">
+    <div class="card-grid cols-3" data-reveal-group>
+      <div class="card" data-tilt data-reveal>
         <div class="card-icon"><img src="../assets/icons/consulting.svg" alt=""></div>
         <p class="card-title">AI導入コンサルティング</p>
         <p class="card-text">導入計画の段階から補助金活用を組み込んで検討できます。</p>
         <a href="consulting.html" class="card-link">詳しく見る &rsaquo;</a>
       </div>
-      <div class="card">
+      <div class="card" data-tilt data-reveal>
         <div class="card-icon"><img src="../assets/icons/realestate.svg" alt=""></div>
         <p class="card-title">不動産AI活用パック</p>
         <p class="card-text">不動産会社様のAI活用パック導入にも補助金を組み合わせられます。</p>
         <a href="real-estate-ai.html" class="card-link">詳しく見る &rsaquo;</a>
       </div>
-      <div class="card">
+      <div class="card" data-tilt data-reveal>
         <div class="card-icon"><img src="../assets/icons/training.svg" alt=""></div>
         <p class="card-title">生成AI研修・社内定着支援</p>
         <p class="card-text">研修費用が補助金の対象となる場合もあります。あわせてご相談ください。</p>
@@ -337,26 +403,22 @@
 </section>
 
 <!-- CTA -->
-<section class="section fade-in" id="cta">
+<section class="section" id="cta">
   <div class="container">
-    <div class="cta-block">
+    <div class="cta-block" data-reveal>
       <span class="section-label">Get Started</span>
       <h2>まずは無料のAI診断から</h2>
       <p>導入計画と合わせて、活用できそうな補助金についても無料診断でご案内します。</p>
       <div class="cta-actions">
         <a href="../lp/index.html" class="btn btn-primary">無料AI診断を申し込む</a>
-        <a href="../contact.html" class="btn btn-on-navy">無料相談を予約する</a>
+        <a href="../contact.html" class="btn btn-secondary">無料相談を予約する</a>
       </div>
     </div>
   </div>
 </section>
 
 </main>
-<!-- ▲▲▲ ページ本体ここまで ▲▲▲ -->
 
-<!-- ==========================================================
-     フッター（全ページ共通・改変時は他ページとの整合に注意）
-     ========================================================== -->
 <footer class="site-footer">
   <div class="container">
     <div class="footer-top">
@@ -420,6 +482,17 @@
   </div>
 </footer>
 
+<!-- ==========================================================
+     CDNライブラリ（jsdelivr固定バージョン）。読込失敗しても
+     js/main.js は無依存で動作し、effects.js / hero-bg.js は
+     typeof チェック / try-catch により機能を静かにスキップする。
+     ========================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis.min.js"></script>
+
 <script src="../js/main.js"></script>
+<script src="../js/effects.js"></script>
+<script type="module" src="../js/hero-bg.js"></script>
 </body>
 </html>

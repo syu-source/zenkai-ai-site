@@ -1,7 +1,16 @@
 /* =========================================================================
-   ZENKAI AI パートナーズ（仮） — main.js
-   依存ライブラリなし（Vanilla JS）。全ページ共通で読み込む。
-   機能: モバイルメニュー開閉 / スクロール淡入(IntersectionObserver) / 平滑スクロール
+   ZENKAI AI パートナーズ（仮） — main.js [V2]
+   依存ライブラリなし（Vanilla JS）。全ページ共通で読み込む。CDN失敗時も
+   完全に単独で動作する（このファイル自体は外部ライブラリに依存しない）。
+
+   機能:
+   1. モバイルメニュー開閉（#navMobile は <header> の外に配置されている
+      前提。backdrop-filter による containing block バグを避けるため）
+   2. ヘッダーのスクロール状態（.is-scrolled）
+   3. スクロール淡入の代替実装（GSAP/effects.js が読み込めない場合の
+      最低限のフォールバック。IntersectionObserverで表示するのみで、
+      初期状態はCSSで隠さないため、JS未実行でも常に完全に可視）
+   4. 平滑アンカースクロール（固定ヘッダー分のオフセット補正）
    ========================================================================= */
 (function () {
   'use strict';
@@ -14,34 +23,32 @@
      ----------------------------------------------------------------------- */
   function initMobileNav() {
     var header = document.querySelector('.site-header');
-    if (!header) return;
+    var navMobile = document.getElementById('navMobile');
+    if (!header || !navMobile) return;
 
     var toggle = header.querySelector('.hamburger');
-    var navMobile = header.querySelector('.nav-mobile');
-    if (!toggle || !navMobile) return;
+    if (!toggle) return;
 
     function closeNav() {
-      header.classList.remove('is-nav-open');
+      navMobile.classList.remove('is-open');
+      toggle.classList.remove('is-active');
       toggle.setAttribute('aria-expanded', 'false');
       document.body.classList.remove('no-scroll');
     }
 
     function openNav() {
-      header.classList.add('is-nav-open');
+      navMobile.classList.add('is-open');
+      toggle.classList.add('is-active');
       toggle.setAttribute('aria-expanded', 'true');
       document.body.classList.add('no-scroll');
     }
 
     toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-controls', navMobile.id || '');
+    toggle.setAttribute('aria-controls', navMobile.id || 'navMobile');
 
     toggle.addEventListener('click', function () {
-      var isOpen = header.classList.contains('is-nav-open');
-      if (isOpen) {
-        closeNav();
-      } else {
-        openNav();
-      }
+      var isOpen = navMobile.classList.contains('is-open');
+      if (isOpen) { closeNav(); } else { openNav(); }
     });
 
     // メニュー内のリンクをクリックしたら閉じる
@@ -51,7 +58,7 @@
 
     // Escキーで閉じる
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && header.classList.contains('is-nav-open')) {
+      if (e.key === 'Escape' && navMobile.classList.contains('is-open')) {
         closeNav();
         toggle.focus();
       }
@@ -59,50 +66,70 @@
 
     // デスクトップ幅にリサイズされたら状態をリセット
     window.addEventListener('resize', function () {
-      if (window.innerWidth >= 1120 && header.classList.contains('is-nav-open')) {
+      if (window.innerWidth >= 1120 && navMobile.classList.contains('is-open')) {
         closeNav();
       }
     });
   }
 
   /* -----------------------------------------------------------------------
-     2. スクロール淡入（IntersectionObserver）
-        prefers-reduced-motion の場合は即座に表示し監視しない
+     2. ヘッダーのスクロール状態（濃色ガラス背景への切り替え）
      ----------------------------------------------------------------------- */
-  function initFadeIn() {
-    var targets = document.querySelectorAll('.fade-in');
-    if (!targets.length) return;
+  function initHeaderScrollState() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
 
-    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      targets.forEach(function (el) {
-        el.classList.add('is-visible');
-      });
-      return;
+    var ticking = false;
+    var THRESHOLD = 8;
+
+    function update() {
+      ticking = false;
+      if (window.scrollY > THRESHOLD) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
     }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* -----------------------------------------------------------------------
+     3. スクロール淡入フォールバック（IntersectionObserver）
+        effects.js（GSAP版）が動いている場合はそちらが担当するため、
+        既に .is-visible-fallback 等の重複制御は行わず、単に「見えたら
+        is-inview クラスを付ける」だけに留める。[data-reveal] 自体は
+        CSSで隠していないため、このJSが動かなくても内容は常に見える。
+     ----------------------------------------------------------------------- */
+  function initRevealFallback() {
+    var targets = document.querySelectorAll('[data-reveal], [data-reveal-group]');
+    if (!targets.length || !('IntersectionObserver' in window)) return;
 
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
+            entry.target.classList.add('is-inview');
             observer.unobserve(entry.target);
           }
         });
       },
-      {
-        root: null,
-        rootMargin: '0px 0px -10% 0px',
-        threshold: 0.1
-      }
+      { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
     );
 
-    targets.forEach(function (el) {
-      observer.observe(el);
-    });
+    targets.forEach(function (el) { observer.observe(el); });
   }
 
   /* -----------------------------------------------------------------------
-     3. 平滑アンカースクロール（固定ヘッダー分のオフセット補正）
+     4. 平滑アンカースクロール（固定ヘッダー分のオフセット補正）
      ----------------------------------------------------------------------- */
   function initSmoothAnchors() {
     var header = document.querySelector('.site-header');
@@ -137,7 +164,6 @@
         behavior: prefersReducedMotion ? 'auto' : 'smooth'
       });
 
-      // アクセシビリティ: フォーカス移動
       targetEl.setAttribute('tabindex', '-1');
       targetEl.focus({ preventScroll: true });
 
@@ -150,7 +176,8 @@
      ----------------------------------------------------------------------- */
   function init() {
     initMobileNav();
-    initFadeIn();
+    initHeaderScrollState();
+    initRevealFallback();
     initSmoothAnchors();
   }
 

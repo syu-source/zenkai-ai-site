@@ -4,31 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>スタイルガイド｜ZENKAI AI パートナーズ</title>
-<meta name="description" content="ZENKAI AI パートナーズ 公式サイト共通デザインシステムの検証用ページ。">
+<meta name="description" content="ZENKAI AI パートナーズ 公式サイト共通デザインシステム（V2 ダーク・テック）の検証用ページ。">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="../css/design-system.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+  }
+}
+</script>
 <style>
   /* このページ限定の検証用スタイル（design-system.cssは改変しない） */
   .sg-block { padding: var(--space-7) 0; border-bottom: 1px dashed var(--color-border); }
-  .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-4); }
+  .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-4); }
   .sg-swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); }
   .sg-swatch-color { height: 64px; }
-  .sg-swatch-label { padding: var(--space-2) var(--space-3); font-size: 0.78rem; background: var(--color-base); }
+  .sg-swatch-label { padding: var(--space-2) var(--space-3); font-size: 0.78rem; background: var(--color-bg-secondary); color: var(--color-text); }
   .sg-icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--space-5); text-align: center; }
-  .sg-icon-tile { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
-  .sg-icon-tile svg { width: 32px; height: 32px; margin: 0 auto var(--space-2); color: var(--color-accent); }
+  .sg-icon-tile { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--glass-bg); }
+  .sg-icon-tile svg, .sg-icon-tile img { width: 32px; height: 32px; margin: 0 auto var(--space-2); }
+  .sg-icon-tile img { filter: brightness(0) saturate(100%) invert(85%) sepia(35%) saturate(1000%) hue-rotate(140deg) brightness(1.05); }
   .sg-icon-tile span { font-size: 0.75rem; color: var(--color-text-muted); display: block; }
   .sg-row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
-  .sg-fuji-demo { position: relative; background: var(--gradient-navy); border-radius: var(--radius-lg); height: 200px; overflow: hidden; }
-  .sg-fuji-demo svg { position: absolute; bottom: 0; left: 0; width: 100%; color: var(--color-accent2); opacity: 0.3; }
-  .sg-logo-demo { padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); display: inline-block; }
-  .sg-logo-demo.dark { background: var(--color-navy); }
-  code.sg-code { background: var(--gray-100); padding: 0.15em 0.5em; border-radius: 4px; font-size: 0.85em; }
+  .sg-fuji-demo { position: relative; background: var(--color-bg-secondary); border-radius: var(--radius-lg); height: 220px; overflow: hidden; border: 1px solid var(--color-border); }
+  .sg-fuji-demo svg, .sg-fuji-demo img { position: absolute; bottom: 0; left: 0; width: 100%; }
+  .sg-logo-demo { padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-md); display: inline-block; background: var(--color-bg-secondary); }
+  code.sg-code { background: var(--color-bg-secondary); border: 1px solid var(--color-border); padding: 0.15em 0.5em; border-radius: 4px; font-size: 0.85em; color: var(--color-text); }
+  .sg-note { color: var(--color-text-muted); font-size: 0.85rem; margin-top: var(--space-3); }
+  .sg-class-list { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+  .sg-class-list code { font-size: 0.76rem; }
 </style>
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="../index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
       <img src="../assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
@@ -49,35 +61,59 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
-      <ul>
-        <li><a href="../index.html">ホーム</a></li>
-        <li><a href="../index.html#services">サービス</a></li>
-        <li><a href="../index.html#industries">業界別</a></li>
-        <li><a href="../cases.html">導入事例</a></li>
-        <li><a href="../pricing.html">料金</a></li>
-        <li><a href="../company.html">会社概要</a></li>
-      </ul>
-      <a href="../contact.html" class="btn btn-primary">無料相談</a>
-    </nav>
   </div>
 </header>
 
+<nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション" data-lenis-prevent>
+  <ul>
+    <li><a href="../index.html">ホーム</a></li>
+    <li><a href="../index.html#services">サービス</a></li>
+    <li><a href="../index.html#industries">業界別</a></li>
+    <li><a href="../cases.html">導入事例</a></li>
+    <li><a href="../pricing.html">料金</a></li>
+    <li><a href="../company.html">会社概要</a></li>
+  </ul>
+  <a href="../contact.html" class="btn btn-primary">無料相談</a>
+</nav>
+
 <main>
 
-<!-- Hero + Fuji line デモ -->
+<!-- Hero + three.js粒子背景 + Fuji line デモ -->
 <section class="hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <img src="../assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
   <div class="container hero-inner">
-    <span class="badge badge-on-navy">静岡発</span>
-    <h1 class="mt-4">スタイルガイド<br>ZENKAI AI パートナーズ デザインシステム</h1>
-    <p class="lead">このページは全ページ共通の css/design-system.css と js/main.js の検証用です。実際のコンテンツページではありません。</p>
-    <div class="cta-actions" style="justify-content:flex-start;">
+    <span class="badge badge-shizuoka" data-reveal>静岡発</span>
+    <h1 class="mt-4" data-reveal data-reveal-delay="0.08">スタイルガイド<br><span class="text-gradient">ZENKAI AI パートナーズ</span> デザインシステム V2</h1>
+    <p class="lead" data-reveal data-reveal-delay="0.16">このページは全ページ共通の css/design-system.css・js/main.js・js/effects.js・js/hero-bg.js の検証用です。実際のコンテンツページではありません。</p>
+    <div class="cta-actions" style="justify-content:flex-start;" data-reveal data-reveal-delay="0.24">
       <a href="#buttons" class="btn btn-primary">主要ボタンを見る</a>
-      <a href="#faq" class="btn btn-on-navy">FAQを見る</a>
+      <a href="#faq" class="btn btn-secondary">FAQを見る</a>
     </div>
   </div>
 </section>
+
+<!-- Tech marquee -->
+<div class="tech-marquee">
+  <div class="tech-marquee__track">
+    <span class="tech-marquee__item">GENERATIVE AI</span>
+    <span class="tech-marquee__item">LLM</span>
+    <span class="tech-marquee__item">RAG</span>
+    <span class="tech-marquee__item">FDE型伴走支援</span>
+    <span class="tech-marquee__item">DX</span>
+    <span class="tech-marquee__item">IoT</span>
+    <span class="tech-marquee__item">画像認識</span>
+    <span class="tech-marquee__item">補助金活用</span>
+    <span class="tech-marquee__item">GENERATIVE AI</span>
+    <span class="tech-marquee__item">LLM</span>
+    <span class="tech-marquee__item">RAG</span>
+    <span class="tech-marquee__item">FDE型伴走支援</span>
+    <span class="tech-marquee__item">DX</span>
+    <span class="tech-marquee__item">IoT</span>
+    <span class="tech-marquee__item">画像認識</span>
+    <span class="tech-marquee__item">補助金活用</span>
+  </div>
+</div>
 
 <div class="container">
 
@@ -88,72 +124,110 @@
       <h2 class="section-title">カラーパレット</h2>
     </div>
     <div class="sg-swatches">
-      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-base);border-bottom:1px solid var(--color-border)"></div><div class="sg-swatch-label">--color-base<br><code class="sg-code">#FFFFFF</code></div></div>
-      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-navy)"></div><div class="sg-swatch-label">--color-navy<br><code class="sg-code">#0B1E3A</code></div></div>
-      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-accent)"></div><div class="sg-swatch-label">--color-accent<br><code class="sg-code">#0E7FC0</code></div></div>
-      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-accent2)"></div><div class="sg-swatch-label">--color-accent2<br><code class="sg-code">#00B4D8</code></div></div>
-      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-tea)"></div><div class="sg-swatch-label">--color-tea<br><code class="sg-code">#3E7C50</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-bg)"></div><div class="sg-swatch-label">--color-bg<br><code class="sg-code">#05070F</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-bg-secondary)"></div><div class="sg-swatch-label">--color-bg-secondary<br><code class="sg-code">#0A0F1E</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-indigo)"></div><div class="sg-swatch-label">--color-indigo<br><code class="sg-code">#6366F1</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-cyan)"></div><div class="sg-swatch-label">--color-cyan<br><code class="sg-code">#22D3EE</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--color-tea)"></div><div class="sg-swatch-label">--color-tea<br><code class="sg-code">#3E9C6E</code></div></div>
       <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gradient-accent)"></div><div class="sg-swatch-label">--gradient-accent</div></div>
-      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-100)"></div><div class="sg-swatch-label">--gray-100</div></div>
-      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-300)"></div><div class="sg-swatch-label">--gray-300</div></div>
-      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-500)"></div><div class="sg-swatch-label">--gray-500</div></div>
-      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-700)"></div><div class="sg-swatch-label">--gray-700</div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-300)"></div><div class="sg-swatch-label">--gray-300<br><code class="sg-code">body text</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-100)"></div><div class="sg-swatch-label">--gray-100<br><code class="sg-code">heading</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color" style="background:var(--gray-500)"></div><div class="sg-swatch-label">--gray-500<br><code class="sg-code">muted</code></div></div>
+      <div class="sg-swatch"><div class="sg-swatch-color glass" style="height:64px"></div><div class="sg-swatch-label">.glass 面</div></div>
     </div>
   </section>
 
   <!-- タイポグラフィ -->
-  <section class="sg-block fade-in" id="typography">
-    <div class="section-head is-left">
+  <section class="sg-block" id="typography" data-reveal-group>
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Typography</span>
       <h2 class="section-title">タイポグラフィ</h2>
     </div>
-    <h1>見出し1（h1）現場を知っているAI会社</h1>
-    <h2 class="mt-4">見出し2（h2）AI導入コンサルティング</h2>
-    <h3 class="mt-4">見出し3（h3）静岡から日本の中小企業へ</h3>
-    <p class="mt-4">本文テキスト：ZENKAI AI パートナーズは、不動産・製造業の実業経験を持つチームが、AI導入の「何から始めればいいか分からない」を解決します。Noto Sans JP／Inter 1234567890</p>
+    <h1 class="display-1" data-reveal>現場を知っている<span class="text-gradient">AI会社</span>。</h1>
+    <h2 class="mt-6" data-reveal>見出し2（h2）AI導入コンサルティング</h2>
+    <h3 class="mt-4" data-reveal>見出し3（h3）静岡から日本の中小企業へ</h3>
+    <p class="mt-4" data-reveal>本文テキスト：ZENKAI AI パートナーズは、不動産・製造業の実業経験を持つチームが、AI導入の「何から始めればいいか分からない」を解決します。Space Grotesk／Noto Sans JP 1234567890</p>
+    <div class="sg-class-list">
+      <code class="sg-code">.display-1</code>
+      <code class="sg-code">.text-gradient</code>
+      <code class="sg-code">.eyebrow</code>
+    </div>
   </section>
 
   <!-- セクション見出しパターン -->
-  <section class="sg-block fade-in" id="section-head">
-    <div class="section-head">
+  <section class="sg-block" id="section-head">
+    <div class="section-head" data-reveal>
       <span class="section-label">Service</span>
       <h2 class="section-title">サービス一覧（見出しパターン中央寄せ例）</h2>
       <p class="section-lead">英語小ラベル＋日本語大見出しの組み合わせ。全ページの導入部で使用する共通パターンです。</p>
     </div>
   </section>
 
+  <!-- Stat数字カード -->
+  <section class="sg-block" id="stats">
+    <div class="section-head is-left" data-reveal>
+      <span class="section-label">Stats</span>
+      <h2 class="section-title">Stat数字カード（[data-counter]）</h2>
+    </div>
+    <div class="stat-grid" data-reveal-group>
+      <div class="stat-card glass" data-reveal>
+        <p class="stat-number"><span data-counter="120" data-counter-suffix="+">0</span></p>
+        <p class="stat-label">導入支援実績</p>
+      </div>
+      <div class="stat-card glass" data-reveal>
+        <p class="stat-number"><span data-counter="98" data-counter-suffix="%">0</span></p>
+        <p class="stat-label">継続支援率（自社実践含む）</p>
+      </div>
+      <div class="stat-card glass" data-reveal>
+        <p class="stat-number"><span data-counter="1" data-counter-suffix="営業日">0</span></p>
+        <p class="stat-label">初回返信までの目安</p>
+      </div>
+      <div class="stat-card glass" data-reveal>
+        <p class="stat-number"><span data-counter="10" data-counter-suffix="種">0</span></p>
+        <p class="stat-label">サービスメニュー</p>
+      </div>
+    </div>
+    <div class="sg-class-list">
+      <code class="sg-code">.stat-grid</code>
+      <code class="sg-code">.stat-card</code>
+      <code class="sg-code">.stat-number</code>
+      <code class="sg-code">[data-counter]</code>
+      <code class="sg-code">[data-counter-suffix]</code>
+    </div>
+  </section>
+
   <!-- ボタン -->
-  <section class="sg-block fade-in" id="buttons">
-    <div class="section-head is-left">
+  <section class="sg-block" id="buttons">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Buttons</span>
       <h2 class="section-title">ボタン</h2>
+      <p class="section-lead">.btn-primary はホバー時にマウス方向へ吸着するマグネティック効果を自動付与（js/effects.js）。</p>
     </div>
     <div class="sg-row">
       <a href="#" class="btn btn-primary">btn btn-primary</a>
       <a href="#" class="btn btn-secondary">btn btn-secondary</a>
+      <a href="#" class="btn btn-ghost">btn btn-ghost &rsaquo;</a>
       <a href="#" class="btn btn-primary btn-sm">btn-primary btn-sm</a>
       <a href="#" class="btn btn-secondary btn-sm">btn-secondary btn-sm</a>
-    </div>
-    <div class="sg-row mt-4" style="background:var(--color-navy);padding:var(--space-5);border-radius:var(--radius-md);">
-      <a href="#" class="btn btn-on-navy">btn btn-on-navy</a>
     </div>
   </section>
 
   <!-- バッジ -->
-  <section class="sg-block fade-in" id="badges">
-    <div class="section-head is-left">
+  <section class="sg-block" id="badges">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Badges</span>
-      <h2 class="section-title">徽章（バッジ）</h2>
+      <h2 class="section-title">徽章（発光カプセル）</h2>
     </div>
     <div class="sg-row">
       <span class="badge badge-shizuoka">静岡発</span>
       <span class="badge badge-accent">FDE型伴走支援</span>
+      <span class="badge badge-on-navy">現場を知っているAI会社</span>
     </div>
   </section>
 
   <!-- パンくず -->
-  <section class="sg-block fade-in" id="breadcrumb">
-    <div class="section-head is-left">
+  <section class="sg-block" id="breadcrumb">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Breadcrumb</span>
       <h2 class="section-title">パンくずリスト</h2>
     </div>
@@ -166,39 +240,46 @@
     </nav>
   </section>
 
-  <!-- カード -->
-  <section class="sg-block fade-in" id="cards">
-    <div class="section-head is-left">
+  <!-- カード（3Dチルト） -->
+  <section class="sg-block" id="cards">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Cards</span>
-      <h2 class="section-title">カード</h2>
+      <h2 class="section-title">グラスカード（[data-tilt] 3Dチルト）</h2>
+      <p class="section-lead">PC・ホバー時にマウス位置に応じて3D傾斜＋グラデーション描边の光斑が追従します。</p>
     </div>
-    <div class="card-grid cols-3">
-      <div class="card">
+    <div class="card-grid cols-3" data-reveal-group>
+      <div class="card" data-tilt data-reveal>
         <div class="card-icon"><img src="../assets/icons/consulting.svg" alt=""></div>
         <p class="card-title">AI導入コンサルティング</p>
         <p class="card-text">需要確定から、ソフト・ハード・開発環境の選定までを伴走支援します。</p>
         <a href="#" class="card-link">詳しく見る &rsaquo;</a>
       </div>
-      <div class="card">
+      <div class="card" data-tilt data-reveal>
         <div class="card-icon"><img src="../assets/icons/engineer.svg" alt=""></div>
         <p class="card-title">AIエンジニア常駐・伴走支援</p>
         <p class="card-text">日単位・週単位でAI人材を実地または遠隔で派遣します（FDE型支援）。</p>
         <a href="#" class="card-link">詳しく見る &rsaquo;</a>
       </div>
-      <div class="card">
+      <div class="card" data-tilt data-reveal>
         <div class="card-icon"><img src="../assets/icons/subsidy.svg" alt=""></div>
         <p class="card-title">補助金申請サポート</p>
         <p class="card-text">デジタル化・AI導入補助金など各種制度の活用を支援します。</p>
         <a href="#" class="card-link">詳しく見る &rsaquo;</a>
       </div>
     </div>
+    <div class="sg-class-list">
+      <code class="sg-code">.card-grid.cols-2/3/4</code>
+      <code class="sg-code">.card</code>
+      <code class="sg-code">[data-tilt]</code>
+      <code class="sg-code">[data-tilt-max="12"]</code>
+    </div>
   </section>
 
   <!-- アイコン一覧 -->
-  <section class="sg-block fade-in" id="icons">
-    <div class="section-head is-left">
+  <section class="sg-block" id="icons">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Icons</span>
-      <h2 class="section-title">サービスアイコン（10種・24x24 stroke）</h2>
+      <h2 class="section-title">サービスアイコン（10種・既存線条を深色調整）</h2>
     </div>
     <div class="sg-icon-grid">
       <div class="sg-icon-tile"><img src="../assets/icons/consulting.svg" alt="コンサルティング"><span>consulting</span></div>
@@ -215,14 +296,14 @@
   </section>
 
   <!-- ロゴ／Fuji line ／favicon -->
-  <section class="sg-block fade-in" id="brand-assets">
-    <div class="section-head is-left">
+  <section class="sg-block" id="brand-assets">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Brand Assets</span>
       <h2 class="section-title">ロゴ／富士山ラインアート／Favicon</h2>
     </div>
     <div class="sg-row">
-      <div class="sg-logo-demo"><img src="../assets/logo.svg" alt="ロゴ（白背景用）" width="180"></div>
-      <div class="sg-logo-demo dark"><img src="../assets/logo-white.svg" alt="ロゴ（紺背景用）" width="180"></div>
+      <div class="sg-logo-demo"><img src="../assets/logo.svg" alt="ロゴ" width="180"></div>
+      <div class="sg-logo-demo"><img src="../assets/logo-white.svg" alt="ロゴ（フッター用）" width="180"></div>
       <div class="sg-logo-demo"><img src="../assets/favicon.svg" alt="favicon" width="48" height="48"></div>
     </div>
     <div class="sg-fuji-demo mt-6">
@@ -231,8 +312,8 @@
   </section>
 
   <!-- テーブル -->
-  <section class="sg-block fade-in" id="table">
-    <div class="section-head is-left">
+  <section class="sg-block" id="table">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Table</span>
       <h2 class="section-title">料金テーブル例</h2>
     </div>
@@ -252,8 +333,8 @@
   </section>
 
   <!-- フォーム -->
-  <section class="sg-block fade-in" id="form">
-    <div class="section-head is-left">
+  <section class="sg-block" id="form">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">Form</span>
       <h2 class="section-title">フォーム部品</h2>
     </div>
@@ -284,8 +365,8 @@
   </section>
 
   <!-- FAQ -->
-  <section class="sg-block fade-in" id="faq">
-    <div class="section-head is-left">
+  <section class="sg-block" id="faq">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">FAQ</span>
       <h2 class="section-title">よくある質問（アコーディオン）</h2>
     </div>
@@ -306,29 +387,29 @@
   </section>
 
   <!-- CTA -->
-  <section class="sg-block fade-in" id="cta">
-    <div class="section-head is-left">
+  <section class="sg-block" id="cta">
+    <div class="section-head is-left" data-reveal>
       <span class="section-label">CTA</span>
       <h2 class="section-title">CTA大区块</h2>
     </div>
-    <div class="cta-block">
+    <div class="cta-block" data-reveal>
       <span class="section-label">Get Started</span>
       <h2>まずは無料相談から</h2>
       <p>現場を知っているAI会社が、貴社の課題に合わせてご提案します。</p>
       <div class="cta-actions">
         <a href="#" class="btn btn-primary">無料相談を予約する</a>
-        <a href="#" class="btn btn-on-navy">資料をダウンロード</a>
+        <a href="#" class="btn btn-secondary">資料をダウンロード</a>
       </div>
     </div>
   </section>
 
-  <!-- section-dark -->
-  <section class="section section-dark fade-in" style="border-radius:var(--radius-lg);" id="section-dark">
+  <!-- section-alt -->
+  <section class="section section-alt" style="border-radius:var(--radius-lg);" id="section-alt">
     <div class="container">
-      <div class="section-head">
-        <span class="section-label">Dark Section</span>
-        <h2 class="section-title">暗色セクション（section-dark）</h2>
-        <p class="section-lead">導入事例や信頼性訴求など、白セクションとのメリハリをつけたい箇所に使用します。</p>
+      <div class="section-head" data-reveal>
+        <span class="section-label">Alt Section</span>
+        <h2 class="section-title">区切り用セクション（section-alt）</h2>
+        <p class="section-lead">導入事例や信頼性訴求など、メリハリをつけたい箇所に使用する、わずかに明るい面。</p>
       </div>
     </div>
   </section>
@@ -400,6 +481,12 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis.min.js"></script>
+
 <script src="../js/main.js"></script>
+<script src="../js/effects.js"></script>
+<script type="module" src="../js/hero-bg.js"></script>
 </body>
 </html>

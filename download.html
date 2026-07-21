@@ -20,8 +20,23 @@
 <!-- Favicon -->
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
+<!-- フォント（Google Fonts。design-system.css内の@importが本体を読み込むため
+     ここではpreconnectのみで接続を先行させる。オフライン時はシステムフォントへ自動フォールバック） -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <!-- 共通デザインシステム -->
 <link rel="stylesheet" href="css/design-system.css">
+
+<!-- three.js（ESモジュール専用配布のため importmap で解決。CDN到達不可の場合は
+     js/hero-bg.js 側の dynamic import が失敗し、静かにスキップされる） -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+  }
+}
+</script>
 
 <!-- 構造化データ（LocalBusiness） -->
 <script type="application/ld+json">
@@ -44,18 +59,7 @@
 </script>
 
 <style>
-  /* download.html 専用スタイル（design-system.cssは改変しない） */
-  .dl-page-head {
-    padding: var(--space-8) 0 var(--space-7);
-    background: var(--gradient-navy);
-    color: var(--color-text-on-navy);
-    position: relative;
-    overflow: hidden;
-  }
-  .dl-page-head .hero-fuji { opacity: 0.14; }
-  .dl-page-head h1 { color: #fff; font-size: 1.9rem; font-weight: 900; }
-  .dl-page-head p { margin-top: var(--space-3); color: var(--color-text-on-navy-muted); max-width: 620px; }
-
+  /* download.html 専用スタイル（design-system.cssは改変せず、V2トークンのみ使用） */
   .dl-layout {
     display: grid;
     grid-template-columns: 1fr;
@@ -65,38 +69,88 @@
     .dl-layout { grid-template-columns: 1.1fr 0.9fr; align-items: start; }
   }
 
+  /* 白皮书封面感デザイン */
   .dl-cover {
-    background: var(--gradient-navy);
-    border-radius: var(--radius-lg);
-    padding: var(--space-7) var(--space-6);
-    color: #fff;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8) var(--space-6);
+    color: var(--color-text-heading);
     box-shadow: var(--shadow-lg);
     position: relative;
     overflow: hidden;
+    isolation: isolate;
   }
-  .dl-cover .hero-fuji { opacity: 0.18; }
+  .dl-cover::before {
+    content: '';
+    position: absolute;
+    inset: -30%;
+    z-index: -1;
+    background: var(--gradient-radial-indigo), var(--gradient-radial-cyan);
+    background-position: 15% 15%, 85% 85%;
+    background-repeat: no-repeat;
+    filter: blur(70px);
+    opacity: 0.75;
+  }
+  .dl-cover .hero-fuji { opacity: 0.28; z-index: -1; }
   .dl-cover-inner { position: relative; z-index: 1; }
-  .dl-cover-label { font-family: var(--font-en); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent2); }
-  .dl-cover-title { margin-top: var(--space-3); font-size: 1.5rem; font-weight: 900; line-height: 1.6; }
-  .dl-cover-sub { margin-top: var(--space-4); color: var(--color-text-on-navy-muted); font-size: 0.92rem; line-height: 1.9; }
-  .dl-cover-pages { margin-top: var(--space-6); font-size: 0.8rem; color: var(--color-text-on-navy-muted); }
+  .dl-cover-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-en);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-cyan);
+  }
+  .dl-cover-label::before {
+    content: '';
+    width: 22px; height: 1px;
+    background: var(--gradient-accent);
+  }
+  .dl-cover-title {
+    margin-top: var(--space-4);
+    font-size: clamp(1.5rem, 2.6vw + 1rem, 2.1rem);
+    font-weight: 900;
+    line-height: 1.5;
+    color: var(--color-text-heading);
+  }
+  .dl-cover-sub { margin-top: var(--space-4); color: var(--color-text); font-size: 0.94rem; line-height: 1.9; }
+  .dl-cover-pages {
+    margin-top: var(--space-6);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.4em 1em;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border-strong);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
 
   .toc-list { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-5); }
   .toc-item {
     display: flex;
     align-items: flex-start;
     gap: var(--space-4);
-    padding: var(--space-4) var(--space-5);
-    background: var(--color-base);
+    padding: var(--space-5);
+    background: var(--glass-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color var(--duration-fast) var(--ease-standard), transform var(--duration-fast) var(--ease-standard);
   }
+  .toc-item:hover { border-color: var(--color-border-strong); transform: translateY(-2px); }
   .toc-num {
     flex: none;
-    width: 32px; height: 32px;
+    width: 34px; height: 34px;
     border-radius: var(--radius-full);
     background: var(--gradient-accent);
     color: #fff;
+    box-shadow: var(--glow-accent-sm);
     font-family: var(--font-en);
     font-weight: 700;
     display: flex;
@@ -104,34 +158,35 @@
     justify-content: center;
     font-size: 0.9rem;
   }
-  .toc-item h3 { font-size: 0.98rem; }
+  .toc-item h3 { font-size: 0.98rem; color: var(--color-text-heading); }
   .toc-item p { margin-top: var(--space-1); color: var(--color-text-muted); font-size: 0.86rem; }
 
   .apply-box {
     position: sticky;
     top: calc(var(--header-height) + var(--space-5));
   }
-  .apply-card {
-    background: var(--color-base);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-6);
-    box-shadow: var(--shadow-md);
-  }
-  .apply-card h2.card-title { font-size: 1.15rem; }
+  .apply-card { }
+  .apply-card .card-title { font-size: 1.15rem; }
   .apply-steps { margin-top: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
   .apply-step { display: flex; gap: var(--space-3); align-items: flex-start; font-size: 0.88rem; color: var(--color-text); }
   .apply-step .step-dot {
     flex: none; width: 22px; height: 22px; border-radius: var(--radius-full);
-    background: rgba(14,127,192,0.1); color: var(--color-accent);
+    background: rgba(34, 211, 238, 0.12); color: var(--color-cyan);
     font-family: var(--font-en); font-weight: 700; font-size: 0.75rem;
     display: flex; align-items: center; justify-content: center;
   }
+
+  /* DLボタン発光 */
+  .dl-btn-glow {
+    box-shadow: var(--glow-accent-md);
+  }
+  .dl-btn-glow:hover { box-shadow: var(--glow-accent-lg); }
+
   .form-placeholder {
     margin-top: var(--space-6);
-    border: 1px dashed var(--color-border);
+    border: 1px dashed var(--color-border-strong);
     border-radius: var(--radius-md);
-    background: var(--gray-50);
+    background: var(--glass-bg);
     padding: var(--space-5);
     text-align: center;
     color: var(--color-text-muted);
@@ -143,9 +198,9 @@
 <body>
 
 <!-- ==========================================================
-     ヘッダー（全ページ共通・page-template-root.htmlより複製）
+     ヘッダー（全ページ共通・templates/page-template-root.htmlより複製）
      ========================================================== -->
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
       <img src="assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
@@ -168,20 +223,23 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-
-    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="index.html#services">サービス</a></li>
-        <li><a href="index.html#industries">業界別</a></li>
-        <li><a href="cases.html">導入事例</a></li>
-        <li><a href="pricing.html">料金</a></li>
-        <li><a href="company.html">会社概要</a></li>
-      </ul>
-      <a href="contact.html" class="btn btn-primary">無料相談</a>
-    </nav>
   </div>
 </header>
+
+<!-- ==========================================================
+     モバイルナビゲーション（<header> の外・body直下に配置。理由はCSSコメント参照）
+     ========================================================== -->
+<nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション" data-lenis-prevent>
+  <ul>
+    <li><a href="index.html">ホーム</a></li>
+    <li><a href="index.html#services">サービス</a></li>
+    <li><a href="index.html#industries">業界別</a></li>
+    <li><a href="cases.html">導入事例</a></li>
+    <li><a href="pricing.html">料金</a></li>
+    <li><a href="company.html">会社概要</a></li>
+  </ul>
+  <a href="contact.html" class="btn btn-primary">無料相談</a>
+</nav>
 
 <!-- ==========================================================
      パンくずリスト
@@ -198,12 +256,15 @@
      ========================================================== -->
 <main>
 
-  <section class="dl-page-head">
-    <img src="assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
-    <div class="container" style="position:relative;z-index:1;">
-      <span class="badge badge-on-navy">無料ダウンロード</span>
-      <h1 class="mt-4">静岡の中小企業のための<br>AI導入ガイド2026</h1>
-      <p>「何から始めればいいか分からない」を解消するための実践ガイドです。現状データ、始め方、使える補助金、自己診断チェックリストを1冊にまとめました。</p>
+  <!-- ページヘッダー -->
+  <section class="section bg-glow" style="padding-bottom: var(--space-6);">
+    <div class="container">
+      <span class="badge badge-shizuoka" data-reveal>無料ダウンロード</span>
+      <div class="section-head is-left mt-4" data-reveal-group>
+        <span class="section-label" data-reveal>White Paper</span>
+        <h1 class="section-title" style="font-size:clamp(2rem, 4vw + 1rem, 3.2rem);" data-reveal>静岡の中小企業のための<br>AI導入ガイド2026</h1>
+        <p class="section-lead" data-reveal data-reveal-delay="0.1">「何から始めればいいか分からない」を解消するための実践ガイドです。現状データ、始め方、使える補助金、自己診断チェックリストを1冊にまとめました。</p>
+      </div>
     </div>
   </section>
 
@@ -212,45 +273,45 @@
       <div class="dl-layout">
 
         <div class="dl-main">
-          <div class="dl-cover fade-in">
+          <div class="dl-cover" data-reveal>
             <img src="assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
             <div class="dl-cover-inner">
               <p class="dl-cover-label">Free White Paper</p>
-              <p class="dl-cover-title">静岡の中小企業のための<br>AI導入ガイド2026</p>
+              <p class="dl-cover-title">静岡の中小企業のための<br><span class="text-gradient">AI導入ガイド2026</span></p>
               <p class="dl-cover-sub">「現場を知っているAI会社」ZENKAI AI パートナーズが、静岡の中小企業経営者向けに作成した無料資料です。専門知識がなくても読み進められる内容になっています。</p>
               <p class="dl-cover-pages">PDF形式／全12ページ程度を予定</p>
             </div>
           </div>
 
-          <div class="section-head is-left mt-8">
+          <div class="section-head is-left mt-8" data-reveal>
             <span class="section-label">Contents</span>
             <h2 class="section-title">主な内容（目次プレビュー）</h2>
             <p class="section-lead">この1冊で、AI導入の全体像から実務レベルの一歩目までを把握いただけます。</p>
           </div>
 
-          <div class="toc-list">
-            <div class="toc-item">
+          <div class="toc-list" data-reveal-group>
+            <div class="toc-item" data-reveal>
               <span class="toc-num">01</span>
               <div>
                 <h3>AI導入の現状データ</h3>
                 <p>全国および静岡県内の中小企業におけるAI導入率、導入の障壁、生成AI活用の実態を最新の公的調査データをもとに整理します。</p>
               </div>
             </div>
-            <div class="toc-item">
+            <div class="toc-item" data-reveal>
               <span class="toc-num">02</span>
               <div>
                 <h3>始め方3ステップ</h3>
                 <p>「何から手をつければいいか分からない」状態から、無理なくAI活用を始めるための実践的な3ステップをご紹介します。</p>
               </div>
             </div>
-            <div class="toc-item">
+            <div class="toc-item" data-reveal>
               <span class="toc-num">03</span>
               <div>
                 <h3>使える補助金一覧</h3>
                 <p>国・静岡県・静岡市の補助金制度の概要を一覧化。実質負担を抑えてAI導入を進めるための制度活用の考え方をまとめました。</p>
               </div>
             </div>
-            <div class="toc-item">
+            <div class="toc-item" data-reveal>
               <span class="toc-num">04</span>
               <div>
                 <h3>自己診断チェックリスト</h3>
@@ -263,7 +324,7 @@
         </div>
 
         <div class="apply-box">
-          <div class="apply-card">
+          <div class="apply-card card" data-reveal>
             <p class="card-title">資料ダウンロードのお申し込み</p>
             <p class="card-text">下記フォームより必要事項をご入力のうえお申し込みください。フォーム送信後、メールでPDFをお送りします（1営業日以内）。</p>
 
@@ -274,7 +335,7 @@
             </div>
 
             <!-- 要差し替え：GoogleフォームURL -->
-            <a href="#" class="btn btn-primary btn-block mt-6" rel="noopener">資料ダウンロードを申し込む（Googleフォーム）</a>
+            <a href="#" class="btn btn-primary btn-block dl-btn-glow mt-6" rel="noopener">資料ダウンロードを申し込む（Googleフォーム）</a>
 
             <div class="form-placeholder">
               【要差し替え：GoogleフォームURL】<br>
@@ -292,7 +353,7 @@
   <!-- CTA -->
   <section class="section section-muted">
     <div class="container">
-      <div class="cta-block fade-in">
+      <div class="cta-block" data-reveal>
         <span class="section-label">Get Started</span>
         <h2>資料だけでなく、直接相談したい方へ</h2>
         <p>貴社の状況に合わせた無料相談も承っています。</p>
@@ -306,7 +367,7 @@
 </main>
 
 <!-- ==========================================================
-     フッター（全ページ共通・page-template-root.htmlより複製）
+     フッター（全ページ共通・templates/page-template-root.htmlより複製）
      ========================================================== -->
 <footer class="site-footer">
   <div class="container">
@@ -371,6 +432,17 @@
   </div>
 </footer>
 
+<!-- ==========================================================
+     CDNライブラリ（jsdelivr固定バージョン）。読込失敗しても
+     js/main.js は無依存で動作し、effects.js / hero-bg.js は
+     typeof チェック / try-catch により機能を静かにスキップする。
+     ========================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis.min.js"></script>
+
 <script src="js/main.js"></script>
+<script src="js/effects.js"></script>
+<script type="module" src="js/hero-bg.js"></script>
 </body>
 </html>

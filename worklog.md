@@ -26,3 +26,10 @@
 - [修正] 公開頁に内部文書名「市場調査メモ」が出典として7箇所露出 → 「静岡県公表資料」「各社公表情報」に置換
 - [修正] トップの FDE 英語表記 Field Deployed Engineer → Forward Deployed Engineer
 - 検収：全站リンク・アンカー検査 問題0（1208参照）、emoji=0、代表8頁+モバイル2頁のスクリーンショットを主会話が目視確認
+
+## V2 全站视觉重做（2026-07-21 用户反馈「太难看」后）
+- [決策] 用户确认：深色科技风／全站20页一次性重做／静态HTML+GSAP・ScrollTrigger・Lenis・three.js（CDN固定版本）
+- 基盘重写：design-system.css（深色tokens/玻璃卡/发光/marquee/stat）、js/effects.js（reveal/counter/tilt/magnetic/光标光晕）、js/hero-bg.js（three.js粒子，仅首页+LP）、logo/富士山SVG霓虹重绘
+- 20页全部重做，内容层（文案/数字/出典/占位符/链接）与V1逐字一致
+- 检收：1109引用0死链、emoji=0、占位符14处全数保留、10页截图主会话目视通过
+- 已知未确认项：three.js粒子背景在headless环境无法实际渲染，需真实浏览器最终确认（有静默降级，不影响内容）

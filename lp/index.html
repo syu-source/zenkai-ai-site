@@ -21,8 +21,23 @@
 <!-- Favicon -->
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 
+<!-- フォント（Google Fonts。design-system.css内の@importが本体を読み込むため
+     ここではpreconnectのみで接続を先行させる。オフライン時はシステムフォントへ自動フォールバック） -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <!-- 共通デザインシステム（改変禁止・そのまま読み込み） -->
 <link rel="stylesheet" href="../css/design-system.css">
+
+<!-- three.js（ESモジュール専用配布のため importmap で解決。CDN到達不可の場合は
+     js/hero-bg.js 側の dynamic import が失敗し、静かにスキップされる） -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+  }
+}
+</script>
 
 <style>
   /*
@@ -41,7 +56,7 @@
   /* ---- 簡易ヘッダー（ロゴ＋静岡発バッジのみ／サイト内ナビ無し） ---- */
   .lp-header {
     padding: var(--space-4) 0;
-    background: var(--color-base);
+    background: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
   }
   .lp-header-inner {
@@ -55,7 +70,7 @@
     .lp-header .header-logo img { height: 32px; }
   }
 
-  /* ---- FV（ファーストビュー） ---- */
+  /* ---- FV（ファーストビュー）：粒子背景 + グラデーション大見出し ---- */
   .lp-hero {
     padding: var(--space-7) 0 var(--space-8);
   }
@@ -63,9 +78,6 @@
   .lp-hero h1 {
     font-size: 1.55rem;
     line-height: 1.55;
-  }
-  .lp-hero h1 .hl {
-    color: var(--color-accent2);
   }
   .lp-hero .lead {
     font-size: 1.02rem;
@@ -76,7 +88,7 @@
   .lp-hero-cta .btn { width: 100%; }
   .lp-hero-source {
     margin-top: var(--space-3);
-    color: var(--color-text-on-navy-muted);
+    color: var(--color-text-muted);
     font-size: 0.74rem;
   }
   .lp-trust-row {
@@ -90,13 +102,13 @@
     align-items: center;
     gap: var(--space-2);
     font-size: 0.82rem;
-    color: var(--color-text-on-navy-muted);
+    color: var(--color-text-muted);
   }
   .lp-trust-item svg {
     flex: none;
     width: 18px;
     height: 18px;
-    color: var(--color-accent2);
+    color: var(--color-cyan);
   }
   @media (min-width: 768px) {
     .lp-hero h1 { font-size: 2.3rem; }
@@ -105,7 +117,7 @@
     .lp-hero-cta .btn { width: auto; }
   }
 
-  /* ---- お悩みチェックリスト ---- */
+  /* ---- お悩みチェックリスト：玻璃（グラス）カード ---- */
   .pain-list {
     display: flex;
     flex-direction: column;
@@ -118,17 +130,20 @@
     align-items: flex-start;
     gap: var(--space-4);
     padding: var(--space-5);
-    background: var(--color-base);
-    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
+    transition: transform var(--duration-base) var(--ease-out-expo),
+                box-shadow var(--duration-base) var(--ease-standard);
+  }
+  .pain-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--glow-accent-sm), var(--shadow-md);
   }
   .pain-item .pain-icon {
     flex: none;
     width: 28px;
     height: 28px;
     border-radius: var(--radius-full);
-    background: rgba(201, 122, 40, 0.12);
+    background: rgba(224, 164, 88, 0.14);
     color: var(--color-warning);
     display: flex;
     align-items: center;
@@ -137,7 +152,7 @@
   .pain-item .pain-icon svg { width: 16px; height: 16px; }
   .pain-item p { color: var(--color-text); font-weight: 500; }
 
-  /* ---- 診断の流れ（ステップ） ---- */
+  /* ---- 診断の流れ：発光数字ノード ---- */
   .flow-list {
     display: flex;
     flex-direction: column;
@@ -165,6 +180,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: var(--glow-accent-sm);
+    animation: flow-num-pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes flow-num-pulse {
+    0%, 100% { box-shadow: var(--glow-accent-sm); }
+    50% { box-shadow: var(--glow-accent-md); }
   }
   .flow-item:not(:last-child)::after {
     content: '';
@@ -183,7 +204,7 @@
     margin-top: var(--space-3);
     padding: 0.35em 0.85em;
     border-radius: var(--radius-full);
-    background: rgba(62, 124, 80, 0.1);
+    background: rgba(62, 124, 80, 0.14);
     color: var(--color-tea);
     font-size: 0.8rem;
     font-weight: 700;
@@ -191,8 +212,9 @@
 
   /* ---- 簡易フッター（運営者情報＋プライバシーポリシーのみ） ---- */
   .lp-footer {
-    background: var(--color-navy);
-    color: var(--color-text-on-navy-muted);
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
     padding: var(--space-7) 0 var(--space-5);
     font-size: 0.85rem;
   }
@@ -209,14 +231,14 @@
   .lp-footer-bottom {
     margin-top: var(--space-6);
     padding-top: var(--space-5);
-    border-top: 1px solid rgba(255,255,255,0.12);
+    border-top: 1px solid var(--color-border);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3);
   }
-  .lp-footer-bottom a { color: var(--color-text-on-navy-muted); font-size: 0.82rem; }
+  .lp-footer-bottom a { color: var(--color-text-muted); font-size: 0.82rem; }
   .lp-footer-bottom a:hover { color: #fff; }
 
   /* ---- 最終CTA周りの余白調整 ---- */
@@ -242,27 +264,28 @@
 
   <!-- 1. FV -->
   <section class="hero lp-hero" id="fv">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <img src="../assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
     <div class="container hero-inner">
-      <span class="badge badge-on-navy">無料AI診断</span>
-      <h1 class="mt-4">「AIを、何から始めればいいか分からない」<br><span class="hl">62%の経営者</span>が、同じ悩みを抱えています。</h1>
-      <p class="lead">30分の無料診断で、貴社のAI活用余地と使える補助金がわかります。不動産・製造業の実業経験を持つチームが、専門用語を使わずご説明します。</p>
+      <span class="badge badge-on-navy" data-reveal>無料AI診断</span>
+      <h1 class="mt-4" data-reveal data-reveal-delay="0.08">「AIを、何から始めればいいか分からない」<br><span class="text-gradient">62%の経営者</span>が、同じ悩みを抱えています。</h1>
+      <p class="lead" data-reveal data-reveal-delay="0.16">30分の無料診断で、貴社のAI活用余地と使える補助金がわかります。不動産・製造業の実業経験を持つチームが、専門用語を使わずご説明します。</p>
 
-      <div class="lp-hero-cta cta-actions" style="justify-content:flex-start;">
+      <div class="lp-hero-cta cta-actions" style="justify-content:flex-start;" data-reveal data-reveal-delay="0.24">
         <a href="#form-placeholder" class="btn btn-primary">無料AI診断に申し込む（1分で完了）</a>
       </div>
       <p class="lp-hero-source note">「何から始めるかわからない」62% — 中小企業基盤整備機構 2026年3月調査</p>
 
-      <div class="lp-trust-row">
-        <span class="lp-trust-item">
+      <div class="lp-trust-row" data-reveal-group>
+        <span class="lp-trust-item" data-reveal>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
           不動産×製造業の実業経験
         </span>
-        <span class="lp-trust-item">
+        <span class="lp-trust-item" data-reveal>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
           静岡発
         </span>
-        <span class="lp-trust-item">
+        <span class="lp-trust-item" data-reveal>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
           初回診断無料
         </span>
@@ -273,37 +296,37 @@
   <!-- 2. お悩みチェックリスト -->
   <section class="section" id="pain">
     <div class="container">
-      <div class="section-head fade-in">
+      <div class="section-head" data-reveal>
         <span class="section-label">Check</span>
         <h2 class="section-title">こんなお悩みありませんか</h2>
       </div>
-      <ul class="pain-list fade-in">
-        <li class="pain-item">
+      <ul class="pain-list" data-reveal-group>
+        <li class="pain-item glass" data-reveal>
           <span class="pain-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v9M12 19h.01"/></svg>
           </span>
           <p>AIを導入したいが、何から手をつければいいか分からない</p>
         </li>
-        <li class="pain-item">
+        <li class="pain-item glass" data-reveal>
           <span class="pain-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v9M12 19h.01"/></svg>
           </span>
           <p>情報収集はしているが、自社に合うツールや進め方が分からない</p>
         </li>
-        <li class="pain-item">
+        <li class="pain-item glass" data-reveal>
           <span class="pain-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v9M12 19h.01"/></svg>
           </span>
           <p>導入コストや、使える補助金の情報が複雑でよく分からない</p>
         </li>
-        <li class="pain-item">
+        <li class="pain-item glass" data-reveal>
           <span class="pain-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v9M12 19h.01"/></svg>
           </span>
           <p>相談したいが、大手コンサルは料金体系が不透明で不安がある</p>
         </li>
       </ul>
-      <div class="text-center mt-8 fade-in">
+      <div class="text-center mt-8" data-reveal>
         <a href="#form-placeholder" class="btn btn-primary">無料AI診断に申し込む</a>
       </div>
     </div>
@@ -312,27 +335,27 @@
   <!-- 3. 無料診断で分かる3つのこと -->
   <section class="section section-muted" id="diagnosis">
     <div class="container">
-      <div class="section-head fade-in">
+      <div class="section-head" data-reveal>
         <span class="section-label">What You'll Know</span>
         <h2 class="section-title">無料診断で分かる3つのこと</h2>
         <p class="section-lead">オンラインで30分。専門知識がなくてもご参加いただけます。</p>
       </div>
-      <div class="card-grid cols-3 fade-in">
-        <div class="card">
+      <div class="card-grid cols-3" data-reveal-group>
+        <div class="card" data-tilt data-reveal>
           <div class="card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
           </div>
           <p class="card-title">①どの業務が、どれくらい削減できるか（試算）</p>
           <p class="card-text">貴社の業務内容をヒアリングし、AI活用による作業時間削減の目安を試算してお伝えします。</p>
         </div>
-        <div class="card">
+        <div class="card" data-tilt data-reveal>
           <div class="card-icon">
             <img src="../assets/icons/consulting.svg" alt="">
           </div>
           <p class="card-title">②貴社に合った最適なツール・進め方</p>
           <p class="card-text">何から着手すべきか、優先順位と具体的な進め方をご提案します。</p>
         </div>
-        <div class="card">
+        <div class="card" data-tilt data-reveal>
           <div class="card-icon">
             <img src="../assets/icons/subsidy.svg" alt="">
           </div>
@@ -341,7 +364,7 @@
           <p class="note mt-4">最新の公募要領をご確認ください。</p>
         </div>
       </div>
-      <div class="text-center mt-8 fade-in">
+      <div class="text-center mt-8" data-reveal>
         <a href="#form-placeholder" class="btn btn-primary">無料AI診断に申し込む</a>
       </div>
     </div>
@@ -350,27 +373,27 @@
   <!-- 4. 選ばれる理由 -->
   <section class="section section-dark" id="reason">
     <div class="container">
-      <div class="section-head fade-in">
+      <div class="section-head" data-reveal>
         <span class="section-label">Why Us</span>
         <h2 class="section-title">選ばれる理由</h2>
         <p class="section-lead">「現場を知っているAI会社」——不動産・製造・環境、3つの現場で実業を営んできたチームです。</p>
       </div>
-      <div class="card-grid cols-3 fade-in">
-        <div class="card">
+      <div class="card-grid cols-3" data-reveal-group>
+        <div class="card" data-tilt data-reveal>
           <div class="card-icon">
             <img src="../assets/icons/realestate.svg" alt="">
           </div>
           <p class="card-title">不動産×製造×環境の実業経験</p>
           <p class="card-text">ZENKAI不動産（不動産業）、ABCマテリアル（プラスチックリサイクル製造業）——現場のオペレーションを知る立場からご提案します。</p>
         </div>
-        <div class="card">
+        <div class="card" data-tilt data-reveal>
           <div class="card-icon">
             <img src="../assets/icons/engineer.svg" alt="">
           </div>
           <p class="card-title">まず自社で実践してからご提案</p>
           <p class="card-text">不動産AI査定、問い合わせ自動応答など、自社の現場で実践したうえで、実感を伴ってお伝えします。</p>
         </div>
-        <div class="card">
+        <div class="card" data-tilt data-reveal>
           <div class="card-icon">
             <img src="../assets/icons/dx.svg" alt="">
           </div>
@@ -378,8 +401,8 @@
           <p class="card-text">ツールを入れて終わりではなく、現場に定着するまで一緒に伴走します。</p>
         </div>
       </div>
-      <div class="text-center mt-8 fade-in">
-        <a href="#form-placeholder" class="btn btn-on-navy">無料AI診断に申し込む</a>
+      <div class="text-center mt-8" data-reveal>
+        <a href="#form-placeholder" class="btn btn-primary">無料AI診断に申し込む</a>
       </div>
     </div>
   </section>
@@ -387,27 +410,27 @@
   <!-- 5. 診断の流れ -->
   <section class="section" id="flow">
     <div class="container">
-      <div class="section-head fade-in">
+      <div class="section-head" data-reveal>
         <span class="section-label">Flow</span>
         <h2 class="section-title">診断の流れ</h2>
         <p class="section-lead">お申込みから診断レポートのお渡しまで、最短のステップです。</p>
       </div>
-      <ol class="flow-list fade-in">
-        <li class="flow-item">
+      <ol class="flow-list" data-reveal-group>
+        <li class="flow-item" data-reveal>
           <span class="flow-num">1</span>
           <div class="flow-body">
             <h3>フォーム申込（1分）</h3>
             <p>会社名・氏名・メールアドレスなど、簡単な項目のみのフォームです。電話番号は任意でご記入いただけます。</p>
           </div>
         </li>
-        <li class="flow-item">
+        <li class="flow-item" data-reveal>
           <span class="flow-num">2</span>
           <div class="flow-body">
             <h3>オンラインヒアリング（30分）</h3>
             <p>現状の業務内容や課題を、専門用語を使わずお伺いします。カメラオフでのご参加も可能です。</p>
           </div>
         </li>
-        <li class="flow-item">
+        <li class="flow-item" data-reveal>
           <span class="flow-num">3</span>
           <div class="flow-body">
             <h3>診断レポートのお渡し</h3>
@@ -422,24 +445,24 @@
   <!-- 6. FAQ -->
   <section class="section section-muted" id="faq">
     <div class="container">
-      <div class="section-head fade-in">
+      <div class="section-head" data-reveal>
         <span class="section-label">FAQ</span>
         <h2 class="section-title">よくある質問</h2>
       </div>
-      <div class="faq-list fade-in" style="max-width:760px;margin:0 auto;">
-        <details class="faq-item">
+      <div class="faq-list" style="max-width:760px;margin:0 auto;" data-reveal-group>
+        <details class="faq-item" data-reveal>
           <summary><span><span class="faq-q-label">Q.</span>本当に無料ですか？</span></summary>
           <p class="faq-answer">はい、初回の無料AI診断（オンラインヒアリング30分＋診断レポート）は無料です。診断後に契約を強制することもありません。</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item" data-reveal>
           <summary><span><span class="faq-q-label">Q.</span>AIについて詳しくなくても相談できますか？</span></summary>
           <p class="faq-answer">はい。専門知識がない状態からのご相談がほとんどです。現状の業務をヒアリングし、何から始めるべきかを整理いたします。</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item" data-reveal>
           <summary><span><span class="faq-q-label">Q.</span>診断後、強引に営業されませんか？</span></summary>
           <p class="faq-answer">診断はあくまで情報提供が目的です。無理な営業はいたしません。ご検討いただいたうえで、必要であれば改めてご相談ください。</p>
         </details>
-        <details class="faq-item">
+        <details class="faq-item" data-reveal>
           <summary><span><span class="faq-q-label">Q.</span>対応エリアはどこですか？</span></summary>
           <p class="faq-answer">静岡県内を中心に、全国対応（オンライン併用）しております。</p>
         </details>
@@ -451,7 +474,7 @@
   <span id="form-placeholder"></span>
   <section class="section lp-final-cta" id="final-cta">
     <div class="container">
-      <div class="cta-block fade-in">
+      <div class="cta-block" data-reveal>
         <span class="section-label">Get Started</span>
         <h2>まずは30分の無料AI診断から</h2>
         <p>貴社のAI活用余地と、使える補助金がわかります。専門用語を使わず、現場目線でご説明します。</p>
@@ -483,6 +506,15 @@
   </div>
 </footer>
 
+<!-- CDNライブラリ（jsdelivr固定バージョン）。読込失敗しても
+     js/main.js は無依存で動作し、effects.js / hero-bg.js は
+     typeof チェック / try-catch により機能を静かにスキップする。 -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis.min.js"></script>
+
 <script src="../js/main.js"></script>
+<script src="../js/effects.js"></script>
+<script type="module" src="../js/hero-bg.js"></script>
 </body>
 </html>

@@ -1,6 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="faviconTitle">
   <title id="faviconTitle">ZENKAI AI パートナーズ favicon</title>
-  <rect width="64" height="64" rx="14" fill="#0B1E3A" />
-  <path d="M10,42 L26,20 L34,30 L42,18 L54,42 Z" fill="none" stroke="#F3F6FA" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-  <circle cx="42" cy="18" r="3.4" fill="#00B4D8" />
+  <defs>
+    <linearGradient id="favGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#05070F" />
+  <rect width="64" height="64" rx="16" fill="none" stroke="url(#favGrad)" stroke-width="1.5" opacity="0.6" />
+  <g fill="none" stroke="url(#favGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="18" y1="46" x2="32" y2="22" />
+    <line x1="46" y1="46" x2="32" y2="22" />
+    <line x1="18" y1="46" x2="46" y2="46" />
+  </g>
+  <circle cx="32" cy="22" r="3.6" fill="url(#favGrad)" />
+  <circle cx="18" cy="46" r="2.6" fill="url(#favGrad)" />
+  <circle cx="46" cy="46" r="2.6" fill="url(#favGrad)" />
 </svg>

@@ -23,6 +23,16 @@
 <!-- 共通デザインシステム -->
 <link rel="stylesheet" href="css/design-system.css">
 
+<!-- three.js（ESモジュール専用配布のため importmap で解決。CDN到達不可の場合は
+     js/hero-bg.js 側の dynamic import が失敗し、静かにスキップされる） -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+  }
+}
+</script>
+
 <!-- 構造化データ（LocalBusiness）。ページごとに値を確認・調整 -->
 <script type="application/ld+json">
 {
@@ -44,37 +54,65 @@
 </script>
 
 <style>
-  /* このページ限定のスタイル（design-system.cssは改変しない） */
+  /* このページ限定のスタイル（design-system.cssは改変しない）
+     「自社実践」＝ tea（緑）／「想定シナリオ（試算）」＝ warning（琥珀）
+     の2色で発光カプセルを明確に区別する。免責文言は左太線＋glowで醒目に。 */
   .badge-real {
     color: var(--color-tea);
-    background: rgba(62, 124, 80, 0.08);
-    border-color: var(--color-tea);
+    background: rgba(62, 156, 110, 0.10);
+    border-color: currentColor;
+    box-shadow: 0 0 22px rgba(62, 156, 110, 0.25);
+  }
+  .badge-real::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--color-tea);
+    box-shadow: 0 0 8px rgba(62, 156, 110, 0.9);
+    margin-right: 2px;
   }
   .badge-scenario {
     color: var(--color-warning);
-    background: rgba(201, 122, 40, 0.08);
-    border-color: var(--color-warning);
+    background: rgba(224, 164, 88, 0.10);
+    border-color: currentColor;
+    box-shadow: 0 0 22px rgba(224, 164, 88, 0.25);
+  }
+  .badge-scenario::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--color-warning);
+    box-shadow: 0 0 8px rgba(224, 164, 88, 0.9);
+    margin-right: 2px;
   }
   .notice-box {
+    position: relative;
     border: 1px solid var(--color-warning);
-    background: rgba(201, 122, 40, 0.06);
+    border-left-width: 4px;
+    background: rgba(224, 164, 88, 0.07);
+    box-shadow: 0 0 28px rgba(224, 164, 88, 0.16);
     border-radius: var(--radius-md);
     padding: var(--space-5);
-    color: var(--color-text);
-    font-size: 0.92rem;
+    color: var(--color-text-heading);
+    font-size: 0.94rem;
+    font-weight: 500;
     margin-bottom: var(--space-6);
   }
   .notice-box strong { color: var(--color-warning); }
-  .notice-box.is-tea { border-color: var(--color-tea); background: rgba(62,124,80,0.06); }
+  .notice-box.is-tea {
+    border-color: var(--color-tea);
+    background: rgba(62, 156, 110, 0.07);
+    box-shadow: 0 0 28px rgba(62, 156, 110, 0.16);
+  }
   .notice-box.is-tea strong { color: var(--color-tea); }
   .coming-soon {
     text-align: center;
     padding: var(--space-8) var(--space-5);
-    border: 1px dashed var(--color-border);
+    border: 1px dashed var(--color-border-strong);
     border-radius: var(--radius-lg);
-    background: var(--gray-50);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
-  .coming-soon p.lead-text { font-size: 1.1rem; font-weight: 700; color: var(--color-navy); }
+  .coming-soon p.lead-text { font-size: 1.1rem; font-weight: 700; color: var(--color-text-heading); }
 </style>
 </head>
 <body>
@@ -82,7 +120,7 @@
 <!-- ==========================================================
      ヘッダー（全ページ共通・改変時は他ページとの整合に注意）
      ========================================================== -->
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
       <img src="assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
@@ -105,20 +143,25 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-
-    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="index.html#services">サービス</a></li>
-        <li><a href="index.html#industries">業界別</a></li>
-        <li><a href="cases.html">導入事例</a></li>
-        <li><a href="pricing.html">料金</a></li>
-        <li><a href="company.html">会社概要</a></li>
-      </ul>
-      <a href="contact.html" class="btn btn-primary">無料相談</a>
-    </nav>
   </div>
 </header>
+
+<!-- ==========================================================
+     モバイルナビゲーション（重要: <header> の外・body直下に配置。
+     header に付与される backdrop-filter が position:fixed 子孫の
+     containing block を書き換え、メニューが潰れる既知バグを回避するため。）
+     ========================================================== -->
+<nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション" data-lenis-prevent>
+  <ul>
+    <li><a href="index.html">ホーム</a></li>
+    <li><a href="index.html#services">サービス</a></li>
+    <li><a href="index.html#industries">業界別</a></li>
+    <li><a href="cases.html">導入事例</a></li>
+    <li><a href="pricing.html">料金</a></li>
+    <li><a href="company.html">会社概要</a></li>
+  </ul>
+  <a href="contact.html" class="btn btn-primary">無料相談</a>
+</nav>
 
 <!-- ==========================================================
      パンくずリスト
@@ -135,14 +178,14 @@
      ========================================================== -->
 <main>
 
-  <!-- Hero -->
-  <section class="hero">
+  <!-- Hero（#hero-canvasは使用せず、.bg-glowによる光斑演出のみ） -->
+  <section class="hero bg-glow glow-center">
     <img src="assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
     <div class="container hero-inner">
-      <span class="badge badge-on-navy">Cases</span>
-      <h1 class="mt-4">導入事例</h1>
-      <p class="lead">ZENKAI AI パートナーズの取り組みをご紹介します。現時点では自社実践事例と想定シナリオを中心に掲載しており、お客様事例は今後準備が整い次第、順次追加してまいります。</p>
-      <div class="cta-actions" style="justify-content:flex-start;">
+      <span class="badge badge-shizuoka" data-reveal>Cases</span>
+      <h1 class="mt-4" data-reveal data-reveal-delay="0.08">導入事例</h1>
+      <p class="lead" data-reveal data-reveal-delay="0.16">ZENKAI AI パートナーズの取り組みをご紹介します。現時点では自社実践事例と想定シナリオを中心に掲載しており、お客様事例は今後準備が整い次第、順次追加してまいります。</p>
+      <div class="cta-actions" style="justify-content:flex-start;" data-reveal data-reveal-delay="0.24">
         <a href="contact.html" class="btn btn-primary">無料相談を予約する</a>
       </div>
     </div>
@@ -151,29 +194,29 @@
   <!-- ①自社実践事例 -->
   <section class="section" id="practice">
     <div class="container">
-      <div class="section-head is-left">
+      <div class="section-head is-left" data-reveal>
         <span class="section-label">Our Practice</span>
         <h2 class="section-title">自社実践事例</h2>
         <p class="section-lead">私たちはコンサルティング専業ではなく、ZENKAI不動産という不動産会社としてAIを日々の業務に取り入れています。</p>
       </div>
-      <div class="card-grid cols-3">
-        <div class="card fade-in">
+      <div class="card-grid cols-3" data-reveal-group>
+        <div class="card" data-tilt data-reveal>
           <span class="badge badge-real">自社実践</span>
           <p class="card-title mt-4">AI査定の実践</p>
           <p class="card-text">自社物件の査定業務にAIを取り入れ、相場データとの整合性を確認しながら運用を検証しています。</p>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <span class="badge badge-real">自社実践</span>
           <p class="card-title mt-4">反響自動応答の実践</p>
           <p class="card-text">問い合わせへのAIによる一次対応を試験的に導入し、対応スピードと精度を検証しています。</p>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <span class="badge badge-real">自社実践</span>
           <p class="card-title mt-4">物件資料生成の実践</p>
           <p class="card-text">物件資料・広告文の作成にAIを活用し、作業時間の短縮を検証しています。</p>
         </div>
       </div>
-      <div class="notice-box is-tea mt-6">
+      <div class="notice-box is-tea mt-6" data-reveal>
         <strong>ご注意：</strong>上記はZENKAI不動産における自社実践・検証中の取り組みであり、数値的な成果を保証するものではありません。効果検証は継続中です。
       </div>
     </div>
@@ -182,26 +225,26 @@
   <!-- ②想定シナリオ集 -->
   <section class="section section-muted" id="scenarios">
     <div class="container">
-      <div class="section-head is-left">
+      <div class="section-head is-left" data-reveal>
         <span class="section-label">Scenarios</span>
         <h2 class="section-title">想定シナリオ集（試算）</h2>
         <p class="section-lead">AI導入によってどのような変化が見込めるかをイメージしていただくための試算例です。</p>
       </div>
-      <div class="notice-box">
+      <div class="notice-box" data-reveal>
         <strong>ご注意：</strong>以下は想定シナリオに基づく試算例であり、実際の成果を保証するものではありません。業種・規模・導入内容により結果は異なります。
       </div>
-      <div class="card-grid cols-3">
-        <div class="card fade-in">
+      <div class="card-grid cols-3" data-reveal-group>
+        <div class="card" data-tilt data-reveal>
           <span class="badge badge-scenario">想定シナリオ（試算）</span>
           <p class="card-title mt-4">製造業：外観検査AI導入</p>
           <p class="card-text">目視検査の一部をAIによる一次スクリーニングに置き換え、検査員が最終判断に集中できる体制を目指す試算例です。</p>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <span class="badge badge-scenario">想定シナリオ（試算）</span>
           <p class="card-title mt-4">全業種：問い合わせ自動化</p>
           <p class="card-text">チャットボットやAI一次応答により、問い合わせへの初動対応を24時間体制に近づける試算例です。</p>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <span class="badge badge-scenario">想定シナリオ（試算）</span>
           <p class="card-title mt-4">全業種：生成AI研修による定着</p>
           <p class="card-text">生成AI研修の実施後、日常業務（資料作成・議事録・メール文面など）にAIを定着させ、作業時間の短縮を狙う試算例です。</p>
@@ -213,7 +256,7 @@
   <!-- ③お客様事例は順次掲載予定 -->
   <section class="section" id="coming-soon">
     <div class="container">
-      <div class="coming-soon fade-in">
+      <div class="coming-soon" data-reveal>
         <p class="lead-text">お客様事例は順次掲載予定です</p>
         <p class="card-text mt-4">現在、正式なお客様導入事例の掲載に向けて準備を進めています。第一号の事例としてご協力いただける企業様も募集しております。</p>
         <div class="cta-actions mt-6">
@@ -226,13 +269,13 @@
   <!-- CTA -->
   <section class="section section-muted">
     <div class="container">
-      <div class="cta-block fade-in">
+      <div class="cta-block" data-reveal>
         <span class="section-label">Get Started</span>
         <h2>貴社の業務に合わせたAI活用をご相談ください</h2>
         <p>自社実践で得た知見をもとに、貴社の業種・規模に合わせた導入ステップをご提案します。</p>
         <div class="cta-actions">
           <a href="contact.html" class="btn btn-primary">無料相談を予約する</a>
-          <a href="pricing.html" class="btn btn-on-navy">料金目安を見る</a>
+          <a href="pricing.html" class="btn btn-secondary">料金目安を見る</a>
         </div>
       </div>
     </div>
@@ -307,6 +350,17 @@
   </div>
 </footer>
 
+<!-- ==========================================================
+     CDNライブラリ（jsdelivr固定バージョン）。読込失敗しても
+     js/main.js は無依存で動作し、effects.js / hero-bg.js は
+     typeof チェック / try-catch により機能を静かにスキップする。
+     ========================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis.min.js"></script>
+
 <script src="js/main.js"></script>
+<script src="js/effects.js"></script>
+<script type="module" src="js/hero-bg.js"></script>
 </body>
 </html>

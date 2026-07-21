@@ -23,6 +23,16 @@
 <!-- 共通デザインシステム -->
 <link rel="stylesheet" href="css/design-system.css">
 
+<!-- three.js（ESモジュール専用配布のため importmap で解決。CDN到達不可の場合は
+     js/hero-bg.js 側の dynamic import が失敗し、静かにスキップされる） -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+  }
+}
+</script>
+
 <!-- 構造化データ（LocalBusiness）。ページごとに値を確認・調整 -->
 <script type="application/ld+json">
 {
@@ -49,15 +59,18 @@
     display: flex;
     align-items: center;
     gap: var(--space-4);
-    background: linear-gradient(135deg, rgba(14,127,192,0.06), rgba(0,180,216,0.06));
-    border: 1px solid rgba(14,127,192,0.25);
+    background: var(--glass-bg);
+    border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-md);
     padding: var(--space-5) var(--space-6);
     margin-top: var(--space-6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
-  .disclaimer-callout p { margin: 0; color: var(--color-navy); font-weight: 700; font-size: 0.95rem; }
+  .disclaimer-callout p { margin: 0; color: var(--color-text-heading); font-weight: 700; font-size: 0.95rem; }
   .subsidy-list { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-6); }
   .subsidy-list .card { display: flex; flex-direction: column; gap: var(--space-2); }
+  .footnote { font-size: 0.78rem; color: var(--color-text-muted); }
 </style>
 </head>
 <body>
@@ -65,7 +78,7 @@
 <!-- ==========================================================
      ヘッダー（全ページ共通・改変時は他ページとの整合に注意）
      ========================================================== -->
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
       <img src="assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
@@ -88,20 +101,25 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-
-    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
-      <ul>
-        <li><a href="index.html">ホーム</a></li>
-        <li><a href="index.html#services">サービス</a></li>
-        <li><a href="index.html#industries">業界別</a></li>
-        <li><a href="cases.html">導入事例</a></li>
-        <li><a href="pricing.html">料金</a></li>
-        <li><a href="company.html">会社概要</a></li>
-      </ul>
-      <a href="contact.html" class="btn btn-primary">無料相談</a>
-    </nav>
   </div>
 </header>
+
+<!-- ==========================================================
+     モバイルナビゲーション（重要: <header> の外・body直下に配置。
+     header に付与される backdrop-filter が position:fixed 子孫の
+     containing block を書き換え、メニューが潰れる既知バグを回避するため。）
+     ========================================================== -->
+<nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション" data-lenis-prevent>
+  <ul>
+    <li><a href="index.html">ホーム</a></li>
+    <li><a href="index.html#services">サービス</a></li>
+    <li><a href="index.html#industries">業界別</a></li>
+    <li><a href="cases.html">導入事例</a></li>
+    <li><a href="pricing.html">料金</a></li>
+    <li><a href="company.html">会社概要</a></li>
+  </ul>
+  <a href="contact.html" class="btn btn-primary">無料相談</a>
+</nav>
 
 <!-- ==========================================================
      パンくずリスト
@@ -118,14 +136,14 @@
      ========================================================== -->
 <main>
 
-  <!-- Hero -->
-  <section class="hero">
+  <!-- Hero（#hero-canvasは使用せず、.bg-glowによる光斑演出のみ） -->
+  <section class="hero bg-glow glow-center">
     <img src="assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
     <div class="container hero-inner">
-      <span class="badge badge-on-navy">Pricing</span>
-      <h1 class="mt-4">料金目安</h1>
-      <p class="lead">サービス内容や規模によって最適なプランは異なります。まずは無料診断で、貴社に合わせたお見積もりをご提示します。</p>
-      <div class="cta-actions" style="justify-content:flex-start;">
+      <span class="badge badge-shizuoka" data-reveal>Pricing</span>
+      <h1 class="mt-4" data-reveal data-reveal-delay="0.08">料金目安</h1>
+      <p class="lead" data-reveal data-reveal-delay="0.16">サービス内容や規模によって最適なプランは異なります。まずは無料診断で、貴社に合わせたお見積もりをご提示します。</p>
+      <div class="cta-actions" style="justify-content:flex-start;" data-reveal data-reveal-delay="0.24">
         <a href="contact.html" class="btn btn-primary">無料相談を予約する</a>
       </div>
     </div>
@@ -134,12 +152,12 @@
   <!-- 料金目安総表 -->
   <section class="section" id="table">
     <div class="container">
-      <div class="section-head is-left">
+      <div class="section-head is-left" data-reveal>
         <span class="section-label">Price List</span>
         <h2 class="section-title">サービス別 料金目安一覧</h2>
         <p class="section-lead">10種類のサービスの料金目安です（税別）。案件の規模・内容により変動します。</p>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap" data-reveal>
         <table class="ds-table">
           <thead>
             <tr><th>サービス</th><th>対象</th><th>料金目安</th></tr>
@@ -158,7 +176,7 @@
           </tbody>
         </table>
       </div>
-      <div class="disclaimer-callout fade-in">
+      <div class="disclaimer-callout" data-reveal>
         <p>上記は全て目安です。正式な金額は無料診断でお見積もりいたします。</p>
       </div>
     </div>
@@ -167,37 +185,37 @@
   <!-- 補助金活用で実質負担軽減 -->
   <section class="section section-muted" id="subsidy">
     <div class="container">
-      <div class="section-head is-left">
+      <div class="section-head is-left" data-reveal>
         <span class="section-label">Subsidy</span>
         <h2 class="section-title">補助金の活用で実質負担を軽減</h2>
         <p class="section-lead">AI・DX関連の投資は、国・県・市の補助金制度と組み合わせることで実質負担を軽減できる可能性があります。</p>
       </div>
-      <div class="subsidy-list">
-        <div class="card fade-in">
+      <div class="subsidy-list" data-reveal-group>
+        <div class="card" data-tilt data-reveal>
           <p class="card-title">デジタル化・AI導入補助金2026（国）</p>
           <p class="card-text">通常枠で5万円〜450万円、補助率1/2〜4/5の枠組みが公表されています（旧IT導入補助金）。</p>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <p class="card-title">静岡県収益力向上補助金（DX枠）</p>
           <p class="card-text">上限700万円〜1000万円程度の枠組みが公表されています（お問い合わせ：静岡県産業振興財団）。</p>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <p class="card-title">静岡市・浜松市 デジタル活用事業補助金</p>
           <p class="card-text">静岡市は上限50万円・補助率2/3、浜松市は上限30万円・補助率1/2の枠組みが公表されています。</p>
         </div>
       </div>
-      <p class="note mt-6">※補助金は制度改定・公募期間が頻繁に変わります。金額・要件は必ず最新の公募要領をご確認ください。申請サポートについては<a href="services/subsidy.html">補助金申請サポート</a>もご覧ください。</p>
+      <p class="footnote mt-6">※補助金は制度改定・公募期間が頻繁に変わります。金額・要件は必ず最新の公募要領をご確認ください。申請サポートについては<a href="services/subsidy.html">補助金申請サポート</a>もご覧ください。</p>
     </div>
   </section>
 
   <!-- FAQ -->
   <section class="section" id="faq">
     <div class="container">
-      <div class="section-head is-left">
+      <div class="section-head is-left" data-reveal>
         <span class="section-label">FAQ</span>
         <h2 class="section-title">よくある質問</h2>
       </div>
-      <div class="faq-list">
+      <div class="faq-list" data-reveal>
         <details class="faq-item">
           <summary><span><span class="faq-q-label">Q.</span>お支払い方法を教えてください。</span></summary>
           <p class="faq-answer">【要差し替え：具体的な支払い方法（銀行振込／クレジットカード等）および分割払いの可否を確定の上、記載してください】現時点では、案件ごとに個別にご案内しております。詳しくは無料相談にてお問い合わせください。</p>
@@ -217,13 +235,13 @@
   <!-- CTA -->
   <section class="section section-muted">
     <div class="container">
-      <div class="cta-block fade-in">
+      <div class="cta-block" data-reveal>
         <span class="section-label">Get Started</span>
         <h2>正式なお見積もりは無料診断で</h2>
         <p>貴社の課題・規模に合わせた最適なプランと、活用できる補助金をあわせてご提案します。</p>
         <div class="cta-actions">
           <a href="contact.html" class="btn btn-primary">無料相談を予約する</a>
-          <a href="download.html" class="btn btn-on-navy">資料をダウンロードする</a>
+          <a href="download.html" class="btn btn-secondary">資料をダウンロードする</a>
         </div>
       </div>
     </div>
@@ -298,6 +316,17 @@
   </div>
 </footer>
 
+<!-- ==========================================================
+     CDNライブラリ（jsdelivr固定バージョン）。読込失敗しても
+     js/main.js は無依存で動作し、effects.js / hero-bg.js は
+     typeof チェック / try-catch により機能を静かにスキップする。
+     ========================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis.min.js"></script>
+
 <script src="js/main.js"></script>
+<script src="js/effects.js"></script>
+<script type="module" src="js/hero-bg.js"></script>
 </body>
 </html>

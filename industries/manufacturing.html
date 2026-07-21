@@ -23,6 +23,16 @@
 <!-- 共通デザインシステム -->
 <link rel="stylesheet" href="../css/design-system.css">
 
+<!-- three.js（ESモジュール専用配布のため importmap で解決。CDN到達不可の場合は
+     js/hero-bg.js 側の dynamic import が失敗し、静かにスキップされる） -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js"
+  }
+}
+</script>
+
 <!-- 構造化データ（LocalBusiness）。ページごとに値を確認・調整 -->
 <script type="application/ld+json">
 {
@@ -45,12 +55,23 @@
 
 <style>
   /* このページ限定のスタイル（design-system.cssは改変しない） */
-  .stat-card { text-align: left; }
-  .stat-card .stat-num { font-family: var(--font-en); font-size: 2rem; font-weight: 800; color: var(--color-accent); line-height: 1.2; }
-  .stat-card .stat-num small { font-size: 1rem; font-weight: 700; margin-left: 0.15em; }
+  .stat-figure {
+    font-family: var(--font-en);
+    font-size: clamp(2rem, 3.2vw, 2.6rem);
+    font-weight: 700;
+    background: var(--gradient-accent-diag);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+    margin-bottom: var(--space-3);
+  }
   .notice-box {
+    position: relative;
     border: 1px solid var(--color-warning);
-    background: rgba(201, 122, 40, 0.06);
+    border-left-width: 4px;
+    background: rgba(224, 164, 88, 0.07);
+    box-shadow: 0 0 26px rgba(224, 164, 88, 0.14);
     border-radius: var(--radius-md);
     padding: var(--space-5);
     color: var(--color-text);
@@ -60,11 +81,20 @@
   .notice-box strong { color: var(--color-warning); }
   .badge-scenario {
     color: var(--color-warning);
-    background: rgba(201, 122, 40, 0.08);
-    border-color: var(--color-warning);
+    background: rgba(224, 164, 88, 0.10);
+    border-color: currentColor;
+    box-shadow: 0 0 22px rgba(224, 164, 88, 0.22);
+  }
+  .badge-scenario::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--color-warning);
+    box-shadow: 0 0 8px rgba(224, 164, 88, 0.9);
+    margin-right: 2px;
   }
   .subsidy-list { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-6); }
   .subsidy-list .card { display: flex; flex-direction: column; gap: var(--space-2); }
+  .footnote { font-size: 0.78rem; color: var(--color-text-muted); }
 </style>
 </head>
 <body>
@@ -72,7 +102,7 @@
 <!-- ==========================================================
      ヘッダー（全ページ共通・改変時は他ページとの整合に注意）
      ========================================================== -->
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a href="../index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
       <img src="../assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
@@ -95,20 +125,25 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-
-    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
-      <ul>
-        <li><a href="../index.html">ホーム</a></li>
-        <li><a href="../index.html#services">サービス</a></li>
-        <li><a href="../index.html#industries">業界別</a></li>
-        <li><a href="../cases.html">導入事例</a></li>
-        <li><a href="../pricing.html">料金</a></li>
-        <li><a href="../company.html">会社概要</a></li>
-      </ul>
-      <a href="../contact.html" class="btn btn-primary">無料相談</a>
-    </nav>
   </div>
 </header>
+
+<!-- ==========================================================
+     モバイルナビゲーション（重要: <header> の外・body直下に配置。
+     header に付与される backdrop-filter が position:fixed 子孫の
+     containing block を書き換え、メニューが潰れる既知バグを回避するため。）
+     ========================================================== -->
+<nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション" data-lenis-prevent>
+  <ul>
+    <li><a href="../index.html">ホーム</a></li>
+    <li><a href="../index.html#services">サービス</a></li>
+    <li><a href="../index.html#industries">業界別</a></li>
+    <li><a href="../cases.html">導入事例</a></li>
+    <li><a href="../pricing.html">料金</a></li>
+    <li><a href="../company.html">会社概要</a></li>
+  </ul>
+  <a href="../contact.html" class="btn btn-primary">無料相談</a>
+</nav>
 
 <!-- ==========================================================
      パンくずリスト
@@ -126,16 +161,16 @@
      ========================================================== -->
 <main>
 
-  <!-- Hero -->
-  <section class="hero">
+  <!-- Hero（#hero-canvasは使用せず、.bg-glowによる光斑演出のみ） -->
+  <section class="hero bg-glow glow-center">
     <img src="../assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
     <div class="container hero-inner">
-      <span class="badge badge-on-navy">静岡発・製造業向け</span>
-      <h1 class="mt-4">静岡のものづくりに、<br>現場で使えるAIを。</h1>
-      <p class="lead">人手不足、熟練技能の承継、DX着手の遅れ——静岡県内の製造業が直面する課題に、AI外観検査・図面認識・IoT・自動化ツールで応えます。不動産・プラスチックリサイクル製造という実業の現場を知るチームが伴走します。</p>
-      <div class="cta-actions" style="justify-content:flex-start;">
+      <span class="badge badge-shizuoka" data-reveal>静岡発・製造業向け</span>
+      <h1 class="mt-4" data-reveal data-reveal-delay="0.08">静岡のものづくりに、<br>現場で使えるAIを。</h1>
+      <p class="lead" data-reveal data-reveal-delay="0.16">人手不足、熟練技能の承継、DX着手の遅れ——静岡県内の製造業が直面する課題に、AI外観検査・図面認識・IoT・自動化ツールで応えます。不動産・プラスチックリサイクル製造という実業の現場を知るチームが伴走します。</p>
+      <div class="cta-actions" style="justify-content:flex-start;" data-reveal data-reveal-delay="0.24">
         <a href="../contact.html" class="btn btn-primary">無料相談を予約する</a>
-        <a href="../download.html" class="btn btn-on-navy">資料をダウンロードする</a>
+        <a href="../download.html" class="btn btn-secondary">資料をダウンロードする</a>
       </div>
     </div>
   </section>
@@ -143,26 +178,26 @@
   <!-- 課題 -->
   <section class="section" id="challenges">
     <div class="container">
-      <div class="section-head is-left">
+      <div class="section-head is-left" data-reveal>
         <span class="section-label">Challenges</span>
         <h2 class="section-title">静岡の製造業が直面する課題</h2>
         <p class="section-lead">運輸機械・楽器・光電子など全国4位の出荷額を誇る静岡のものづくりも、人材と情報の両面で厳しい状況に置かれています。</p>
       </div>
-      <div class="card-grid cols-3">
-        <div class="card stat-card fade-in">
-          <p class="stat-num">17.1<small>%</small></p>
+      <div class="card-grid cols-3" data-reveal-group>
+        <div class="card" data-tilt data-reveal>
+          <p class="stat-figure"><span data-counter="17.1" data-counter-suffix="%">17.1%</span></p>
           <p class="card-title">静岡県内企業のDX着手率</p>
           <p class="card-text">DXに「取り組んでいる」県内企業はまだ2割弱。人手不足の中で新しい取り組みに着手する余力が限られているのが実情です。</p>
-          <p class="note">出典：帝国データバンク静岡支店 県内企業DX意識調査（2023年）</p>
+          <p class="footnote mt-4">出典：帝国データバンク静岡支店 県内企業DX意識調査（2023年）</p>
         </div>
-        <div class="card stat-card fade-in">
-          <p class="stat-num">62<small>%</small></p>
+        <div class="card" data-tilt data-reveal>
+          <p class="stat-figure"><span data-counter="62" data-counter-suffix="%">62%</span></p>
           <p class="card-title">「何から始めればいいかわからない」</p>
           <p class="card-text">AI・DXに着手しない・できない理由として最も多く挙げられている回答です。専門人材・ノウハウ不足（41.3%）が続きます。</p>
-          <p class="note">出典：中小企業基盤整備機構 2026年3月調査／帝国データバンク 2026年3月調査</p>
+          <p class="footnote mt-4">出典：中小企業基盤整備機構 2026年3月調査／帝国データバンク 2026年3月調査</p>
         </div>
-        <div class="card stat-card fade-in">
-          <p class="stat-num">熟練</p>
+        <div class="card" data-tilt data-reveal>
+          <p class="stat-figure">熟練</p>
           <p class="card-title">目視検査・技能承継の属人化</p>
           <p class="card-text">検査精度や段取りが熟練工の「勘」に依存する工程は、後継者育成に時間がかかり、退職・異動のたびに品質が揺らぎやすい構造です。</p>
         </div>
@@ -173,31 +208,31 @@
   <!-- 対応サービス -->
   <section class="section section-muted" id="services">
     <div class="container">
-      <div class="section-head is-left">
+      <div class="section-head is-left" data-reveal>
         <span class="section-label">Solutions</span>
         <h2 class="section-title">製造業向けの対応サービス</h2>
         <p class="section-lead">母体である株式会社ABCマテリアル（プラスチックリサイクル製造）の現場経験を踏まえ、検査・記録・省力化の各工程にAIを組み込みます。</p>
       </div>
-      <div class="card-grid cols-2 cols-4">
-        <div class="card fade-in">
+      <div class="card-grid cols-2 cols-4" data-reveal-group>
+        <div class="card" data-tilt data-reveal>
           <div class="card-icon"><img src="../assets/icons/inspection.svg" alt=""></div>
           <p class="card-title">AI外観検査・図面認識</p>
           <p class="card-text">製品の外観検査や、手書き・過去図面のデータ化にAIを活用する製造業向け標準パッケージです。</p>
           <a href="../services/inspection.html" class="card-link">詳しく見る &rsaquo;</a>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <div class="card-icon"><img src="../assets/icons/iot.svg" alt=""></div>
           <p class="card-title">IoT機器導入支援</p>
           <p class="card-text">生産ラインや設備にセンサーを設置し、稼働状況を可視化。属人的な勘に頼らない管理体制づくりを支援します。</p>
           <a href="../services/iot.html" class="card-link">詳しく見る &rsaquo;</a>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <div class="card-icon"><img src="../assets/icons/tool.svg" alt=""></div>
           <p class="card-title">業務自動化ツール開発（省力化）</p>
           <p class="card-text">記録・集計・報告といった定型業務を自動化する小規模ツールを開発し、限られた人員での運用を支えます。</p>
           <a href="../services/automation-tools.html" class="card-link">詳しく見る &rsaquo;</a>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <div class="card-icon"><img src="../assets/icons/engineer.svg" alt=""></div>
           <p class="card-title">AIエンジニア常駐・伴走支援</p>
           <p class="card-text">日単位・週単位で現場に入り、導入から定着まで伴走します（FDE型支援）。</p>
@@ -210,26 +245,26 @@
   <!-- 想定シナリオ -->
   <section class="section" id="scenarios">
     <div class="container">
-      <div class="section-head is-left">
+      <div class="section-head is-left" data-reveal>
         <span class="section-label">Scenarios</span>
         <h2 class="section-title">想定シナリオ（試算）</h2>
         <p class="section-lead">AI導入によってどのような変化が見込めるかをイメージしていただくための試算例です。</p>
       </div>
-      <div class="notice-box">
+      <div class="notice-box" data-reveal>
         <strong>ご注意：</strong>以下は想定される活用シナリオに基づく試算例であり、成果を保証するものではありません。実際の効果は業種・工程・導入規模により異なります。
       </div>
-      <div class="card-grid cols-3">
-        <div class="card fade-in">
+      <div class="card-grid cols-3" data-reveal-group>
+        <div class="card" data-tilt data-reveal>
           <span class="badge badge-scenario">想定シナリオ（試算）</span>
           <p class="card-title mt-4">外観検査AI導入シナリオ</p>
           <p class="card-text">目視検査の一部をAIによる一次スクリーニングに置き換え、検査員が最終判断に集中できる体制を目指す試算例です。</p>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <span class="badge badge-scenario">想定シナリオ（試算）</span>
           <p class="card-title mt-4">図面認識AIシナリオ</p>
           <p class="card-text">手書き図面・過去図面をAIでデータ化し、検索・再利用にかかる時間の短縮を狙う試算例です。</p>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <span class="badge badge-scenario">想定シナリオ（試算）</span>
           <p class="card-title mt-4">稼働監視IoTシナリオ</p>
           <p class="card-text">生産ラインにセンサーを設置して稼働状況を可視化し、属人的な勘に頼らない管理へ移行する試算例です。</p>
@@ -241,39 +276,39 @@
   <!-- 補助金 -->
   <section class="section section-muted" id="subsidy">
     <div class="container">
-      <div class="section-head is-left">
+      <div class="section-head is-left" data-reveal>
         <span class="section-label">Subsidy</span>
         <h2 class="section-title">補助金の活用で実質負担を軽減</h2>
         <p class="section-lead">製造業のAI・省力化投資は、国・県の補助金制度と組み合わせることで実質負担を軽減できる可能性があります。</p>
       </div>
-      <div class="subsidy-list">
-        <div class="card fade-in">
+      <div class="subsidy-list" data-reveal-group>
+        <div class="card" data-tilt data-reveal>
           <p class="card-title">ものづくり・商業・サービス生産性向上促進補助金（ものづくり補助金）</p>
           <p class="card-text">設備投資・システム投資を伴うAI導入・省力化に活用可能な代表的な補助金制度です。</p>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <p class="card-title">中小企業省力化投資補助金</p>
           <p class="card-text">人手不足対応のための省力化機器・IoT・自動化ツールの導入を対象とした補助金制度です。</p>
         </div>
-        <div class="card fade-in">
+        <div class="card" data-tilt data-reveal>
           <p class="card-title">静岡県収益力向上補助金（DX枠）／静岡市デジタル活用事業補助金</p>
           <p class="card-text">静岡県・静岡市が独自に設けているDX関連の補助金制度もあわせてご案内可能です（お問い合わせは静岡県経営支援課などの窓口でも受け付けています）。</p>
         </div>
       </div>
-      <p class="note mt-6">※補助金は制度改定・公募期間が頻繁に変わります。金額・要件は必ず最新の公募要領をご確認ください。申請サポートについては<a href="../services/subsidy.html">補助金申請サポート</a>もご覧ください。</p>
+      <p class="footnote mt-6">※補助金は制度改定・公募期間が頻繁に変わります。金額・要件は必ず最新の公募要領をご確認ください。申請サポートについては<a href="../services/subsidy.html">補助金申請サポート</a>もご覧ください。</p>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="section">
     <div class="container">
-      <div class="cta-block fade-in">
+      <div class="cta-block" data-reveal>
         <span class="section-label">Get Started</span>
         <h2>まずは無料相談で、自社の課題を整理しませんか</h2>
         <p>現場を知っているAI会社が、貴社の製造工程に合わせた導入ステップと補助金活用をご提案します。</p>
         <div class="cta-actions">
           <a href="../contact.html" class="btn btn-primary">無料相談を予約する</a>
-          <a href="../pricing.html" class="btn btn-on-navy">料金目安を見る</a>
+          <a href="../pricing.html" class="btn btn-secondary">料金目安を見る</a>
         </div>
       </div>
     </div>
@@ -348,6 +383,17 @@
   </div>
 </footer>
 
+<!-- ==========================================================
+     CDNライブラリ（jsdelivr固定バージョン）。読込失敗しても
+     js/main.js は無依存で動作し、effects.js / hero-bg.js は
+     typeof チェック / try-catch により機能を静かにスキップする。
+     ========================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis.min.js"></script>
+
 <script src="../js/main.js"></script>
+<script src="../js/effects.js"></script>
+<script type="module" src="../js/hero-bg.js"></script>
 </body>
 </html>
