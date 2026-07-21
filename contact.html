@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ｜ZENKAI AI パートナーズ</title>
+<meta name="description" content="AI導入・DX化に関する無料相談・お問い合わせはこちらから。フォームでのお問い合わせ、日程予約、メールでのご連絡に対応しています。">
+<link rel="canonical" href="https://example.com/contact.html">
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZENKAI AI パートナーズ">
+<meta property="og:title" content="お問い合わせ｜ZENKAI AI パートナーズ">
+<meta property="og:description" content="AI導入・DX化に関する無料相談・お問い合わせはこちらから。">
+<meta property="og:url" content="https://example.com/contact.html">
+<meta property="og:image" content="https://example.com/assets/ogp.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+<!-- 共通デザインシステム -->
+<link rel="stylesheet" href="css/design-system.css">
+
+<!-- 構造化データ（LocalBusiness） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "ZENKAI AI パートナーズ（ZENKAI不動産株式会社）",
+  "url": "https://example.com/contact.html",
+  "telephone": "",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "中田1-1-8 リブロBLDG 301",
+    "addressLocality": "静岡市駿河区",
+    "addressRegion": "静岡県",
+    "addressCountry": "JP"
+  },
+  "openingHours": "Mo,Tu,Th,Fr,Sa,Su 09:00-18:00",
+  "areaServed": "JP"
+}
+</script>
+
+<style>
+  /* contact.html 専用スタイル（design-system.cssは改変しない） */
+  .ct-page-head {
+    padding: var(--space-8) 0 var(--space-7);
+    background: var(--gradient-navy);
+    color: var(--color-text-on-navy);
+    position: relative;
+    overflow: hidden;
+  }
+  .ct-page-head .hero-fuji { opacity: 0.14; }
+  .ct-page-head h1 { color: #fff; font-size: 1.9rem; font-weight: 900; }
+  .ct-page-head p { margin-top: var(--space-3); color: var(--color-text-on-navy-muted); max-width: 620px; }
+
+  .ct-promise {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-5);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: var(--radius-md);
+    max-width: 560px;
+    font-size: 0.9rem;
+    color: #fff;
+  }
+  .ct-promise svg { flex: none; width: 20px; height: 20px; color: var(--color-accent2); }
+
+  .ct-block { margin-bottom: var(--space-9); }
+  .ct-block:last-child { margin-bottom: 0; }
+
+  .embed-placeholder {
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--gray-50);
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-6);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.9;
+  }
+  .embed-placeholder strong { display: block; color: var(--color-navy); font-size: 0.95rem; margin-bottom: var(--space-2); }
+  .embed-placeholder code {
+    display: inline-block;
+    margin-top: var(--space-3);
+    background: var(--gray-100);
+    border-radius: 4px;
+    padding: 0.2em 0.6em;
+    font-size: 0.78rem;
+    color: var(--color-text);
+  }
+
+  .ct-other {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+  }
+  @media (min-width: 768px) {
+    .ct-other { grid-template-columns: 1fr 1fr; }
+  }
+  .ct-other .card { display: flex; flex-direction: column; }
+  .ct-other .card a.mail-link { font-weight: 700; word-break: break-all; }
+</style>
+</head>
+<body>
+
+<!-- ==========================================================
+     ヘッダー（全ページ共通・page-template-root.htmlより複製）
+     ========================================================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
+      <img src="assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
+    </a>
+
+    <nav class="nav-primary" aria-label="メインナビゲーション">
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="index.html#services">サービス</a></li>
+        <li><a href="index.html#industries">業界別</a></li>
+        <li><a href="cases.html">導入事例</a></li>
+        <li><a href="pricing.html">料金</a></li>
+        <li><a href="company.html">会社概要</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="contact.html" class="btn btn-primary btn-sm header-cta">無料相談</a>
+      <button type="button" class="hamburger" aria-label="メニューを開く" aria-controls="navMobile" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="index.html#services">サービス</a></li>
+        <li><a href="index.html#industries">業界別</a></li>
+        <li><a href="cases.html">導入事例</a></li>
+        <li><a href="pricing.html">料金</a></li>
+        <li><a href="company.html">会社概要</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==========================================================
+     パンくずリスト
+     ========================================================== -->
+<nav class="container breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="index.html">ホーム</a></li>
+    <li aria-current="page">お問い合わせ</li>
+  </ol>
+</nav>
+
+<!-- ==========================================================
+     ページ本体
+     ========================================================== -->
+<main>
+
+  <section class="ct-page-head">
+    <img src="assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
+    <div class="container" style="position:relative;z-index:1;">
+      <span class="badge badge-on-navy">無料相談・お問い合わせ</span>
+      <h1 class="mt-4">お問い合わせ</h1>
+      <p>AI導入・DX化に関するご相談を無料で承っています。まずはお気軽にご連絡ください。</p>
+      <div class="ct-promise">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span>1営業日以内にご返信します（営業時間9:00〜18:00、水曜定休）</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- フォームでのお問い合わせ -->
+  <section class="section">
+    <div class="container">
+
+      <div class="ct-block">
+        <div class="section-head is-left">
+          <span class="section-label">Contact Form</span>
+          <h2 class="section-title">フォームでお問い合わせ</h2>
+          <p class="section-lead">会社名・お名前・メールアドレス・業種・ご相談内容などをご入力の上、送信してください。</p>
+        </div>
+
+        <!-- 要差し替え：GoogleフォームembedURL -->
+        <div class="embed-placeholder" role="img" aria-label="Googleフォーム埋め込み予定エリア">
+          <strong>【要差し替え：GoogleフォームembedURL】</strong>
+          ここにGoogleフォームの埋め込み用iframeを設置してください。<br>
+          （Googleフォーム編集画面 &rsaquo; 送信 &rsaquo; 埋め込み &lt;&gt; からURLを取得）
+          <code>&lt;iframe src="【フォームembed URL】" width="100%" height="900" frameborder="0"&gt;&lt;/iframe&gt;</code>
+        </div>
+      </div>
+
+      <!-- 日程予約 -->
+      <div class="ct-block">
+        <div class="section-head is-left">
+          <span class="section-label">Book a Meeting</span>
+          <h2 class="section-title">日程予約（オンライン相談）</h2>
+          <p class="section-lead">ご都合の良い日時を選んで、そのままオンライン相談をご予約いただけます。</p>
+        </div>
+
+        <!-- 要差し替え：TimeRex埋め込みURL -->
+        <div class="embed-placeholder" role="img" aria-label="TimeRex日程予約埋め込み予定エリア">
+          <strong>【要差し替え：TimeRex埋め込みURL】</strong>
+          ここにTimeRexの予約ページ埋め込み用iframeを設置してください。<br>
+          （TimeRex管理画面 &rsaquo; 予約ページ設定 &rsaquo; 埋め込みコードを取得）
+          <code>&lt;iframe src="【TimeRex埋め込みURL】" width="100%" height="720" frameborder="0"&gt;&lt;/iframe&gt;</code>
+        </div>
+      </div>
+
+      <!-- その他の連絡方法 -->
+      <div class="ct-block">
+        <div class="section-head is-left">
+          <span class="section-label">Other Ways</span>
+          <h2 class="section-title">その他のご連絡方法</h2>
+        </div>
+
+        <div class="ct-other">
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z" opacity="0"></path><path d="M22 6l-10 7L2 6"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+            </div>
+            <p class="card-title">メールでのお問い合わせ</p>
+            <p class="card-text">下記メールアドレス宛に、会社名・ご相談内容を添えてご連絡ください。</p>
+            <a class="mail-link mt-4" href="mailto:【要差し替え：AI事業用メールアドレス】">【要差し替え：AI事業用メールアドレス】</a>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <p class="card-title">対応時間について</p>
+            <p class="card-text">営業時間は9:00〜18:00（水曜定休）です。時間外にいただいたお問い合わせも、翌営業日以内にご返信いたします。</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ==========================================================
+     フッター（全ページ共通・page-template-root.htmlより複製）
+     ========================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
+          <img src="assets/logo-white.svg" alt="ZENKAI AI パートナーズ" width="150" height="32">
+        </a>
+        <p>現場を知っているAI会社。不動産・製造業の実業経験を活かし、静岡の中小企業のAI導入・DX化を伴走支援します。</p>
+        <span class="badge badge-shizuoka mt-4">静岡発</span>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">サービス</p>
+        <ul class="footer-links">
+          <li><a href="services/consulting.html">AI導入コンサルティング</a></li>
+          <li><a href="services/engineer.html">AIエンジニア常駐・伴走支援</a></li>
+          <li><a href="services/tool.html">業務自動化ツール開発</a></li>
+          <li><a href="services/dx.html">DX化支援</a></li>
+          <li><a href="services/sfa.html">オーダーメイドSFA構築</a></li>
+          <li><a href="services/iot.html">IoT機器導入支援</a></li>
+          <li><a href="services/training.html">生成AI研修・社内定着支援</a></li>
+          <li><a href="services/inspection.html">AI外観検査・図面認識</a></li>
+          <li><a href="services/realestate.html">不動産AI活用パック</a></li>
+          <li><a href="services/subsidy.html">補助金申請サポート</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">業界別・その他</p>
+        <ul class="footer-links">
+          <li><a href="industries/manufacturing.html">製造業向け</a></li>
+          <li><a href="industries/real-estate.html">不動産・建築業向け</a></li>
+          <li><a href="industries/local.html">静岡地場産業向け</a></li>
+          <li><a href="cases.html">導入事例</a></li>
+          <li><a href="pricing.html">料金目安</a></li>
+          <li><a href="company.html">会社概要</a></li>
+          <li><a href="download.html">資料ダウンロード</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">運営会社</p>
+        <dl class="footer-company">
+          <dt>会社名</dt><dd>ZENKAI不動産株式会社</dd>
+          <dt>所在地</dt><dd>静岡市駿河区中田1-1-8<br>リブロBLDG 301</dd>
+          <dt>営業時間</dt><dd>9:00〜18:00（水曜定休）</dd>
+        </dl>
+        <ul class="footer-links mt-4">
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2026 ZENKAI不動産株式会社</p>
+      <div class="footer-legal">
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

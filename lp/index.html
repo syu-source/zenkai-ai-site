@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【無料AI診断】何から始めるか、30分で明確に｜ZENKAI AI パートナーズ</title>
+<meta name="description" content="AI導入、何から始めればいいか分からない——62%の経営者が同じ悩みを抱えています。30分の無料診断で、貴社のAI活用余地と使える補助金がわかります。静岡発、不動産×製造業の実業経験を持つチームが伴走します。">
+<link rel="canonical" href="https://example.com/lp/">
+
+<!-- OGP（ドメイン確定後に差し替え） -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZENKAI AI パートナーズ">
+<meta property="og:title" content="【無料AI診断】何から始めるか、30分で明確に｜ZENKAI AI パートナーズ">
+<meta property="og:description" content="30分の無料診断で、貴社のAI活用余地と使える補助金がわかります。静岡発、不動産×製造業の実業経験を持つチームが伴走します。">
+<meta property="og:url" content="https://example.com/lp/">
+<meta property="og:image" content="https://example.com/assets/ogp.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex, follow">
+
+<!-- Favicon -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+
+<!-- 共通デザインシステム（改変禁止・そのまま読み込み） -->
+<link rel="stylesheet" href="../css/design-system.css">
+
+<style>
+  /*
+    ==========================================================================
+    LP専用スタイル（このページ限定。css/design-system.css は改変しない）
+    - このLPは全站導航（サイト共通ヘッダー）を持たない単独ページのため、
+      .site-header は使用せず、ロゴ＋バッジのみの簡易ヘッダーを独自に組む。
+    ==========================================================================
+  */
+
+  /* ---- CTAリンク：全ボタンここが唯一の申込導線 ----
+     【要差し替え】href="#form-placeholder" は仮リンクです。
+     本番公開前に、Googleフォームの申込URLへ一括置換してください。
+     （このファイル内で href="#form-placeholder" を検索すれば全箇所ヒットします） */
+
+  /* ---- 簡易ヘッダー（ロゴ＋静岡発バッジのみ／サイト内ナビ無し） ---- */
+  .lp-header {
+    padding: var(--space-4) 0;
+    background: var(--color-base);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .lp-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .lp-header .header-logo img { height: 28px; width: auto; }
+  @media (min-width: 768px) {
+    .lp-header .header-logo img { height: 32px; }
+  }
+
+  /* ---- FV（ファーストビュー） ---- */
+  .lp-hero {
+    padding: var(--space-7) 0 var(--space-8);
+  }
+  .lp-hero .badge { margin-bottom: var(--space-4); }
+  .lp-hero h1 {
+    font-size: 1.55rem;
+    line-height: 1.55;
+  }
+  .lp-hero h1 .hl {
+    color: var(--color-accent2);
+  }
+  .lp-hero .lead {
+    font-size: 1.02rem;
+  }
+  .lp-hero-cta {
+    margin-top: var(--space-6);
+  }
+  .lp-hero-cta .btn { width: 100%; }
+  .lp-hero-source {
+    margin-top: var(--space-3);
+    color: var(--color-text-on-navy-muted);
+    font-size: 0.74rem;
+  }
+  .lp-trust-row {
+    margin-top: var(--space-7);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .lp-trust-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.82rem;
+    color: var(--color-text-on-navy-muted);
+  }
+  .lp-trust-item svg {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    color: var(--color-accent2);
+  }
+  @media (min-width: 768px) {
+    .lp-hero h1 { font-size: 2.3rem; }
+    .lp-hero .lead { font-size: 1.15rem; }
+    .lp-hero-cta { display: flex; }
+    .lp-hero-cta .btn { width: auto; }
+  }
+
+  /* ---- お悩みチェックリスト ---- */
+  .pain-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .pain-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    background: var(--color-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .pain-item .pain-icon {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    background: rgba(201, 122, 40, 0.12);
+    color: var(--color-warning);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pain-item .pain-icon svg { width: 16px; height: 16px; }
+  .pain-item p { color: var(--color-text); font-weight: 500; }
+
+  /* ---- 診断の流れ（ステップ） ---- */
+  .flow-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: 760px;
+    margin: 0 auto;
+    counter-reset: flow;
+  }
+  .flow-item {
+    position: relative;
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+  }
+  .flow-num {
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-accent);
+    color: #fff;
+    font-family: var(--font-en);
+    font-weight: 800;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flow-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 21px;
+    top: 44px;
+    width: 2px;
+    height: calc(100% + var(--space-6) - 44px);
+    background: var(--color-border);
+  }
+  .flow-body { padding-top: var(--space-1); }
+  .flow-body h3 { font-size: 1.05rem; }
+  .flow-body p { margin-top: var(--space-2); color: var(--color-text-muted); font-size: 0.92rem; }
+  .flow-note {
+    display: inline-block;
+    margin-top: var(--space-3);
+    padding: 0.35em 0.85em;
+    border-radius: var(--radius-full);
+    background: rgba(62, 124, 80, 0.1);
+    color: var(--color-tea);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  /* ---- 簡易フッター（運営者情報＋プライバシーポリシーのみ） ---- */
+  .lp-footer {
+    background: var(--color-navy);
+    color: var(--color-text-on-navy-muted);
+    padding: var(--space-7) 0 var(--space-5);
+    font-size: 0.85rem;
+  }
+  .lp-footer .header-logo img { height: 26px; }
+  .lp-footer-company {
+    margin-top: var(--space-4);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-2) var(--space-3);
+    max-width: 420px;
+  }
+  .lp-footer-company dt { color: var(--gray-400); }
+  .lp-footer-company dd { margin: 0; }
+  .lp-footer-bottom {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .lp-footer-bottom a { color: var(--color-text-on-navy-muted); font-size: 0.82rem; }
+  .lp-footer-bottom a:hover { color: #fff; }
+
+  /* ---- 最終CTA周りの余白調整 ---- */
+  .lp-final-cta .btn { width: 100%; }
+  @media (min-width: 480px) {
+    .lp-final-cta .btn { width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 簡易ヘッダー：ロゴ＋「静岡発」バッジのみ。サイト内ナビ・他ページへの導線は意図的に排除（LP鉄則） -->
+<header class="lp-header">
+  <div class="container lp-header-inner">
+    <span class="header-logo" aria-label="ZENKAI AI パートナーズ">
+      <img src="../assets/logo.svg" alt="ZENKAI AI パートナーズ" width="150" height="32">
+    </span>
+    <span class="badge badge-shizuoka">静岡発</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. FV -->
+  <section class="hero lp-hero" id="fv">
+    <img src="../assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
+    <div class="container hero-inner">
+      <span class="badge badge-on-navy">無料AI診断</span>
+      <h1 class="mt-4">「AIを、何から始めればいいか分からない」<br><span class="hl">62%の経営者</span>が、同じ悩みを抱えています。</h1>
+      <p class="lead">30分の無料診断で、貴社のAI活用余地と使える補助金がわかります。不動産・製造業の実業経験を持つチームが、専門用語を使わずご説明します。</p>
+
+      <div class="lp-hero-cta cta-actions" style="justify-content:flex-start;">
+        <a href="#form-placeholder" class="btn btn-primary">無料AI診断に申し込む（1分で完了）</a>
+      </div>
+      <p class="lp-hero-source note">「何から始めるかわからない」62% — 帝国データバンク 2026年3月調査</p>
+
+      <div class="lp-trust-row">
+        <span class="lp-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+          不動産×製造業の実業経験
+        </span>
+        <span class="lp-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5ZM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          静岡発
+        </span>
+        <span class="lp-trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          初回診断無料
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. お悩みチェックリスト -->
+  <section class="section" id="pain">
+    <div class="container">
+      <div class="section-head fade-in">
+        <span class="section-label">Check</span>
+        <h2 class="section-title">こんなお悩みありませんか</h2>
+      </div>
+      <ul class="pain-list fade-in">
+        <li class="pain-item">
+          <span class="pain-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v9M12 19h.01"/></svg>
+          </span>
+          <p>AIを導入したいが、何から手をつければいいか分からない</p>
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v9M12 19h.01"/></svg>
+          </span>
+          <p>情報収集はしているが、自社に合うツールや進め方が分からない</p>
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v9M12 19h.01"/></svg>
+          </span>
+          <p>導入コストや、使える補助金の情報が複雑でよく分からない</p>
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v9M12 19h.01"/></svg>
+          </span>
+          <p>相談したいが、大手コンサルは料金体系が不透明で不安がある</p>
+        </li>
+      </ul>
+      <div class="text-center mt-8 fade-in">
+        <a href="#form-placeholder" class="btn btn-primary">無料AI診断に申し込む</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 無料診断で分かる3つのこと -->
+  <section class="section section-muted" id="diagnosis">
+    <div class="container">
+      <div class="section-head fade-in">
+        <span class="section-label">What You'll Know</span>
+        <h2 class="section-title">無料診断で分かる3つのこと</h2>
+        <p class="section-lead">オンラインで30分。専門知識がなくてもご参加いただけます。</p>
+      </div>
+      <div class="card-grid cols-3 fade-in">
+        <div class="card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
+          </div>
+          <p class="card-title">①どの業務が、どれくらい削減できるか（試算）</p>
+          <p class="card-text">貴社の業務内容をヒアリングし、AI活用による作業時間削減の目安を試算してお伝えします。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <img src="../assets/icons/consulting.svg" alt="">
+          </div>
+          <p class="card-title">②貴社に合った最適なツール・進め方</p>
+          <p class="card-text">何から着手すべきか、優先順位と具体的な進め方をご提案します。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <img src="../assets/icons/subsidy.svg" alt="">
+          </div>
+          <p class="card-title">③活用できる可能性のある補助金</p>
+          <p class="card-text">デジタル化・AI導入補助金など、貴社が活用できる可能性のある制度をご案内します。</p>
+          <p class="note mt-4">最新の公募要領をご確認ください。</p>
+        </div>
+      </div>
+      <div class="text-center mt-8 fade-in">
+        <a href="#form-placeholder" class="btn btn-primary">無料AI診断に申し込む</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 選ばれる理由 -->
+  <section class="section section-dark" id="reason">
+    <div class="container">
+      <div class="section-head fade-in">
+        <span class="section-label">Why Us</span>
+        <h2 class="section-title">選ばれる理由</h2>
+        <p class="section-lead">「現場を知っているAI会社」——不動産・製造・環境、3つの現場で実業を営んできたチームです。</p>
+      </div>
+      <div class="card-grid cols-3 fade-in">
+        <div class="card">
+          <div class="card-icon">
+            <img src="../assets/icons/realestate.svg" alt="">
+          </div>
+          <p class="card-title">不動産×製造×環境の実業経験</p>
+          <p class="card-text">ZENKAI不動産（不動産業）、ABCマテリアル（プラスチックリサイクル製造業）——現場のオペレーションを知る立場からご提案します。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <img src="../assets/icons/engineer.svg" alt="">
+          </div>
+          <p class="card-title">まず自社で実践してからご提案</p>
+          <p class="card-text">不動産AI査定、問い合わせ自動応答など、自社の現場で実践したうえで、実感を伴ってお伝えします。</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <img src="../assets/icons/dx.svg" alt="">
+          </div>
+          <p class="card-title">導入して終わりにしない伴走型</p>
+          <p class="card-text">ツールを入れて終わりではなく、現場に定着するまで一緒に伴走します。</p>
+        </div>
+      </div>
+      <div class="text-center mt-8 fade-in">
+        <a href="#form-placeholder" class="btn btn-on-navy">無料AI診断に申し込む</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 診断の流れ -->
+  <section class="section" id="flow">
+    <div class="container">
+      <div class="section-head fade-in">
+        <span class="section-label">Flow</span>
+        <h2 class="section-title">診断の流れ</h2>
+        <p class="section-lead">お申込みから診断レポートのお渡しまで、最短のステップです。</p>
+      </div>
+      <ol class="flow-list fade-in">
+        <li class="flow-item">
+          <span class="flow-num">1</span>
+          <div class="flow-body">
+            <h3>フォーム申込（1分）</h3>
+            <p>会社名・氏名・メールアドレスなど、簡単な項目のみのフォームです。電話番号は任意でご記入いただけます。</p>
+          </div>
+        </li>
+        <li class="flow-item">
+          <span class="flow-num">2</span>
+          <div class="flow-body">
+            <h3>オンラインヒアリング（30分）</h3>
+            <p>現状の業務内容や課題を、専門用語を使わずお伺いします。カメラオフでのご参加も可能です。</p>
+          </div>
+        </li>
+        <li class="flow-item">
+          <span class="flow-num">3</span>
+          <div class="flow-body">
+            <h3>診断レポートのお渡し</h3>
+            <p>削減時間の試算、進め方、活用できる可能性のある補助金をまとめてご報告します。</p>
+            <span class="flow-note">無理な営業はいたしません</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. FAQ -->
+  <section class="section section-muted" id="faq">
+    <div class="container">
+      <div class="section-head fade-in">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">よくある質問</h2>
+      </div>
+      <div class="faq-list fade-in" style="max-width:760px;margin:0 auto;">
+        <details class="faq-item">
+          <summary><span><span class="faq-q-label">Q.</span>本当に無料ですか？</span></summary>
+          <p class="faq-answer">はい、初回の無料AI診断（オンラインヒアリング30分＋診断レポート）は無料です。診断後に契約を強制することもありません。</p>
+        </details>
+        <details class="faq-item">
+          <summary><span><span class="faq-q-label">Q.</span>AIについて詳しくなくても相談できますか？</span></summary>
+          <p class="faq-answer">はい。専門知識がない状態からのご相談がほとんどです。現状の業務をヒアリングし、何から始めるべきかを整理いたします。</p>
+        </details>
+        <details class="faq-item">
+          <summary><span><span class="faq-q-label">Q.</span>診断後、強引に営業されませんか？</span></summary>
+          <p class="faq-answer">診断はあくまで情報提供が目的です。無理な営業はいたしません。ご検討いただいたうえで、必要であれば改めてご相談ください。</p>
+        </details>
+        <details class="faq-item">
+          <summary><span><span class="faq-q-label">Q.</span>対応エリアはどこですか？</span></summary>
+          <p class="faq-answer">静岡県内を中心に、全国対応（オンライン併用）しております。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. 最終CTA -->
+  <section class="section lp-final-cta" id="final-cta">
+    <div class="container">
+      <div class="cta-block fade-in">
+        <span class="section-label">Get Started</span>
+        <h2>まずは30分の無料AI診断から</h2>
+        <p>貴社のAI活用余地と、使える補助金がわかります。専門用語を使わず、現場目線でご説明します。</p>
+        <div class="cta-actions">
+          <a href="#form-placeholder" class="btn btn-primary">無料AI診断に申し込む（1分で完了）</a>
+        </div>
+        <p class="lp-hero-source note" style="margin-top:var(--space-4);">1営業日以内にご返信いたします（営業時間 9:00〜18:00・水曜定休）</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 簡易フッター：運営者情報＋プライバシーポリシーのみ。サービス一覧・業界別リンク等は意図的に排除（LP鉄則） -->
+<footer class="lp-footer">
+  <div class="container">
+    <span class="header-logo" aria-label="ZENKAI AI パートナーズ">
+      <img src="../assets/logo-white.svg" alt="ZENKAI AI パートナーズ" width="150" height="32">
+    </span>
+    <dl class="lp-footer-company">
+      <dt>運営会社</dt><dd>ZENKAI不動産株式会社</dd>
+      <dt>所在地</dt><dd>静岡市駿河区中田1-1-8 リブロBLDG 301</dd>
+      <dt>営業時間</dt><dd>9:00〜18:00（水曜定休）</dd>
+    </dl>
+    <div class="lp-footer-bottom">
+      <p class="copyright">&copy; 2026 ZENKAI不動産株式会社</p>
+      <a href="../privacy.html">プライバシーポリシー</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

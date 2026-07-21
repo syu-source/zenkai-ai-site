@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資料ダウンロード｜ZENKAI AI パートナーズ</title>
+<meta name="description" content="無料ホワイトペーパー『静岡の中小企業のためのAI導入ガイド2026』をダウンロードいただけます。AI導入の現状データ、始め方3ステップ、補助金一覧、自己診断チェックリストを収録。">
+<link rel="canonical" href="https://example.com/download.html">
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZENKAI AI パートナーズ">
+<meta property="og:title" content="資料ダウンロード｜ZENKAI AI パートナーズ">
+<meta property="og:description" content="無料ホワイトペーパー『静岡の中小企業のためのAI導入ガイド2026』をダウンロードいただけます。">
+<meta property="og:url" content="https://example.com/download.html">
+<meta property="og:image" content="https://example.com/assets/ogp.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+<!-- 共通デザインシステム -->
+<link rel="stylesheet" href="css/design-system.css">
+
+<!-- 構造化データ（LocalBusiness） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "ZENKAI AI パートナーズ（ZENKAI不動産株式会社）",
+  "url": "https://example.com/download.html",
+  "telephone": "",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "中田1-1-8 リブロBLDG 301",
+    "addressLocality": "静岡市駿河区",
+    "addressRegion": "静岡県",
+    "addressCountry": "JP"
+  },
+  "openingHours": "Mo,Tu,Th,Fr,Sa,Su 09:00-18:00",
+  "areaServed": "JP"
+}
+</script>
+
+<style>
+  /* download.html 専用スタイル（design-system.cssは改変しない） */
+  .dl-page-head {
+    padding: var(--space-8) 0 var(--space-7);
+    background: var(--gradient-navy);
+    color: var(--color-text-on-navy);
+    position: relative;
+    overflow: hidden;
+  }
+  .dl-page-head .hero-fuji { opacity: 0.14; }
+  .dl-page-head h1 { color: #fff; font-size: 1.9rem; font-weight: 900; }
+  .dl-page-head p { margin-top: var(--space-3); color: var(--color-text-on-navy-muted); max-width: 620px; }
+
+  .dl-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+  @media (min-width: 900px) {
+    .dl-layout { grid-template-columns: 1.1fr 0.9fr; align-items: start; }
+  }
+
+  .dl-cover {
+    background: var(--gradient-navy);
+    border-radius: var(--radius-lg);
+    padding: var(--space-7) var(--space-6);
+    color: #fff;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+  }
+  .dl-cover .hero-fuji { opacity: 0.18; }
+  .dl-cover-inner { position: relative; z-index: 1; }
+  .dl-cover-label { font-family: var(--font-en); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent2); }
+  .dl-cover-title { margin-top: var(--space-3); font-size: 1.5rem; font-weight: 900; line-height: 1.6; }
+  .dl-cover-sub { margin-top: var(--space-4); color: var(--color-text-on-navy-muted); font-size: 0.92rem; line-height: 1.9; }
+  .dl-cover-pages { margin-top: var(--space-6); font-size: 0.8rem; color: var(--color-text-on-navy-muted); }
+
+  .toc-list { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-5); }
+  .toc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    background: var(--color-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  .toc-num {
+    flex: none;
+    width: 32px; height: 32px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-accent);
+    color: #fff;
+    font-family: var(--font-en);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+  .toc-item h3 { font-size: 0.98rem; }
+  .toc-item p { margin-top: var(--space-1); color: var(--color-text-muted); font-size: 0.86rem; }
+
+  .apply-box {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-5));
+  }
+  .apply-card {
+    background: var(--color-base);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-md);
+  }
+  .apply-card h2.card-title { font-size: 1.15rem; }
+  .apply-steps { margin-top: var(--space-5); display: flex; flex-direction: column; gap: var(--space-3); }
+  .apply-step { display: flex; gap: var(--space-3); align-items: flex-start; font-size: 0.88rem; color: var(--color-text); }
+  .apply-step .step-dot {
+    flex: none; width: 22px; height: 22px; border-radius: var(--radius-full);
+    background: rgba(14,127,192,0.1); color: var(--color-accent);
+    font-family: var(--font-en); font-weight: 700; font-size: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .form-placeholder {
+    margin-top: var(--space-6);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--gray-50);
+    padding: var(--space-5);
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.86rem;
+    line-height: 1.9;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==========================================================
+     ヘッダー（全ページ共通・page-template-root.htmlより複製）
+     ========================================================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
+      <img src="assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
+    </a>
+
+    <nav class="nav-primary" aria-label="メインナビゲーション">
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="index.html#services">サービス</a></li>
+        <li><a href="index.html#industries">業界別</a></li>
+        <li><a href="cases.html">導入事例</a></li>
+        <li><a href="pricing.html">料金</a></li>
+        <li><a href="company.html">会社概要</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="contact.html" class="btn btn-primary btn-sm header-cta">無料相談</a>
+      <button type="button" class="hamburger" aria-label="メニューを開く" aria-controls="navMobile" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="index.html#services">サービス</a></li>
+        <li><a href="index.html#industries">業界別</a></li>
+        <li><a href="cases.html">導入事例</a></li>
+        <li><a href="pricing.html">料金</a></li>
+        <li><a href="company.html">会社概要</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==========================================================
+     パンくずリスト
+     ========================================================== -->
+<nav class="container breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="index.html">ホーム</a></li>
+    <li aria-current="page">資料ダウンロード</li>
+  </ol>
+</nav>
+
+<!-- ==========================================================
+     ページ本体
+     ========================================================== -->
+<main>
+
+  <section class="dl-page-head">
+    <img src="assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
+    <div class="container" style="position:relative;z-index:1;">
+      <span class="badge badge-on-navy">無料ダウンロード</span>
+      <h1 class="mt-4">静岡の中小企業のための<br>AI導入ガイド2026</h1>
+      <p>「何から始めればいいか分からない」を解消するための実践ガイドです。現状データ、始め方、使える補助金、自己診断チェックリストを1冊にまとめました。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="dl-layout">
+
+        <div class="dl-main">
+          <div class="dl-cover fade-in">
+            <img src="assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
+            <div class="dl-cover-inner">
+              <p class="dl-cover-label">Free White Paper</p>
+              <p class="dl-cover-title">静岡の中小企業のための<br>AI導入ガイド2026</p>
+              <p class="dl-cover-sub">「現場を知っているAI会社」ZENKAI AI パートナーズが、静岡の中小企業経営者向けに作成した無料資料です。専門知識がなくても読み進められる内容になっています。</p>
+              <p class="dl-cover-pages">PDF形式／全12ページ程度を予定</p>
+            </div>
+          </div>
+
+          <div class="section-head is-left mt-8">
+            <span class="section-label">Contents</span>
+            <h2 class="section-title">主な内容（目次プレビュー）</h2>
+            <p class="section-lead">この1冊で、AI導入の全体像から実務レベルの一歩目までを把握いただけます。</p>
+          </div>
+
+          <div class="toc-list">
+            <div class="toc-item">
+              <span class="toc-num">01</span>
+              <div>
+                <h3>AI導入の現状データ</h3>
+                <p>全国および静岡県内の中小企業におけるAI導入率、導入の障壁、生成AI活用の実態を最新の公的調査データをもとに整理します。</p>
+              </div>
+            </div>
+            <div class="toc-item">
+              <span class="toc-num">02</span>
+              <div>
+                <h3>始め方3ステップ</h3>
+                <p>「何から手をつければいいか分からない」状態から、無理なくAI活用を始めるための実践的な3ステップをご紹介します。</p>
+              </div>
+            </div>
+            <div class="toc-item">
+              <span class="toc-num">03</span>
+              <div>
+                <h3>使える補助金一覧</h3>
+                <p>国・静岡県・静岡市の補助金制度の概要を一覧化。実質負担を抑えてAI導入を進めるための制度活用の考え方をまとめました。</p>
+              </div>
+            </div>
+            <div class="toc-item">
+              <span class="toc-num">04</span>
+              <div>
+                <h3>自己診断チェックリスト</h3>
+                <p>自社のAI活用の準備状況をその場で確認できる、10項目のセルフチェックシートを収録しています。</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="note mt-6">補助金に関する記載は制度の概要紹介を目的としたものです。金額・要件は変更される場合がありますので、必ず最新の公募要領をご確認ください。</p>
+        </div>
+
+        <div class="apply-box">
+          <div class="apply-card">
+            <p class="card-title">資料ダウンロードのお申し込み</p>
+            <p class="card-text">下記フォームより必要事項をご入力のうえお申し込みください。フォーム送信後、メールでPDFをお送りします（1営業日以内）。</p>
+
+            <div class="apply-steps">
+              <div class="apply-step"><span class="step-dot">1</span><span>フォームに会社名・氏名・メールアドレスなどをご入力</span></div>
+              <div class="apply-step"><span class="step-dot">2</span><span>送信完了後、担当より1営業日以内にPDFをメールでお送りします</span></div>
+              <div class="apply-step"><span class="step-dot">3</span><span>ご希望の方には、無料相談もあわせてご案内します</span></div>
+            </div>
+
+            <!-- 要差し替え：GoogleフォームURL -->
+            <a href="#" class="btn btn-primary btn-block mt-6" rel="noopener">資料ダウンロードを申し込む（Googleフォーム）</a>
+
+            <div class="form-placeholder">
+              【要差し替え：GoogleフォームURL】<br>
+              上記ボタンのリンク先を、実際のGoogleフォームURLに差し替えてください。
+            </div>
+
+            <p class="form-hint mt-4">ご入力いただいた情報は、資料送付およびサービスご案内の目的以外には使用しません。詳しくは<a href="privacy.html">プライバシーポリシー</a>をご確認ください。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-muted">
+    <div class="container">
+      <div class="cta-block fade-in">
+        <span class="section-label">Get Started</span>
+        <h2>資料だけでなく、直接相談したい方へ</h2>
+        <p>貴社の状況に合わせた無料相談も承っています。</p>
+        <div class="cta-actions">
+          <a href="contact.html" class="btn btn-primary">無料相談を予約する</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==========================================================
+     フッター（全ページ共通・page-template-root.htmlより複製）
+     ========================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
+          <img src="assets/logo-white.svg" alt="ZENKAI AI パートナーズ" width="150" height="32">
+        </a>
+        <p>現場を知っているAI会社。不動産・製造業の実業経験を活かし、静岡の中小企業のAI導入・DX化を伴走支援します。</p>
+        <span class="badge badge-shizuoka mt-4">静岡発</span>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">サービス</p>
+        <ul class="footer-links">
+          <li><a href="services/consulting.html">AI導入コンサルティング</a></li>
+          <li><a href="services/engineer.html">AIエンジニア常駐・伴走支援</a></li>
+          <li><a href="services/tool.html">業務自動化ツール開発</a></li>
+          <li><a href="services/dx.html">DX化支援</a></li>
+          <li><a href="services/sfa.html">オーダーメイドSFA構築</a></li>
+          <li><a href="services/iot.html">IoT機器導入支援</a></li>
+          <li><a href="services/training.html">生成AI研修・社内定着支援</a></li>
+          <li><a href="services/inspection.html">AI外観検査・図面認識</a></li>
+          <li><a href="services/realestate.html">不動産AI活用パック</a></li>
+          <li><a href="services/subsidy.html">補助金申請サポート</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">業界別・その他</p>
+        <ul class="footer-links">
+          <li><a href="industries/manufacturing.html">製造業向け</a></li>
+          <li><a href="industries/real-estate.html">不動産・建築業向け</a></li>
+          <li><a href="industries/local.html">静岡地場産業向け</a></li>
+          <li><a href="cases.html">導入事例</a></li>
+          <li><a href="pricing.html">料金目安</a></li>
+          <li><a href="company.html">会社概要</a></li>
+          <li><a href="download.html">資料ダウンロード</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">運営会社</p>
+        <dl class="footer-company">
+          <dt>会社名</dt><dd>ZENKAI不動産株式会社</dd>
+          <dt>所在地</dt><dd>静岡市駿河区中田1-1-8<br>リブロBLDG 301</dd>
+          <dt>営業時間</dt><dd>9:00〜18:00（水曜定休）</dd>
+        </dl>
+        <ul class="footer-links mt-4">
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2026 ZENKAI不動産株式会社</p>
+      <div class="footer-legal">
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

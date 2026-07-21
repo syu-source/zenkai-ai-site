@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DX化支援｜ZENKAI AI パートナーズ</title>
+<meta name="description" content="Google Workspace の整備とGemini等の生成AI接続で、ペーパーレス化と情報共有基盤づくりを支援。バラバラな情報を一元化し、業務の土台からDXを進めます。">
+<link rel="canonical" href="https://example.com/services/dx-google.html">
+
+<!-- OGP（ページごとに差し替え） -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZENKAI AI パートナーズ">
+<meta property="og:title" content="DX化支援｜ZENKAI AI パートナーズ">
+<meta property="og:description" content="Google Workspace の整備とGemini等の生成AI接続で、ペーパーレス化と情報共有基盤づくりを支援します。">
+<meta property="og:url" content="https://example.com/services/dx-google.html">
+<meta property="og:image" content="https://example.com/assets/ogp.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicon -->
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+
+<!-- 共通デザインシステム -->
+<link rel="stylesheet" href="../css/design-system.css">
+
+<!-- 構造化データ（LocalBusiness） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "ZENKAI AI パートナーズ（ZENKAI不動産株式会社）",
+  "url": "https://example.com/",
+  "telephone": "",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "中田1-1-8 リブロBLDG 301",
+    "addressLocality": "静岡市駿河区",
+    "addressRegion": "静岡県",
+    "addressCountry": "JP"
+  },
+  "openingHours": "Mo,Tu,Th,Fr,Sa,Su 09:00-18:00",
+  "areaServed": "JP"
+}
+</script>
+<style>
+  /* このページ限定のスタイル（design-system.cssは変更しない） */
+  .service-hero { padding: var(--space-8) 0 var(--space-7); }
+  .hero .section-label { color: var(--color-accent2); }
+  .service-hero-icon {
+    width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-md);
+    background: rgba(255,255,255,0.92);
+    margin-bottom: var(--space-5);
+  }
+  .service-hero-icon img { width: 30px; height: 30px; }
+  .service-hero-tags { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: var(--space-5) 0 0; }
+
+  .issue-list { display: flex; flex-direction: column; gap: var(--space-4); }
+  .issue-list li {
+    display: flex; gap: var(--space-4); align-items: flex-start;
+    padding: var(--space-5);
+    background: var(--gray-50);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  .issue-mark {
+    flex: none; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--gradient-accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-en); font-weight: 700; font-size: 0.82rem;
+  }
+  .issue-list p { color: var(--color-text); margin: 0; }
+
+  .process-list { display: flex; flex-direction: column; gap: var(--space-6); }
+  .process-step { display: flex; gap: var(--space-5); align-items: flex-start; }
+  .process-num {
+    flex: none; width: 40px; height: 40px; border-radius: 50%;
+    background: var(--gradient-accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-en); font-weight: 700; font-size: 1rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .process-step h3 { font-size: 1.05rem; color: var(--color-navy); margin-bottom: var(--space-2); }
+  .process-step p { color: var(--color-text-muted); font-size: 0.92rem; margin: 0; }
+
+  .deliverable-list { display: flex; flex-direction: column; gap: var(--space-4); }
+  .deliverable-list li {
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-base);
+  }
+  .deliverable-list strong { display: block; color: var(--color-navy); margin-bottom: var(--space-2); font-size: 0.98rem; }
+  .deliverable-list span { color: var(--color-text-muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<!-- ==========================================================
+     ヘッダー（全ページ共通・改変時は他ページとの整合に注意）
+     ========================================================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
+      <img src="../assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
+    </a>
+
+    <nav class="nav-primary" aria-label="メインナビゲーション">
+      <ul>
+        <li><a href="../index.html">ホーム</a></li>
+        <li><a href="../index.html#services">サービス</a></li>
+        <li><a href="../index.html#industries">業界別</a></li>
+        <li><a href="../cases.html">導入事例</a></li>
+        <li><a href="../pricing.html">料金</a></li>
+        <li><a href="../company.html">会社概要</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="../contact.html" class="btn btn-primary btn-sm header-cta">無料相談</a>
+      <button type="button" class="hamburger" aria-label="メニューを開く" aria-controls="navMobile" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション">
+      <ul>
+        <li><a href="../index.html">ホーム</a></li>
+        <li><a href="../index.html#services">サービス</a></li>
+        <li><a href="../index.html#industries">業界別</a></li>
+        <li><a href="../cases.html">導入事例</a></li>
+        <li><a href="../pricing.html">料金</a></li>
+        <li><a href="../company.html">会社概要</a></li>
+      </ul>
+      <a href="../contact.html" class="btn btn-primary">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==========================================================
+     パンくずリスト
+     ========================================================== -->
+<nav class="container breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="../index.html">ホーム</a></li>
+    <li><a href="../index.html#services">サービス</a></li>
+    <li aria-current="page">DX化支援</li>
+  </ol>
+</nav>
+
+<!-- ==========================================================
+     ▼▼▼ ページ本体 ▼▼▼
+     ========================================================== -->
+<main>
+
+<!-- 页头 -->
+<section class="hero service-hero">
+  <img src="../assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
+  <div class="container hero-inner">
+    <div class="service-hero-icon"><img src="../assets/icons/dx.svg" alt=""></div>
+    <span class="badge badge-on-navy">対象：全業種</span>
+    <h1 class="mt-4">DX化支援</h1>
+    <p class="lead">Google Workspace（Gmail・スプレッドシート等が使えるGoogleの法人向け業務ツール群）の整備と生成AIの接続で、ペーパーレス化と情報共有基盤づくりを支援します。</p>
+    <div class="service-hero-tags">
+      <a href="#pricing" class="btn btn-on-navy btn-sm">料金目安を見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- こんな課題に -->
+<section class="section fade-in" id="issues">
+  <div class="container">
+    <div class="section-head is-left">
+      <span class="section-label">Challenges</span>
+      <h2 class="section-title">こんな課題はありませんか</h2>
+    </div>
+    <ul class="issue-list">
+      <li><span class="issue-mark">1</span><p>情報が紙・メール・個人のPCにバラバラに存在し、必要な資料がすぐに見つからない。</p></li>
+      <li><span class="issue-mark">2</span><p>Google Workspaceは導入済みだが、機能を活かしきれておらず従来のやり方が残っている。</p></li>
+      <li><span class="issue-mark">3</span><p>Gemini（Googleの生成AI）などの生成AIをどう業務に繋げればよいか分からない。</p></li>
+      <li><span class="issue-mark">4</span><p>ペーパーレス化を進めたいが、社内のルールや権限設計が整っていない。</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 提供内容 -->
+<section class="section section-muted fade-in" id="offer">
+  <div class="container">
+    <div class="section-head is-left">
+      <span class="section-label">What We Provide</span>
+      <h2 class="section-title">提供内容</h2>
+    </div>
+    <ul class="deliverable-list">
+      <li><strong>Google Workspaceの設計・移行支援</strong><span>組織構成やアクセス権限の設計、既存データの移行を支援します。</span></li>
+      <li><strong>生成AI接続による業務効率化</strong><span>文書作成・要約・情報整理などをGeminiと連携させ、日常業務のスピードを上げます。</span></li>
+      <li><strong>権限設計・情報共有基盤の構築</strong><span>部門・役職に応じたアクセス権限を整え、必要な情報にすぐたどり着ける状態をつくります。</span></li>
+      <li><strong>社内規程・運用ルールの整備</strong><span>ファイルの命名規則や共有範囲など、定着に必要な運用ルールの整備を支援します。</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 進め方 -->
+<section class="section fade-in" id="process">
+  <div class="container">
+    <div class="section-head is-left">
+      <span class="section-label">Process</span>
+      <h2 class="section-title">進め方</h2>
+    </div>
+    <ol class="process-list">
+      <li class="process-step">
+        <span class="process-num">1</span>
+        <div><h3>現状棚卸し</h3><p>現在使用しているツール、情報の保管場所、既存のルールを確認します。</p></div>
+      </li>
+      <li class="process-step">
+        <span class="process-num">2</span>
+        <div><h3>設計</h3><p>組織構成・権限・フォルダ構成などの設計案を作成します。</p></div>
+      </li>
+      <li class="process-step">
+        <span class="process-num">3</span>
+        <div><h3>移行・設定</h3><p>データ移行と各種設定を行い、生成AI活用の初期設定も進めます。</p></div>
+      </li>
+      <li class="process-step">
+        <span class="process-num">4</span>
+        <div><h3>定着支援</h3><p>運用ルールの周知や利用状況の確認を行い、社内に定着するまで伴走します。</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- 料金目安 -->
+<section class="section section-muted fade-in" id="pricing">
+  <div class="container">
+    <div class="section-head is-left">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-title">料金目安</h2>
+    </div>
+    <div class="table-wrap">
+      <table class="ds-table">
+        <thead><tr><th>内容</th><th>料金目安</th></tr></thead>
+        <tbody>
+          <tr><td>DX化支援（Google Workspace整備・AI接続）</td><td class="cell-accent">要相談</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note mt-4">内容により変動します。まずは無料診断でお見積りください。</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section fade-in" id="faq">
+  <div class="container">
+    <div class="section-head is-left">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">よくある質問</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary><span><span class="faq-q-label">Q.</span>既存のメールサーバーからの移行は可能ですか。</span></summary>
+        <p class="faq-answer">はい。移行元の環境やデータ量を確認したうえで、移行計画をご提案します。</p>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="faq-q-label">Q.</span>セキュリティ設定はどこまで対応してもらえますか。</span></summary>
+        <p class="faq-answer">アクセス権限や共有範囲の設計など、業務利用に必要な基本的なセキュリティ設定を対応します。高度なセキュリティ要件がある場合は個別にご相談ください。</p>
+      </details>
+      <details class="faq-item">
+        <summary><span><span class="faq-q-label">Q.</span>生成AI研修とセットで依頼できますか。</span></summary>
+        <p class="faq-answer">はい。基盤整備とあわせて、生成AI研修・社内定着支援をセットでご依頼いただくことも可能です。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 関連サービス -->
+<section class="section section-muted fade-in" id="related">
+  <div class="container">
+    <div class="section-head is-left">
+      <span class="section-label">Related Services</span>
+      <h2 class="section-title">関連サービス</h2>
+    </div>
+    <div class="card-grid cols-3">
+      <div class="card">
+        <div class="card-icon"><img src="../assets/icons/tool.svg" alt=""></div>
+        <p class="card-title">業務自動化ツール開発</p>
+        <p class="card-text">基盤整備後、さらに個別業務を自動化したい場合はこちら。</p>
+        <a href="automation-tools.html" class="card-link">詳しく見る &rsaquo;</a>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="../assets/icons/training.svg" alt=""></div>
+        <p class="card-title">生成AI研修・社内定着支援</p>
+        <p class="card-text">整備した基盤を社内に定着させるための研修もあわせてどうぞ。</p>
+        <a href="training.html" class="card-link">詳しく見る &rsaquo;</a>
+      </div>
+      <div class="card">
+        <div class="card-icon"><img src="../assets/icons/subsidy.svg" alt=""></div>
+        <p class="card-title">補助金申請サポート</p>
+        <p class="card-text">DX化への投資は補助金の対象となる場合があります。</p>
+        <a href="subsidy.html" class="card-link">詳しく見る &rsaquo;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section fade-in" id="cta">
+  <div class="container">
+    <div class="cta-block">
+      <span class="section-label">Get Started</span>
+      <h2>まずは無料のAI診断から</h2>
+      <p>現状の情報共有の課題を整理するところから、無料診断で一緒に始めましょう。</p>
+      <div class="cta-actions">
+        <a href="../lp/index.html" class="btn btn-primary">無料AI診断を申し込む</a>
+        <a href="../contact.html" class="btn btn-on-navy">無料相談を予約する</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<!-- ▲▲▲ ページ本体ここまで ▲▲▲ -->
+
+<!-- ==========================================================
+     フッター（全ページ共通・改変時は他ページとの整合に注意）
+     ========================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
+          <img src="../assets/logo-white.svg" alt="ZENKAI AI パートナーズ" width="150" height="32">
+        </a>
+        <p>現場を知っているAI会社。不動産・製造業の実業経験を活かし、静岡の中小企業のAI導入・DX化を伴走支援します。</p>
+        <span class="badge badge-shizuoka mt-4">静岡発</span>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">サービス</p>
+        <ul class="footer-links">
+          <li><a href="../services/consulting.html">AI導入コンサルティング</a></li>
+          <li><a href="../services/engineer.html">AIエンジニア常駐・伴走支援</a></li>
+          <li><a href="../services/tool.html">業務自動化ツール開発</a></li>
+          <li><a href="../services/dx.html">DX化支援</a></li>
+          <li><a href="../services/sfa.html">オーダーメイドSFA構築</a></li>
+          <li><a href="../services/iot.html">IoT機器導入支援</a></li>
+          <li><a href="../services/training.html">生成AI研修・社内定着支援</a></li>
+          <li><a href="../services/inspection.html">AI外観検査・図面認識</a></li>
+          <li><a href="../services/realestate.html">不動産AI活用パック</a></li>
+          <li><a href="../services/subsidy.html">補助金申請サポート</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">業界別・その他</p>
+        <ul class="footer-links">
+          <li><a href="../industries/manufacturing.html">製造業向け</a></li>
+          <li><a href="../industries/real-estate.html">不動産・建築業向け</a></li>
+          <li><a href="../industries/local.html">静岡地場産業向け</a></li>
+          <li><a href="../cases.html">導入事例</a></li>
+          <li><a href="../pricing.html">料金目安</a></li>
+          <li><a href="../company.html">会社概要</a></li>
+          <li><a href="../download.html">資料ダウンロード</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">運営会社</p>
+        <dl class="footer-company">
+          <dt>会社名</dt><dd>ZENKAI不動産株式会社</dd>
+          <dt>所在地</dt><dd>静岡市駿河区中田1-1-8<br>リブロBLDG 301</dd>
+          <dt>営業時間</dt><dd>9:00〜18:00（水曜定休）</dd>
+        </dl>
+        <ul class="footer-links mt-4">
+          <li><a href="../contact.html">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2026 ZENKAI不動産株式会社</p>
+      <div class="footer-legal">
+        <a href="../privacy.html">プライバシーポリシー</a>
+        <a href="../contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
