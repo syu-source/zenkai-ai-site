@@ -174,11 +174,33 @@
   /* -----------------------------------------------------------------------
      初期化
      ----------------------------------------------------------------------- */
+  /* -----------------------------------------------------------------------
+     カード全体クリック（.card内の.card-link、無ければ先頭のリンクへ委譲。
+     カード内の別リンクやテキスト選択操作は妨げない）
+     ----------------------------------------------------------------------- */
+  function initClickableCards() {
+    document.querySelectorAll('.card').forEach(function (card) {
+      var link = card.querySelector('a.card-link') || card.querySelector('a[href]');
+      if (!link) return;
+      card.classList.add('is-clickable');
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('a, button, input, textarea, select, summary')) return;
+        if (window.getSelection && String(window.getSelection())) return;
+        if (e.metaKey || e.ctrlKey) {
+          window.open(link.href, '_blank');
+        } else {
+          window.location.href = link.href;
+        }
+      });
+    });
+  }
+
   function init() {
     initMobileNav();
     initHeaderScrollState();
     initRevealFallback();
     initSmoothAnchors();
+    initClickableCards();
   }
 
   if (document.readyState === 'loading') {

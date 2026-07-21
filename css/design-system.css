@@ -38,15 +38,15 @@
    1. デザイントークン（CSS変数）
    ------------------------------------------------------------------------- */
 :root {
-  /* --- ベースカラー（深色） --- */
-  --color-bg: #05070F;
-  --color-bg-secondary: #0A0F1E;
-  --color-bg-elevated: #0D1326;
+  /* --- ベースカラー（深色。2026-07-21 ユーザー要望で一段明るく調整） --- */
+  --color-bg: #0D1424;
+  --color-bg-secondary: #141C31;
+  --color-bg-elevated: #1A2340;
 
   /* --- グラス面 --- */
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-bg-strong: rgba(255, 255, 255, 0.07);
-  --glass-border: rgba(255, 255, 255, 0.10);
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-strong: rgba(255, 255, 255, 0.10);
+  --glass-border: rgba(255, 255, 255, 0.14);
 
   /* --- ブランドカラー --- */
   --color-indigo: #6366F1;
@@ -79,9 +79,9 @@
   /* --- 状態カラー --- */
   --color-success: var(--color-tea);
   --color-warning: #E0A458;
-  --color-border: rgba(255, 255, 255, 0.10);
-  --color-border-strong: rgba(255, 255, 255, 0.18);
-  --color-text: var(--gray-300);
+  --color-border: rgba(255, 255, 255, 0.13);
+  --color-border-strong: rgba(255, 255, 255, 0.22);
+  --color-text: #B4BDCF;
   --color-text-heading: var(--gray-100);
   --color-text-muted: var(--gray-500);
 
@@ -622,6 +622,10 @@ h1, h2, h3, h4 {
   transition: gap var(--duration-fast) var(--ease-standard);
 }
 .card-link:hover { gap: var(--space-2); text-decoration: none; }
+
+/* カード全体クリック可（js/main.jsが.is-clickableを付与） */
+.card.is-clickable { cursor: pointer; }
+.card.is-clickable:hover .card-link { gap: var(--space-2); }
 
 .card-grid {
   display: grid;
