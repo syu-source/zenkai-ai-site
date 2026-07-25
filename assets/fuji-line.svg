@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax meet" role="img" aria-hidden="true" focusable="false">
-  <title>富士山ワイヤーフレーム（デジタルメッシュ）</title>
+  <title>富士山ワイヤーフレーム（デジタル進化エフェクト）</title>
   <defs>
     <linearGradient id="fujiGrad" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0%" stop-color="#6366F1" />
@@ -17,83 +17,139 @@
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
+    <filter id="fujiGlowStrong" x="-40%" y="-80%" width="180%" height="260%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
     <style>
+      /* 頂点ノードの明滅 */
       .fj-dot { animation: fjPulse 2.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
       .fj-dot.d2 { animation-delay: 0.9s; }
       .fj-dot.d3 { animation-delay: 1.7s; }
-      .fj-rise { animation: fjRise 7s linear infinite; }
-      .fj-rise.r2 { animation-delay: 2.3s; }
-      .fj-rise.r3 { animation-delay: 4.6s; }
+      /* 山頂から立ち上るデータ粒子 */
+      .fj-rise { animation: fjRise 6s linear infinite; }
+      .fj-rise.r2 { animation-delay: 1.5s; }
+      .fj-rise.r3 { animation-delay: 3s; }
+      .fj-rise.r4 { animation-delay: 4.5s; }
+      /* 稜線を走る流光（デジタルスキャン） */
+      .fj-trace { stroke-dasharray: 130 2400; animation: fjTrace 6.5s linear infinite; }
+      .fj-trace.t2 { stroke-dasharray: 60 2400; animation-duration: 6.5s; animation-delay: 3.2s; }
+      /* メッシュ面のデジタル組み上がりフリッカー */
+      .fj-face { animation: fjFace 4.2s ease-in-out infinite; }
+      .fj-face.f2 { animation-delay: 0.7s; }
+      .fj-face.f3 { animation-delay: 1.4s; }
+      .fj-face.f4 { animation-delay: 2.1s; }
+      .fj-face.f5 { animation-delay: 2.8s; }
+      .fj-face.f6 { animation-delay: 3.5s; }
+      /* 山頂の進化リング（拡散して消える光環） */
+      .fj-ring { transform-box: fill-box; transform-origin: center; animation: fjRing 4.5s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
+      .fj-ring.g2 { animation-delay: 1.5s; }
+      .fj-ring.g3 { animation-delay: 3s; }
+      /* 山体内部を立ち上るデータストリーム */
+      .fj-stream { animation: fjStream 3.8s linear infinite; }
+      .fj-stream.s2 { animation-delay: 0.8s; }
+      .fj-stream.s3 { animation-delay: 1.6s; }
+      .fj-stream.s4 { animation-delay: 2.4s; }
+      .fj-stream.s5 { animation-delay: 3.1s; }
+      /* メッシュ全体のゆらぎ */
+      .fj-mesh { animation: fjMesh 5.5s ease-in-out infinite; }
+
       @keyframes fjPulse { 0%,100% { opacity: 0.45; } 50% { opacity: 1; } }
-      @keyframes fjRise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 0.9; } 100% { transform: translateY(-110px); opacity: 0; } }
-      @media (prefers-reduced-motion: reduce) { .fj-dot, .fj-rise { animation: none; } }
+      @keyframes fjRise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 0.9; } 100% { transform: translateY(-120px); opacity: 0; } }
+      @keyframes fjTrace { 0% { stroke-dashoffset: 2530; } 100% { stroke-dashoffset: 0; } }
+      @keyframes fjFace { 0%,100% { opacity: 0.10; } 12% { opacity: 0.42; } 18% { opacity: 0.16; } 24% { opacity: 0.38; } 55% { opacity: 0.14; } }
+      @keyframes fjRing { 0% { transform: scale(0.25); opacity: 0; } 10% { opacity: 0.75; } 100% { transform: scale(3.2); opacity: 0; } }
+      @keyframes fjStream { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 0.55; } 80% { opacity: 0.45; } 100% { transform: translateY(-150px); opacity: 0; } }
+      @keyframes fjMesh { 0%,100% { opacity: 0.30; } 50% { opacity: 0.48; } }
+      @media (prefers-reduced-motion: reduce) {
+        .fj-dot, .fj-rise, .fj-trace, .fj-face, .fj-ring, .fj-stream, .fj-mesh { animation: none; }
+        .fj-trace { stroke-dasharray: none; opacity: 0; }
+        .fj-ring { opacity: 0; }
+      }
     </style>
   </defs>
 
-  <!-- 稜線本体：どっしりした山体
-       ・山頂の幅を広く（火口縁 600→840）、中腹も太く、傾斜は緩やかに
-       ・裾野は画面いっぱいに広がる -->
+  <!-- ============ 稜線本体（最初期の富士山シルエット・不変） ============ -->
   <g fill="none" stroke="url(#fujiGrad)" stroke-linecap="round" stroke-linejoin="round" filter="url(#fujiGlow)">
-    <path d="M40,380
-             C300,362 440,322 520,242
-             C562,200 582,150 600,116
-             L624,106 L652,112 L682,100 L712,110 L740,102 L768,112 L796,105 L818,112 L840,116
-             C858,150 878,200 920,242
-             C1000,322 1140,362 1400,380"
+    <path id="fjRidge" d="M40,380 L590,120 L632,156 L676,112 L720,156 L760,100 L804,156 L846,118 L886,156 L1380,380"
           stroke-width="2.6" />
-    <!-- 雪形ライン（山頂直下、指状に垂れる雪の縁） -->
-    <path d="M580,195 L610,165 L632,205 L660,172 L688,212 L716,175 L744,214 L772,175 L798,208 L826,170 L852,196"
-          opacity="0.8" stroke-width="1.8" />
-    <path d="M640,212 L636,248" opacity="0.45" stroke-width="1.4" />
-    <path d="M744,222 L748,258" opacity="0.45" stroke-width="1.4" />
+    <!-- 山頂の雪冠ライン -->
+    <path d="M676,156 L706,138 L730,150 L752,136 L804,156" opacity="0.85" stroke-width="1.8" />
   </g>
 
-  <!-- 内部ワイヤーフレーム（ローポリ三角メッシュ＝デジタル進化風） -->
-  <g fill="none" stroke="url(#fujiGrad)" stroke-width="1" opacity="0.38">
-    <path d="M600,116 L560,255 M624,106 L560,255 M682,100 L660,245 M652,112 L660,245 M740,102 L760,242 M712,110 L760,242 M818,112 L860,250 M796,105 L860,250 M840,116 L860,250
-             M560,255 L660,245 L760,242 L860,250
-             M520,242 L560,255 M920,242 L860,250
-             M560,255 L480,335 M560,255 L640,330 M660,245 L640,330 M660,245 L720,332 M760,242 L720,332 M760,242 L800,332 M860,250 L800,332 M860,250 L960,338
-             M520,242 L480,335 M920,242 L960,338
-             M480,335 L240,380 M480,335 L520,380 M640,330 L520,380 M640,330 L760,380 M720,332 L760,380 M800,332 L760,380 M800,332 L1000,380 M960,338 L1000,380 M960,338 L1240,380" />
+  <!-- 稜線を走る流光（2本、速度違いで交差） -->
+  <g fill="none" stroke-linecap="round" filter="url(#fujiGlowStrong)">
+    <path class="fj-trace" d="M40,380 L590,120 L632,156 L676,112 L720,156 L760,100 L804,156 L846,118 L886,156 L1380,380"
+          stroke="#22D3EE" stroke-width="3.4" />
+    <path class="fj-trace t2" d="M40,380 L590,120 L632,156 L676,112 L720,156 L760,100 L804,156 L846,118 L886,156 L1380,380"
+          stroke="#8B93F5" stroke-width="2.6" />
   </g>
 
-  <!-- メッシュ面のうっすら光る面（数枚だけ） -->
+  <!-- ============ 内部ワイヤーフレーム（ローポリ三角メッシュ） ============ -->
+  <g class="fj-mesh" fill="none" stroke="url(#fujiGrad)" stroke-width="1">
+    <path d="M590,120 L520,250 L40,380 M520,250 L360,380 M520,250 L640,252 L632,156 M676,112 L640,252 M640,252 L620,380 M640,252 L770,244 L720,156 M760,100 L770,244 M770,244 L804,156 M770,244 L900,256 L846,118 M886,156 L900,256 M900,256 L850,380 M900,256 L1030,290 L1380,380 M1030,290 L1090,380 M520,250 L590,120 M1030,290 L886,156" />
+    <path d="M360,380 L520,250 M620,380 L770,244 M850,380 L900,256 M200,380 L520,250" opacity="0.6" />
+  </g>
+
+  <!-- メッシュ面：デジタル組み上がりフリッカー（順に点滅して「進化中」の質感） -->
   <g stroke="none">
-    <polygon points="652,112 682,100 660,245" fill="url(#fujiGradV)" opacity="0.30" />
-    <polygon points="712,110 740,102 760,242" fill="url(#fujiGradV)" opacity="0.34" />
-    <polygon points="796,105 818,112 860,250" fill="url(#fujiGradV)" opacity="0.22" />
-    <polygon points="560,255 660,245 640,330" fill="url(#fujiGradV)" opacity="0.14" />
-    <polygon points="760,242 860,250 800,332" fill="url(#fujiGradV)" opacity="0.12" />
+    <polygon class="fj-face"    points="676,112 720,156 640,252" fill="url(#fujiGradV)" />
+    <polygon class="fj-face f2" points="760,100 804,156 770,244" fill="url(#fujiGradV)" />
+    <polygon class="fj-face f3" points="846,118 886,156 900,256" fill="url(#fujiGradV)" />
+    <polygon class="fj-face f4" points="590,120 632,156 520,250" fill="url(#fujiGradV)" />
+    <polygon class="fj-face f5" points="640,252 770,244 720,156" fill="url(#fujiGradV)" />
+    <polygon class="fj-face f6" points="770,244 900,256 804,156" fill="url(#fujiGradV)" />
+    <polygon class="fj-face f3" points="520,250 640,252 620,380" fill="url(#fujiGradV)" />
+    <polygon class="fj-face f6" points="900,256 1030,290 850,380" fill="url(#fujiGradV)" />
+  </g>
+
+  <!-- 山頂の進化リング（拡散光環、3重で連続爆発） -->
+  <g fill="none" stroke="#22D3EE">
+    <circle class="fj-ring"    cx="760" cy="100" r="26" stroke-width="1.6" />
+    <circle class="fj-ring g2" cx="760" cy="100" r="26" stroke-width="1.2" stroke="#8B93F5" />
+    <circle class="fj-ring g3" cx="760" cy="100" r="26" stroke-width="1" />
+  </g>
+
+  <!-- 山体内部のデータストリーム（裾から山頂へ立ち上る短い光線） -->
+  <g stroke-linecap="round">
+    <line class="fj-stream"    x1="560" y1="360" x2="560" y2="330" stroke="#22D3EE" stroke-width="1.6" />
+    <line class="fj-stream s2" x1="680" y1="370" x2="680" y2="336" stroke="#8B93F5" stroke-width="1.4" />
+    <line class="fj-stream s3" x1="780" y1="366" x2="780" y2="334" stroke="#22D3EE" stroke-width="1.6" />
+    <line class="fj-stream s4" x1="880" y1="372" x2="880" y2="342" stroke="#8B93F5" stroke-width="1.4" />
+    <line class="fj-stream s5" x1="960" y1="374" x2="960" y2="348" stroke="#22D3EE" stroke-width="1.2" />
   </g>
 
   <!-- 水平線（ベースライン） -->
   <line x1="0" y1="380" x2="1440" y2="380" stroke="url(#fujiGrad)" stroke-width="1" opacity="0.22" />
   <!-- デジタル等高線（破線スキャンライン） -->
   <g stroke="url(#fujiGrad)" stroke-width="1" fill="none" opacity="0.20" stroke-dasharray="6 10">
-    <path d="M260,330 L1180,330" />
-    <path d="M400,265 L1050,265" />
-    <path d="M520,195 L920,195" />
+    <path d="M300,330 L1160,330" />
+    <path d="M420,270 L1040,270" />
+    <path d="M540,205 L940,205" />
   </g>
 
   <!-- 頂点ノード（発光ドット、ゆっくり明滅） -->
   <g fill="#22D3EE">
-    <circle class="fj-dot" cx="682" cy="100" r="3" />
-    <circle class="fj-dot d2" cx="600" cy="116" r="2" />
-    <circle class="fj-dot d3" cx="840" cy="116" r="2" />
-    <circle class="fj-dot d2" cx="520" cy="242" r="1.8" opacity="0.7" />
-    <circle class="fj-dot d3" cx="920" cy="242" r="1.8" opacity="0.7" />
-    <circle class="fj-dot" cx="560" cy="255" r="1.6" opacity="0.6" />
-    <circle class="fj-dot d2" cx="760" cy="242" r="1.6" opacity="0.6" />
-    <circle class="fj-dot d3" cx="860" cy="250" r="1.6" opacity="0.6" />
-    <circle class="fj-dot" cx="640" cy="330" r="1.4" opacity="0.5" />
-    <circle class="fj-dot d3" cx="960" cy="338" r="1.4" opacity="0.5" />
+    <circle class="fj-dot" cx="760" cy="100" r="3" />
+    <circle class="fj-dot d2" cx="676" cy="112" r="2.2" />
+    <circle class="fj-dot d3" cx="846" cy="118" r="2.2" />
+    <circle class="fj-dot d2" cx="590" cy="120" r="1.8" opacity="0.7" />
+    <circle class="fj-dot d3" cx="886" cy="156" r="1.8" opacity="0.7" />
+    <circle class="fj-dot" cx="640" cy="252" r="1.6" opacity="0.6" />
+    <circle class="fj-dot d2" cx="770" cy="244" r="1.6" opacity="0.6" />
+    <circle class="fj-dot d3" cx="900" cy="256" r="1.6" opacity="0.6" />
+    <circle class="fj-dot" cx="520" cy="250" r="1.4" opacity="0.5" />
+    <circle class="fj-dot d3" cx="1030" cy="290" r="1.4" opacity="0.5" />
   </g>
 
-  <!-- 進化エフェクト：山頂から立ち上るデータ粒子 -->
+  <!-- 山頂から立ち上るデータ粒子（増量） -->
   <g fill="#8B93F5">
-    <circle class="fj-rise" cx="700" cy="88" r="1.8" />
-    <circle class="fj-rise r2" cx="756" cy="92" r="1.4" />
-    <circle class="fj-rise r3" cx="664" cy="94" r="1.2" />
+    <circle class="fj-rise"    cx="738" cy="86" r="1.8" />
+    <circle class="fj-rise r2" cx="782" cy="92" r="1.4" />
+    <circle class="fj-rise r3" cx="712" cy="96" r="1.2" />
+    <circle class="fj-rise r4" cx="760" cy="80" r="2" fill="#22D3EE" />
   </g>
 </svg>
