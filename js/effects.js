@@ -71,15 +71,22 @@
   function initReveal() {
     if (!hasGsap || reduceMotion) return;
 
+    /* 入場アニメ中の要素に data-reveal-pending を立て、tilt等の他エフェクトが
+       transform を上書き（overwrite）して途中停止＝縦ズレを起こすのを防ぐ。
+       完了時は clearProps でインライン transform/opacity を必ず消し、
+       最終位置が常にCSS本来のレイアウト（＝一直線）になるようにする。 */
     var singles = document.querySelectorAll('[data-reveal]:not([data-reveal-group] [data-reveal])');
     singles.forEach(function (el) {
       var delay = parseFloat(el.getAttribute('data-reveal-delay')) || 0;
+      el.setAttribute('data-reveal-pending', '');
       window.gsap.from(el, {
         opacity: 0,
         y: 32,
         duration: 0.8,
         ease: 'power3.out',
         delay: delay,
+        clearProps: 'opacity,transform',
+        onComplete: function () { el.removeAttribute('data-reveal-pending'); },
         scrollTrigger: hasScrollTrigger ? {
           trigger: el,
           start: 'top 88%',
@@ -92,12 +99,21 @@
     groups.forEach(function (group) {
       var children = group.querySelectorAll('[data-reveal]');
       var items = children.length ? children : group.children;
+      Array.prototype.forEach.call(items, function (item) {
+        item.setAttribute('data-reveal-pending', '');
+      });
       window.gsap.from(items, {
         opacity: 0,
         y: 32,
         duration: 0.7,
         ease: 'power3.out',
         stagger: 0.12,
+        clearProps: 'opacity,transform',
+        onComplete: function () {
+          Array.prototype.forEach.call(items, function (item) {
+            item.removeAttribute('data-reveal-pending');
+          });
+        },
         scrollTrigger: hasScrollTrigger ? {
           trigger: group,
           start: 'top 85%',
@@ -174,6 +190,7 @@
       var maxTilt = parseFloat(card.getAttribute('data-tilt-max')) || 8;
 
       function onMove(e) {
+        if (card.hasAttribute('data-reveal-pending')) return;
         var rect = card.getBoundingClientRect();
         var px = (e.clientX - rect.left) / rect.width;
         var py = (e.clientY - rect.top) / rect.height;
@@ -195,6 +212,7 @@
 
       function onLeave() {
         card.classList.remove('is-tilting');
+        if (card.hasAttribute('data-reveal-pending')) return;
         var transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0)';
         if (hasGsap) {
           window.gsap.to(card, { transform: transform, duration: 0.5, ease: 'power3.out', overwrite: true });
