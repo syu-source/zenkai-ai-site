@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMax slice" role="img" aria-hidden="true" focusable="false">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax meet" role="img" aria-hidden="true" focusable="false">
   <title>富士山ラインアート（ネオン）</title>
   <defs>
     <linearGradient id="fujiGrad" x1="0" y1="0" x2="1" y2="0">
@@ -16,23 +16,33 @@
   </defs>
 
   <g fill="none" stroke="url(#fujiGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" filter="url(#fujiGlow)">
-    <!-- 稜線本体 -->
-    <path d="M0,300 L430,60 L472,96 L512,54 L556,96 L600,44 L648,96 L690,58 L730,96 L1200,300" stroke-width="2.4" />
-    <!-- 山頂の雪冠ライン -->
-    <path d="M556,96 L580,80 L600,90 L618,78 L648,96" opacity="0.9" />
-    <path d="M512,54 L522,64 L534,58" opacity="0.7" />
+    <!-- 稜線本体：広い裾野（凹カーブ）＋台形の山頂部＝富士山の象徴的シルエット -->
+    <path d="M0,340
+             C220,332 420,318 560,270
+             C640,240 680,180 700,120
+             L716,104
+             L736,116 L756,100 L776,114 L796,102 L816,118 L836,106
+             L852,122
+             C876,186 916,244 992,276
+             C1120,326 1280,336 1440,341"
+          stroke-width="2.6" />
+    <!-- 山頂の雪冠ライン（稜線の下に沿う八の字） -->
+    <path d="M716,140 L744,158 L768,142 L792,160 L818,146 L840,160" opacity="0.85" stroke-width="1.8" />
+    <!-- 宝永山（右斜面の小さな肩） -->
+    <path d="M905,232 L936,214 L964,246" opacity="0.6" stroke-width="1.8" />
     <!-- 裾野の等高線（装飾） -->
-    <path d="M120,300 C260,250 340,240 430,220" opacity="0.4" />
-    <path d="M1080,300 C960,250 880,240 790,222" opacity="0.4" />
+    <path d="M200,340 C400,322 520,306 610,282" opacity="0.35" />
+    <path d="M1240,340 C1080,324 990,310 918,290" opacity="0.35" />
   </g>
 
   <!-- 水平線（ベースライン、グロー無し） -->
-  <line x1="0" y1="300" x2="1200" y2="300" stroke="url(#fujiGrad)" stroke-width="1" opacity="0.22" />
+  <line x1="0" y1="340" x2="1440" y2="340" stroke="url(#fujiGrad)" stroke-width="1" opacity="0.22" />
 
   <!-- 山頂付近の光点（回路基板風のアクセント） -->
   <g fill="#22D3EE">
-    <circle cx="600" cy="44" r="2.6" opacity="0.95" />
-    <circle cx="472" cy="96" r="1.6" opacity="0.6" />
-    <circle cx="730" cy="96" r="1.6" opacity="0.6" />
+    <circle cx="776" cy="114" r="2.6" opacity="0.95" />
+    <circle cx="700" cy="120" r="1.6" opacity="0.6" />
+    <circle cx="852" cy="122" r="1.6" opacity="0.6" />
+    <circle cx="936" cy="214" r="1.4" opacity="0.5" />
   </g>
 </svg>

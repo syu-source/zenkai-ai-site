@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-hidden="true" focusable="false">
+  <title>AI外観検査・図面認識のイメージ図（カメラ・検査ライン・判定）</title>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <radialGradient id="glowIndigo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="80" cy="70" r="130" fill="url(#glowIndigo)"/>
+  <circle cx="410" cy="300" r="150" fill="url(#glowCyan)"/>
+
+  <path d="M0,0L0,360M40,0L40,360M80,0L80,360M120,0L120,360M160,0L160,360M200,0L200,360M240,0L240,360M280,0L280,360M320,0L320,360M360,0L360,360M400,0L400,360M440,0L440,360M480,0L480,360M0,0L480,0M0,40L480,40M0,80L480,80M0,120L480,120M0,160L480,160M0,200L480,200M0,240L480,240M0,280L480,280M0,320L480,320M0,360L480,360" stroke="#8B93F5" stroke-width="1" opacity="0.06"/>
+
+  <!-- ベルトコンベア -->
+  <line x1="40" y1="284" x2="440" y2="284" stroke="url(#grad)" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <line x1="40" y1="298" x2="440" y2="298" stroke="url(#grad)" stroke-width="1.2" opacity="0.3"/>
+  <g stroke="#22D3EE" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.45">
+    <path d="M200,291 l8,-7 l8,7"/>
+    <path d="M360,291 l8,-7 l8,7"/>
+  </g>
+
+  <!-- 検査カメラ -->
+  <line x1="240" y1="24" x2="240" y2="66" stroke="url(#grad)" stroke-width="2.2" opacity="0.7"/>
+  <g filter="url(#glow)">
+    <rect x="206" y="60" width="68" height="40" rx="8" fill="rgba(99,102,241,0.12)" stroke="url(#grad)" stroke-width="2.2"/>
+    <circle cx="240" cy="80" r="13" fill="#0D1424" stroke="url(#grad)" stroke-width="2.4"/>
+  </g>
+  <circle cx="240" cy="80" r="4" fill="#22D3EE"/>
+
+  <!-- スキャンビーム -->
+  <path d="M222,100 L128,246 L352,246 Z" fill="rgba(34,211,238,0.06)" stroke="url(#grad)" stroke-width="1.2" stroke-dasharray="3 6" opacity="0.5"/>
+
+  <!-- 合格製品 -->
+  <g filter="url(#glow)">
+    <rect x="118" y="242" width="60" height="42" rx="8" fill="rgba(34,211,238,0.08)" stroke="url(#grad)" stroke-width="2.2"/>
+  </g>
+  <g stroke="#22D3EE" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)">
+    <path d="M132,220 l9,10 l19,-22"/>
+  </g>
+
+  <!-- 要確認製品 -->
+  <g filter="url(#glow)">
+    <rect x="298" y="242" width="60" height="42" rx="8" fill="rgba(224,164,88,0.08)" stroke="url(#grad)" stroke-width="2.2"/>
+    <circle cx="330" cy="264" r="10" fill="none" stroke="#E0A458" stroke-width="1.6" stroke-dasharray="2 4"/>
+  </g>
+  <g stroke="#E0A458" stroke-width="3.2" stroke-linecap="round" filter="url(#glow)">
+    <path d="M312,210 l20,20 M332,210 l-20,20"/>
+  </g>
+</svg>

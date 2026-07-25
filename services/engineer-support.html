@@ -92,6 +92,27 @@
   }
   .service-hero-tags { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin: var(--space-6) 0 0; }
 
+  /* --- ページ頭：左テキスト・右イラストのレイアウト --- */
+  .page-head-grid { display: flex; flex-direction: column; gap: var(--space-7); }
+  .page-head-media { width: min(320px, 78%); margin: 0 auto; }
+  .page-head-media img { width: 100%; height: auto; display: block; }
+  .page-head-illust {
+    animation: page-head-float 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 26px rgba(99, 102, 241, 0.28));
+  }
+  @keyframes page-head-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .page-head-illust { animation: none; }
+  }
+  @media (min-width: 1024px) {
+    .page-head-grid { flex-direction: row; align-items: center; justify-content: space-between; gap: var(--space-8); }
+    .page-head-text { flex: 1 1 54%; max-width: 640px; }
+    .page-head-media { flex: 1 1 40%; max-width: 460px; width: 100%; margin: 0; }
+  }
+
   .issue-card { display: flex; gap: var(--space-4); align-items: flex-start; }
   .issue-mark {
     flex: none; width: 32px; height: 32px; border-radius: 50%;
@@ -184,7 +205,8 @@
 
 <!-- ページ頭 -->
 <section class="page-head bg-glow">
-  <div class="container">
+  <div class="container page-head-grid">
+    <div class="page-head-text">
     <div class="service-hero-icon" data-reveal><img src="../assets/icons/engineer.svg" alt=""></div>
     <span class="eyebrow" data-reveal data-reveal-delay="0.06">FDE — Forward Deployed Engineer</span>
     <h1 class="mt-3" data-reveal data-reveal-delay="0.12">AIエンジニア<span class="text-gradient">常駐・伴走支援</span></h1>
@@ -192,6 +214,10 @@
     <div class="service-hero-tags" data-reveal data-reveal-delay="0.24">
       <span class="badge badge-on-navy">対象：全業種</span>
       <a href="#pricing" class="btn btn-secondary btn-sm">料金目安を見る</a>
+    </div>
+    </div>
+    <div class="page-head-media" data-reveal data-reveal-delay="0.3">
+      <img class="page-head-illust" src="../assets/illustrations/engineer.svg" alt="" width="480" height="360" loading="eager" decoding="async">
     </div>
   </div>
 </section>

@@ -140,6 +140,32 @@
     font-size: 0.9rem;
     line-height: 1.9;
   }
+
+  /* --- 写真プレースホルダー（グループ各社の実写真差し替え用。準備でき次第 <img> に置換） --- */
+  .photo-slot {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    background: var(--glass-bg);
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--color-text-muted);
+    text-align: center;
+    padding: var(--space-5);
+    overflow: hidden;
+    transition: border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard);
+  }
+  .photo-slot:hover { border-color: var(--color-cyan); background: var(--glass-bg-strong); }
+  .photo-slot__icon { color: var(--color-cyan); opacity: 0.75; }
+  .photo-slot__icon svg { width: 36px; height: 36px; display: block; }
+  .photo-slot__text { font-size: 0.82rem; line-height: 1.6; letter-spacing: 0.01em; }
 </style>
 </head>
 <body>
@@ -294,12 +320,30 @@
           <p class="card-title">ZENKAI不動産株式会社</p>
           <p class="text-accent" style="font-weight:700; font-size:0.82rem; margin-top:calc(var(--space-1) * -1);">不動産事業（運営会社）</p>
           <p class="card-text mt-4">静岡市を拠点に、不動産の売買・賃貸仲介、管理業を展開。ZENKAI AI パートナーズの運営主体でもあり、自社の反響対応・物件査定などでAI活用を先行して実践しています。</p>
+          <div class="photo-slot mt-4" role="img" aria-label="ZENKAI不動産 店舗・オフィス写真プレースホルダー">
+            <span class="photo-slot__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                <circle cx="12" cy="13" r="3.5"/>
+              </svg>
+            </span>
+            <span class="photo-slot__text">【要差し替え：ZENKAI不動産 店舗・オフィス写真】</span>
+          </div>
         </div>
         <div class="card" data-tilt data-reveal>
           <div class="card-icon"><img src="assets/icons/inspection.svg" alt=""></div>
           <p class="card-title">株式会社ABCマテリアル</p>
           <p class="text-accent" style="font-weight:700; font-size:0.82rem; margin-top:calc(var(--space-1) * -1);">親会社／プラスチックリサイクル製造業</p>
           <p class="card-text mt-4">静岡県榛原郡吉田町を拠点に、プラスチックリサイクルの製造を手がける親会社。製造現場における人手不足・検品業務などの課題を、グループ内で日常的に共有しています。</p>
+          <div class="photo-slot mt-4" role="img" aria-label="ABCマテリアル 工場・産線写真プレースホルダー">
+            <span class="photo-slot__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+                <circle cx="12" cy="13" r="3.5"/>
+              </svg>
+            </span>
+            <span class="photo-slot__text">【要差し替え：ABCマテリアル 工場・産線写真】</span>
+          </div>
         </div>
       </div>
 

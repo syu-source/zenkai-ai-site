@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-hidden="true" focusable="false">
+  <title>AI導入コンサルティングのイメージ図（対話・分析・ロードマップ）</title>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <radialGradient id="glowIndigo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 背景グロー -->
+  <circle cx="70" cy="55" r="130" fill="url(#glowIndigo)"/>
+  <circle cx="415" cy="305" r="150" fill="url(#glowCyan)"/>
+
+  <!-- 背景グリッド -->
+  <path d="M0,0L0,360M40,0L40,360M80,0L80,360M120,0L120,360M160,0L160,360M200,0L200,360M240,0L240,360M280,0L280,360M320,0L320,360M360,0L360,360M400,0L400,360M440,0L440,360M480,0L480,360M0,0L480,0M0,40L480,40M0,80L480,80M0,120L480,120M0,160L480,160M0,200L480,200M0,240L480,240M0,280L480,280M0,320L480,320M0,360L480,360" stroke="#8B93F5" stroke-width="1" opacity="0.06"/>
+
+  <!-- 進捗チェーン（相談・整理・提案の3ステップ） -->
+  <g fill="none" stroke="url(#grad)" stroke-width="1.6" opacity="0.55" stroke-dasharray="2 6" stroke-linecap="round">
+    <path d="M96,300 L206,326 L318,292"/>
+  </g>
+  <g stroke="url(#grad)" stroke-width="2.4" filter="url(#glow)">
+    <circle cx="96" cy="300" r="9" fill="#0D1424"/>
+    <circle cx="206" cy="326" r="9" fill="#0D1424"/>
+    <circle cx="318" cy="292" r="9" fill="#0D1424"/>
+  </g>
+  <g fill="#22D3EE">
+    <circle cx="96" cy="300" r="3"/>
+    <circle cx="206" cy="326" r="3"/>
+    <circle cx="318" cy="292" r="3"/>
+  </g>
+
+  <!-- 対話吹き出し -->
+  <g filter="url(#glow)">
+    <path d="M46,58 h150 a14,14 0 0 1 14,14 v66 a14,14 0 0 1 -14,14 h-96 l-26,24 v-24 h-28 a14,14 0 0 1 -14,-14 v-66 a14,14 0 0 1 14,-14 z"
+          fill="rgba(99,102,241,0.10)" stroke="url(#grad)" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+  <g stroke="#B4BDCF" stroke-width="2.2" stroke-linecap="round" opacity="0.75">
+    <line x1="66" y1="90" x2="176" y2="90"/>
+    <line x1="66" y1="108" x2="196" y2="108"/>
+    <line x1="66" y1="126" x2="150" y2="126"/>
+  </g>
+  <circle cx="204" cy="90" r="3" fill="#22D3EE"/>
+
+  <!-- 虫眼鏡 + 簡易グラフ（分析） -->
+  <g stroke="url(#grad)" stroke-width="1.6" opacity="0.5">
+    <rect x="272" y="182" width="130" height="86" rx="6" fill="rgba(255,255,255,0.03)"/>
+  </g>
+  <g stroke="url(#grad)" stroke-width="2" stroke-linecap="round" fill="none">
+    <path d="M290,252 L290,214 M318,252 L318,228 M346,252 L346,200 M374,252 L374,236"/>
+  </g>
+  <g filter="url(#glow)">
+    <circle cx="352" cy="200" r="34" fill="rgba(34,211,238,0.08)" stroke="url(#grad)" stroke-width="3"/>
+    <line x1="376" y1="224" x2="404" y2="252" stroke="url(#grad)" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <circle cx="352" cy="200" r="4" fill="#22D3EE"/>
+</svg>

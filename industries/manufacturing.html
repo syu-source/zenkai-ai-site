@@ -95,6 +95,15 @@
   .subsidy-list { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-6); }
   .subsidy-list .card { display: flex; flex-direction: column; gap: var(--space-2); }
   .footnote { font-size: 0.78rem; color: var(--color-text-muted); }
+
+  /* Hero写真背景（実業の現場感を伝える写真＋深色グラデーション遮罩で可読性を確保） */
+  .hero-photo {
+    background-image:
+      linear-gradient(180deg, rgba(13, 20, 36, 0.88) 0%, rgba(13, 20, 36, 0.72) 42%, rgba(13, 20, 36, 0.94) 100%),
+      url('../assets/photos/manufacturing-factory-line.jpg');
+    background-size: cover;
+    background-position: center 60%;
+  }
 </style>
 </head>
 <body>
@@ -162,7 +171,7 @@
 <main>
 
   <!-- Hero（#hero-canvasは使用せず、.bg-glowによる光斑演出のみ） -->
-  <section class="hero bg-glow glow-center">
+  <section class="hero bg-glow glow-center hero-photo">
     <img src="../assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
     <div class="container hero-inner">
       <span class="badge badge-shizuoka" data-reveal>静岡発・製造業向け</span>

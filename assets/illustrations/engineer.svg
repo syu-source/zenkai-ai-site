@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-hidden="true" focusable="false">
+  <title>AIエンジニア常駐・伴走支援のイメージ図（人物・コード・歯車）</title>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <radialGradient id="glowIndigo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="80" cy="70" r="130" fill="url(#glowIndigo)"/>
+  <circle cx="420" cy="300" r="150" fill="url(#glowCyan)"/>
+
+  <path d="M0,0L0,360M40,0L40,360M80,0L80,360M120,0L120,360M160,0L160,360M200,0L200,360M240,0L240,360M280,0L280,360M320,0L320,360M360,0L360,360M400,0L400,360M440,0L440,360M480,0L480,360M0,0L480,0M0,40L480,40M0,80L480,80M0,120L480,120M0,160L480,160M0,200L480,200M0,240L480,240M0,280L480,280M0,320L480,320M0,360L480,360" stroke="#8B93F5" stroke-width="1" opacity="0.06"/>
+
+  <!-- 歯車（システム／自動化のアクセント） -->
+  <g stroke="url(#grad)" stroke-width="2.4" fill="none" opacity="0.85" filter="url(#glow)">
+    <circle cx="392" cy="272" r="30"/>
+    <circle cx="392" cy="272" r="10"/>
+    <g stroke-width="4" stroke-linecap="round">
+      <line x1="392" y1="234" x2="392" y2="246"/>
+      <line x1="392" y1="298" x2="392" y2="310"/>
+      <line x1="354" y1="272" x2="366" y2="272"/>
+      <line x1="418" y1="272" x2="430" y2="272"/>
+      <line x1="365" y1="245" x2="373" y2="253"/>
+      <line x1="411" y1="291" x2="419" y2="299"/>
+      <line x1="419" y1="245" x2="411" y2="253"/>
+      <line x1="373" y1="291" x2="365" y2="299"/>
+    </g>
+  </g>
+
+  <!-- コードウィンドウ -->
+  <g filter="url(#glow)">
+    <rect x="168" y="46" width="270" height="176" rx="10" fill="rgba(255,255,255,0.03)" stroke="url(#grad)" stroke-width="2"/>
+  </g>
+  <line x1="168" y1="80" x2="438" y2="80" stroke="url(#grad)" stroke-width="1.4" opacity="0.6"/>
+  <g fill="#8B93F5" opacity="0.85">
+    <circle cx="186" cy="63" r="4"/>
+    <circle cx="202" cy="63" r="4" fill="#22D3EE"/>
+    <circle cx="218" cy="63" r="4"/>
+  </g>
+  <g stroke="#B4BDCF" stroke-width="2.2" stroke-linecap="round" opacity="0.75">
+    <line x1="190" y1="100" x2="260" y2="100"/>
+    <line x1="204" y1="118" x2="310" y2="118"/>
+    <line x1="204" y1="136" x2="286" y2="136"/>
+    <line x1="190" y1="154" x2="240" y2="154"/>
+  </g>
+  <g stroke="url(#grad)" stroke-width="2.4" stroke-linecap="round">
+    <line x1="204" y1="172" x2="320" y2="172"/>
+  </g>
+  <rect x="326" y="164" width="8" height="16" fill="#22D3EE" opacity="0.9"/>
+
+  <!-- 人物（伴走するエンジニア） -->
+  <g filter="url(#glow)">
+    <circle cx="92" cy="120" r="19" fill="rgba(99,102,241,0.12)" stroke="url(#grad)" stroke-width="2.2"/>
+  </g>
+  <path d="M92,140 C68,148 62,168 62,190 L62,244 C62,258 122,258 122,244 L122,186 C122,164 114,148 92,140 Z"
+        fill="rgba(99,102,241,0.10)" stroke="url(#grad)" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M116,196 C136,204 150,208 166,214" fill="none" stroke="url(#grad)" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="168" cy="216" r="4" fill="#22D3EE"/>
+  <line x1="30" y1="244" x2="210" y2="244" stroke="url(#grad)" stroke-width="1.4" opacity="0.35"/>
+</svg>

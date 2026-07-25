@@ -1006,7 +1006,8 @@ select.form-control {
   left: 0; right: 0; bottom: 0;
   width: 100%;
   height: auto;
-  max-height: 40%;
+  /* max-heightで縦を絞るとSVG（slice時代）の山頂が上から裁ち落とされる事故があったため、
+     常に全体が見えるよう高さは幅比率に任せる（SVG側もmeetに変更済み） */
   opacity: 0.55;
   color: var(--color-cyan);
   pointer-events: none;

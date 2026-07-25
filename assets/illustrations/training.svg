@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-hidden="true" focusable="false">
+  <title>生成AI研修・社内定着支援のイメージ図（スクリーン・受講者・ひらめき）</title>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <radialGradient id="glowIndigo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="80" cy="70" r="130" fill="url(#glowIndigo)"/>
+  <circle cx="410" cy="300" r="150" fill="url(#glowCyan)"/>
+
+  <path d="M0,0L0,360M40,0L40,360M80,0L80,360M120,0L120,360M160,0L160,360M200,0L200,360M240,0L240,360M280,0L280,360M320,0L320,360M360,0L360,360M400,0L400,360M440,0L440,360M480,0L480,360M0,0L480,0M0,40L480,40M0,80L480,80M0,120L480,120M0,160L480,160M0,200L480,200M0,240L480,240M0,280L480,280M0,320L480,320M0,360L480,360" stroke="#8B93F5" stroke-width="1" opacity="0.06"/>
+
+  <!-- 電球（ひらめき） -->
+  <g stroke="url(#grad)" stroke-linecap="round" opacity="0.6">
+    <line x1="392" y1="46" x2="392" y2="60" stroke-width="2"/>
+    <line x1="352" y1="66" x2="362" y2="76" stroke-width="2"/>
+    <line x1="432" y1="66" x2="422" y2="76" stroke-width="2"/>
+  </g>
+  <g filter="url(#glow)">
+    <circle cx="392" cy="104" r="30" fill="rgba(34,211,238,0.12)" stroke="url(#grad)" stroke-width="2.4"/>
+    <path d="M380,130 h24 v10 a12,10 0 0 1 -24,0 z" fill="rgba(255,255,255,0.05)" stroke="url(#grad)" stroke-width="2"/>
+    <line x1="384" y1="150" x2="400" y2="150" stroke="url(#grad)" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+  <path d="M380,96 q12,-18 24,0" fill="none" stroke="#22D3EE" stroke-width="1.6" opacity="0.8"/>
+  <circle cx="392" cy="104" r="3" fill="#22D3EE"/>
+
+  <!-- 講義スクリーン -->
+  <g filter="url(#glow)">
+    <rect x="56" y="54" width="210" height="126" rx="8" fill="rgba(255,255,255,0.03)" stroke="url(#grad)" stroke-width="2.2"/>
+  </g>
+  <line x1="56" y1="82" x2="266" y2="82" stroke="url(#grad)" stroke-width="1.2" opacity="0.5"/>
+  <g stroke="#B4BDCF" stroke-width="1.8" opacity="0.7" stroke-linecap="round">
+    <line x1="72" y1="100" x2="180" y2="100"/>
+    <line x1="72" y1="116" x2="150" y2="116"/>
+  </g>
+  <g stroke="url(#grad)" stroke-width="2" fill="rgba(99,102,241,0.12)">
+    <rect x="72" y="150" width="16" height="16" rx="2"/>
+    <rect x="96" y="140" width="16" height="26" rx="2"/>
+    <rect x="120" y="130" width="16" height="36" rx="2"/>
+    <rect x="144" y="146" width="16" height="20" rx="2" fill="rgba(34,211,238,0.16)"/>
+  </g>
+  <path d="M160,178 L160,206" stroke="url(#grad)" stroke-width="3" opacity="0.6"/>
+  <path d="M138,206 h44" stroke="url(#grad)" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- 受講者（シルエット） -->
+  <g stroke="url(#grad)" stroke-width="2" fill="rgba(99,102,241,0.10)" filter="url(#glow)">
+    <circle cx="80" cy="270" r="14"/>
+    <path d="M60,320 a20,22 0 0 1 40,0 z"/>
+    <circle cx="148" cy="262" r="15"/>
+    <path d="M126,320 a22,24 0 0 1 44,0 z"/>
+    <circle cx="222" cy="270" r="14"/>
+    <path d="M202,320 a20,22 0 0 1 40,0 z"/>
+    <circle cx="292" cy="264" r="15"/>
+    <path d="M270,320 a22,24 0 0 1 44,0 z"/>
+    <circle cx="362" cy="272" r="13"/>
+    <path d="M344,320 a18,20 0 0 1 36,0 z"/>
+  </g>
+</svg>

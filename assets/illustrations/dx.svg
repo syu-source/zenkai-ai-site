@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-hidden="true" focusable="false">
+  <title>DX化支援のイメージ図（クラウド・フォルダ・同期・共同編集）</title>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <radialGradient id="glowIndigo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="90" cy="70" r="130" fill="url(#glowIndigo)"/>
+  <circle cx="400" cy="310" r="150" fill="url(#glowCyan)"/>
+
+  <path d="M0,0L0,360M40,0L40,360M80,0L80,360M120,0L120,360M160,0L160,360M200,0L200,360M240,0L240,360M280,0L280,360M320,0L320,360M360,0L360,360M400,0L400,360M440,0L440,360M480,0L480,360M0,0L480,0M0,40L480,40M0,80L480,80M0,120L480,120M0,160L480,160M0,200L480,200M0,240L480,240M0,280L480,280M0,320L480,320M0,360L480,360" stroke="#8B93F5" stroke-width="1" opacity="0.06"/>
+
+  <!-- クラウド -->
+  <g filter="url(#glow)">
+    <path d="M156,132 a34,34 0 0 1 8,-67 a44,44 0 0 1 84,-12 a36,36 0 0 1 40,58 a30,30 0 0 1 -6,60 h-118 a28,28 0 0 1 -8,-39 z"
+          fill="rgba(99,102,241,0.10)" stroke="url(#grad)" stroke-width="2.2" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 同期の二重矢印 -->
+  <g fill="none" stroke="url(#grad)" stroke-width="2.6" stroke-linecap="round" filter="url(#glow)">
+    <path d="M212,196 a34,34 0 1 1 -6,40"/>
+    <path d="M268,196 a34,34 0 1 0 6,40"/>
+  </g>
+  <g stroke="url(#grad)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M204,190 l8,6 l-2,-10"/>
+    <path d="M276,242 l-8,-6 l2,10"/>
+  </g>
+
+  <!-- フォルダ -->
+  <g filter="url(#glow)">
+    <path d="M172,258 h44 l12,14 h80 a8,8 0 0 1 8,8 v46 a8,8 0 0 1 -8,8 h-136 a8,8 0 0 1 -8,-8 v-60 a8,8 0 0 1 8,-8 z"
+          fill="rgba(34,211,238,0.08)" stroke="url(#grad)" stroke-width="2.2" stroke-linejoin="round"/>
+  </g>
+  <g stroke="#B4BDCF" stroke-width="1.8" opacity="0.65" stroke-linecap="round">
+    <line x1="192" y1="306" x2="256" y2="306"/>
+    <line x1="192" y1="318" x2="240" y2="318"/>
+  </g>
+
+  <!-- 共同編集する拠点（ユーザーノード） -->
+  <g stroke="url(#grad)" stroke-width="1.4" opacity="0.4" stroke-dasharray="2 6">
+    <path d="M90,320 C130,300 160,300 190,296"/>
+    <path d="M390,320 C340,300 300,300 268,296"/>
+  </g>
+  <g filter="url(#glow)">
+    <circle cx="90" cy="320" r="16" fill="rgba(99,102,241,0.12)" stroke="url(#grad)" stroke-width="2"/>
+    <circle cx="390" cy="320" r="16" fill="rgba(34,211,238,0.10)" stroke="url(#grad)" stroke-width="2"/>
+  </g>
+  <g fill="none" stroke="#B4BDCF" stroke-width="1.6" opacity="0.75">
+    <circle cx="90" cy="314" r="5"/>
+    <path d="M80,328 a10,9 0 0 1 20,0"/>
+    <circle cx="390" cy="314" r="5"/>
+    <path d="M380,328 a10,9 0 0 1 20,0"/>
+  </g>
+  <circle cx="240" cy="76" r="3.4" fill="#22D3EE"/>
+</svg>

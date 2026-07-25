@@ -173,6 +173,33 @@
     margin-bottom: var(--space-4);
   }
 
+  /* --- 写真プレースホルダー（自社写真差し替え用。準備でき次第 <img> に置換） --- */
+  .practice-photo { grid-column: 1 / -1; margin-top: var(--space-2); }
+  .photo-slot {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    background: var(--glass-bg);
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--color-text-muted);
+    text-align: center;
+    padding: var(--space-5);
+    overflow: hidden;
+    transition: border-color var(--duration-base) var(--ease-standard), background var(--duration-base) var(--ease-standard);
+  }
+  .photo-slot:hover { border-color: var(--color-cyan); background: var(--glass-bg-strong); }
+  .photo-slot__icon { color: var(--color-cyan); opacity: 0.75; }
+  .photo-slot__icon svg { width: 36px; height: 36px; display: block; }
+  .photo-slot__text { font-size: 0.82rem; line-height: 1.6; letter-spacing: 0.01em; }
+
   /* --- FAQ 抜粋 --- */
   .faq-more { margin-top: var(--space-6); text-align: center; }
 </style>
@@ -545,6 +572,18 @@
       <div class="practice-item">
         <span class="dot" aria-hidden="true"></span>
         <p><strong>物件資料生成</strong>物件紹介資料の作成をAIで効率化できるか試行しています。</p>
+      </div>
+    </div>
+
+    <div class="practice-photo" data-reveal data-reveal-delay="0.15">
+      <div class="photo-slot" role="img" aria-label="自社写真プレースホルダー（オフィス・現場の実写真に差し替え予定）">
+        <span class="photo-slot__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+            <circle cx="12" cy="13" r="3.5"/>
+          </svg>
+        </span>
+        <span class="photo-slot__text">【要差し替え：自社写真（オフィス／現場）】</span>
       </div>
     </div>
   </div>
