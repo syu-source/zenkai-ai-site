@@ -51,3 +51,9 @@
 - [決策] ieYou是提携先非集团成员：company.html在グループ構成之外独立设「テクノロジーパートナー」区块；正式社名（Ma'anshan/亦友科技）小字如实注记；数据处理表述为「案件ごとに契約で明確に取り決め」（不做未授权承诺）
 - cases.html：新增③「開発パートナーの実績」区（badge-partner青色、4卡、注记明示为ieYou実績非当社導入実績）；自社実践区新增AI助手自建panel
 - 检收：截图目视OK、emoji=0、cases.html#partner锚点通（company.html引用）
+
+## 2026-07-26 第11服务「オンプレミスAI構築」追加
+- 新規: services/onpremise-ai.html、assets/icons/onpremise.svg、assets/illustrations/onpremise.svg
+- 接入: 全站23文件footer链接、首页服务卡（11件目）、pricing.html表行+件数表述、PROJECT_PLAN 3.4表
+- 内容要点: 数据不出社内的プライベートAI、HW选定调达代行、引き継ぎ前提、ieYou共同体制注记、补助金可能性（附公募要领注意）、FAQ含「クラウド比性能」诚实回答
+- 检收: 1202引用0死链、emoji=0、SVG valid、桌面+移动截图目视OK

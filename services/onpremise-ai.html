@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>補助金申請サポート｜ZENKAI AI パートナーズ</title>
-<meta name="description" content="デジタル化・AI導入補助金や静岡県・静岡市の各種制度の活用をサポート。他のAI導入サービスと一体で申請設計まで伴走します。">
-<link rel="canonical" href="https://example.com/services/subsidy.html">
+<title>オンプレミスAI構築（プライベートAI）｜ZENKAI AI パートナーズ</title>
+<meta name="description" content="データを外部に出せない企業のために、社内サーバー上で完結するプライベートAI環境を構築。ハードウェア選定・調達から環境構築・運用立ち上げ・引き継ぎまで一貫対応します。">
+<link rel="canonical" href="https://example.com/services/onpremise-ai.html">
 
 <!-- OGP（ページごとに差し替え） -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ZENKAI AI パートナーズ">
-<meta property="og:title" content="補助金申請サポート｜ZENKAI AI パートナーズ">
-<meta property="og:description" content="デジタル化・AI導入補助金や静岡県・静岡市の各種制度の活用をサポートします。">
-<meta property="og:url" content="https://example.com/services/subsidy.html">
+<meta property="og:title" content="オンプレミスAI構築（プライベートAI）｜ZENKAI AI パートナーズ">
+<meta property="og:description" content="データを外部に出せない企業のために、社内サーバー上で完結するプライベートAI環境を構築します。">
+<meta property="og:url" content="https://example.com/services/onpremise-ai.html">
 <meta property="og:image" content="https://example.com/assets/ogp.png">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
@@ -152,35 +152,17 @@
   .process-step h3 { font-size: 1.08rem; color: var(--color-text-heading); margin-bottom: var(--space-2); }
   .process-step p { color: var(--color-text-muted); font-size: 0.92rem; margin: 0; }
 
-  /* --- 活用可能な制度カード --- */
-  .program-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
-    margin-top: var(--space-6);
-  }
-  @media (min-width: 768px) {
-    .program-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .program-card {
+  .partner-note {
+    border: 1px solid rgba(34, 211, 238, 0.35);
+    border-left-width: 4px;
+    background: rgba(34, 211, 238, 0.06);
+    box-shadow: 0 0 28px rgba(34, 211, 238, 0.12);
+    border-radius: var(--radius-md);
     padding: var(--space-5);
-    border-radius: var(--radius-lg);
-    background: var(--glass-bg);
-    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-size: 0.92rem;
   }
-  .program-tag {
-    display: inline-flex;
-    padding: 0.25em 0.85em;
-    border-radius: var(--radius-full);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--color-cyan);
-    background: rgba(34, 211, 238, 0.10);
-    border: 1px solid rgba(34, 211, 238, 0.30);
-    margin-bottom: var(--space-3);
-  }
-  .program-card h3 { font-size: 1rem; color: var(--color-text-heading); margin-bottom: var(--space-2); }
-  .program-card p { font-size: 0.88rem; color: var(--color-text-muted); margin: 0; }
+  .partner-note strong { color: var(--color-cyan); }
 </style>
 </head>
 <body>
@@ -227,7 +209,7 @@
   <ol>
     <li><a href="../index.html">ホーム</a></li>
     <li><a href="../index.html#services">サービス</a></li>
-    <li aria-current="page">補助金申請サポート</li>
+    <li aria-current="page">オンプレミスAI構築</li>
   </ol>
 </nav>
 
@@ -237,17 +219,17 @@
 <section class="page-head bg-glow">
   <div class="container page-head-grid">
     <div class="page-head-text">
-    <div class="service-hero-icon" data-reveal><img src="../assets/icons/subsidy.svg" alt=""></div>
-    <span class="eyebrow" data-reveal data-reveal-delay="0.06">SUBSIDY SUPPORT</span>
-    <h1 class="mt-3" data-reveal data-reveal-delay="0.12">補助金<span class="text-gradient">申請サポート</span></h1>
-    <p class="lead" data-reveal data-reveal-delay="0.18">デジタル化・AI導入補助金など各種制度の活用可能性を整理し、他のAI導入サービスと一体で申請までサポートします。AI活用にかかる実質負担を軽減する、全サービス共通の「潤滑剤」です。</p>
+    <div class="service-hero-icon" data-reveal><img src="../assets/icons/onpremise.svg" alt=""></div>
+    <span class="eyebrow" data-reveal data-reveal-delay="0.06">PRIVATE AI / ON-PREMISE</span>
+    <h1 class="mt-3" data-reveal data-reveal-delay="0.12">オンプレミス<span class="text-gradient">AI構築</span></h1>
+    <p class="lead" data-reveal data-reveal-delay="0.18">ChatGPTなどの外部クラウドAIにデータを出せない——そんな企業のために、貴社のサーバー上で完結するプライベートAI環境を構築します。データも処理も社外に出ません。ハードウェアの選定・調達から環境構築・運用立ち上げまで一貫して対応します。</p>
     <div class="service-hero-tags" data-reveal data-reveal-delay="0.24">
-      <span class="badge badge-on-navy">対象：全業種</span>
+      <span class="badge badge-on-navy">対象：機密情報を扱う全業種</span>
       <a href="#pricing" class="btn btn-secondary btn-sm">料金目安を見る</a>
     </div>
     </div>
     <div class="page-head-media" data-reveal data-reveal-delay="0.3">
-      <img class="page-head-illust" src="../assets/illustrations/subsidy.svg" alt="" width="480" height="360" loading="eager" decoding="async">
+      <img class="page-head-illust" src="../assets/illustrations/onpremise.svg" alt="" width="480" height="360" loading="eager" decoding="async">
     </div>
   </div>
 </section>
@@ -262,19 +244,19 @@
     <div class="card-grid cols-2" data-reveal-group>
       <div class="card issue-card" data-reveal>
         <span class="issue-mark">1</span>
-        <p>補助金の種類が多く、自社がどの制度の対象になるのか分からない。</p>
+        <p>情報漏洩が心配で、ChatGPTなどのクラウドAIの業務利用を社内で許可できない。</p>
       </div>
       <div class="card issue-card" data-reveal>
         <span class="issue-mark">2</span>
-        <p>申請書類の作成には時間と専門知識が必要で、通常業務と並行して進めるのが難しい。</p>
+        <p>取引先との契約や社内規程で、業務データを外部サービスに出すこと自体が禁じられている。</p>
       </div>
       <div class="card issue-card" data-reveal>
         <span class="issue-mark">3</span>
-        <p>公募期間が短く、情報を追いきれないうちに募集が終わってしまう。</p>
+        <p>AIは使いたいが、どこまでを社内に置けばよいのか、判断できる人材がいない。</p>
       </div>
       <div class="card issue-card" data-reveal>
         <span class="issue-mark">4</span>
-        <p>AI導入の相談と補助金申請を別々の会社に依頼するのが手間になっている。</p>
+        <p>AI用のサーバーやGPU（AI処理用の演算装置）の選定・調達を任せられる相手がいない。</p>
       </div>
     </div>
   </div>
@@ -289,41 +271,25 @@
     </div>
     <ul class="deliverable-list" data-reveal-group>
       <li class="glass deliverable-item" data-reveal>
-        <strong>活用可能な補助金制度の整理・ご提案</strong>
-        <span>貴社の導入計画に合わせて、活用できそうな制度をご案内します。</span>
+        <strong>要件整理・モデル選定</strong>
+        <span>扱うデータ・用途・予算を確認し、公開されているAIモデルの中から業務に合うものを選定します。必要十分な最小構成でご提案し、過剰な投資は勧めません。</span>
       </li>
       <li class="glass deliverable-item" data-reveal>
-        <strong>申請書類作成サポート</strong>
-        <span>事業計画書など申請に必要な書類の作成を支援します。</span>
+        <strong>ハードウェア選定・調達</strong>
+        <span>データ量・同時利用人数に合わせてサーバー・GPUの仕様を策定し、購入・設定まで代行します。社内にインフラ担当がいなくても大丈夫です。</span>
       </li>
       <li class="glass deliverable-item" data-reveal>
-        <strong>他サービスと一体での申請設計</strong>
-        <span>AI導入コンサルティングやDX化支援など、他サービスの導入計画と一体で申請を設計します。</span>
+        <strong>プライベートAI環境の構築</strong>
+        <span>社内ネットワークの中で完結する構成で、文書検索・要約・文書処理などのAI環境を構築します。データも処理結果も社外には出ません。</span>
       </li>
       <li class="glass deliverable-item" data-reveal>
-        <strong>相談窓口のご案内</strong>
-        <span>静岡県・静岡市の担当窓口など、制度に関する公的な相談先の情報をご案内します。</span>
+        <strong>運用立ち上げ・引き継ぎ</strong>
+        <span>監視・アップデートの手順を整備し、貴社のチームが自分たちで運用できる状態までお渡しします。必要に応じて保守・伴走支援も選べます。</span>
       </li>
     </ul>
-
-    <div class="program-grid" data-reveal-group>
-      <div class="program-card" data-reveal>
-        <span class="program-tag">国</span>
-        <h3>デジタル化・AI導入補助金2026</h3>
-        <p>中小企業のITツール・AI導入を後押しする国の制度です。</p>
-      </div>
-      <div class="program-card" data-reveal>
-        <span class="program-tag">静岡県</span>
-        <h3>収益力向上補助金 DX枠</h3>
-        <p>県内中小企業のDX投資を支援する静岡県独自の制度です。</p>
-      </div>
-      <div class="program-card" data-reveal>
-        <span class="program-tag">静岡市</span>
-        <h3>デジタル活用事業補助金</h3>
-        <p>静岡市内の中小企業のデジタル活用を後押しする市の制度です。</p>
-      </div>
+    <div class="partner-note mt-6" data-reveal>
+      <strong>開発体制：</strong>本サービスは、オンプレミスAI構築の実績を持つ技術パートナー <a href="../cases.html#partner">ieYou Tech</a> との共同体制で提供します。お客様の業務データの取り扱い範囲は、案件ごとに契約で明確に取り決めます。
     </div>
-    <p class="note mt-4" data-reveal>各制度の概要をご紹介するものであり、対象要件・補助率・金額等の詳細は年度や公募回によって変わります。最新の公募要領をご確認ください。</p>
   </div>
 </section>
 
@@ -337,19 +303,19 @@
     <ol class="process-list" data-reveal-group>
       <li class="process-step" data-reveal>
         <span class="process-num">1</span>
-        <div><h3>現状・導入計画ヒアリング</h3><p>導入したい内容とスケジュールをお聞きします。</p></div>
+        <div><h3>要件・制約の確認</h3><p>扱うデータの種類、社内規程・契約上の制約、既存のネットワーク環境を確認します。</p></div>
       </li>
       <li class="process-step" data-reveal>
         <span class="process-num">2</span>
-        <div><h3>活用可能制度の選定</h3><p>条件に合いそうな制度を整理し、優先順位をご提案します。</p></div>
+        <div><h3>構成設計・お見積り</h3><p>モデル・ハードウェア・ネットワーク構成を設計し、導入・運用コストを見積ります。</p></div>
       </li>
       <li class="process-step" data-reveal>
         <span class="process-num">3</span>
-        <div><h3>申請書類作成支援</h3><p>事業計画書などの作成をサポートし、申請までを伴走します。</p></div>
+        <div><h3>構築・テスト</h3><p>ハードウェアを調達・設定し、実際の業務データで精度と使い勝手を検証します。</p></div>
       </li>
       <li class="process-step" data-reveal>
         <span class="process-num">4</span>
-        <div><h3>申請・報告サポート</h3><p>申請後の手続きや、採択後の実績報告についてもご相談いただけます。</p></div>
+        <div><h3>運用立ち上げ・引き継ぎ</h3><p>運用手順を整備し、担当者への引き継ぎまで行います。以後の保守・伴走もご相談いただけます。</p></div>
       </li>
     </ol>
   </div>
@@ -366,11 +332,11 @@
       <table class="ds-table">
         <thead><tr><th>内容</th><th>料金目安</th></tr></thead>
         <tbody>
-          <tr><td>補助金申請サポート</td><td class="cell-accent">成功報酬等・要相談</td></tr>
+          <tr><td>オンプレミスAI構築（プライベートAI）</td><td class="cell-accent">要相談（構成により変動）</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="note mt-4" data-reveal>内容により変動します。まずは無料診断でお見積りください。</p>
+    <p class="note mt-4" data-reveal>サーバー等のハードウェア費用は別途実費となります。導入内容によっては補助金の対象となる場合があります（※最新の公募要領をご確認ください）。まずは無料診断でお見積りください。</p>
   </div>
 </section>
 
@@ -383,16 +349,16 @@
     </div>
     <div class="faq-list" data-reveal-group>
       <details class="faq-item" open data-reveal>
-        <summary><span><span class="faq-q-label">Q.</span>補助金申請だけの相談も可能ですか。</span></summary>
-        <p class="faq-answer">はい。AI導入の他サービスとセットでなくても、補助金申請サポート単体でのご相談を承っております。</p>
+        <summary><span><span class="faq-q-label">Q.</span>クラウドAIと比べて性能は落ちませんか。</span></summary>
+        <p class="faq-answer">用途によります。社内文書の検索・要約や定型文書の処理など、多くの業務用途では公開モデルで十分な精度が得られるケースが増えています。要件整理の段階で、求める精度に届くかを確認したうえでご提案します。届かない場合は、その旨を正直にお伝えします。</p>
       </details>
       <details class="faq-item" data-reveal>
-        <summary><span><span class="faq-q-label">Q.</span>不採択になった場合の費用はどうなりますか。</span></summary>
-        <p class="faq-answer">費用の考え方は契約形態（成功報酬型か着手金型かなど）によって異なります。ご契約前に条件を明確にご説明します。</p>
+        <summary><span><span class="faq-q-label">Q.</span>どのくらいの規模のサーバーが必要ですか。</span></summary>
+        <p class="faq-answer">目的と同時利用人数によります。中小企業の一般的な用途であれば、大規模な設備ではなく、適切に構成された小規模なサーバーで足りることがほとんどです。過剰な構成はご提案しません。</p>
       </details>
       <details class="faq-item" data-reveal>
-        <summary><span><span class="faq-q-label">Q.</span>どの補助金が使えるか自社では分かりません。</span></summary>
-        <p class="faq-answer">多くのお客様が同じ状況からご相談いただいています。まずは導入したい内容をお聞かせいただければ、活用可能性のある制度を整理してご案内します。</p>
+        <summary><span><span class="faq-q-label">Q.</span>構築後の運用は自社でできますか。</span></summary>
+        <p class="faq-answer">引き継ぎまでを前提に構築します。運用手順書の整備と担当者への引き継ぎを行い、ご希望に応じて保守契約やAIエンジニアの常駐・伴走支援も組み合わせられます。</p>
       </details>
     </div>
   </div>
@@ -409,20 +375,20 @@
       <div class="card" data-tilt data-reveal>
         <div class="card-icon"><img src="../assets/icons/consulting.svg" alt=""></div>
         <p class="card-title">AI導入コンサルティング</p>
-        <p class="card-text">導入計画の段階から補助金活用を組み込んで検討できます。</p>
+        <p class="card-text">クラウドとオンプレミスのどちらが適切かの判断から相談したい場合はこちら。</p>
         <a href="consulting.html" class="card-link">詳しく見る &rsaquo;</a>
       </div>
       <div class="card" data-tilt data-reveal>
-        <div class="card-icon"><img src="../assets/icons/realestate.svg" alt=""></div>
-        <p class="card-title">不動産AI活用パック</p>
-        <p class="card-text">不動産会社様のAI活用パック導入にも補助金を組み合わせられます。</p>
-        <a href="real-estate-ai.html" class="card-link">詳しく見る &rsaquo;</a>
+        <div class="card-icon"><img src="../assets/icons/engineer.svg" alt=""></div>
+        <p class="card-title">AIエンジニア常駐・伴走支援</p>
+        <p class="card-text">構築後の活用・定着フェーズは常駐・伴走支援でサポートします。</p>
+        <a href="engineer-support.html" class="card-link">詳しく見る &rsaquo;</a>
       </div>
       <div class="card" data-tilt data-reveal>
-        <div class="card-icon"><img src="../assets/icons/training.svg" alt=""></div>
-        <p class="card-title">生成AI研修・社内定着支援</p>
-        <p class="card-text">研修費用が補助金の対象となる場合もあります。あわせてご相談ください。</p>
-        <a href="training.html" class="card-link">詳しく見る &rsaquo;</a>
+        <div class="card-icon"><img src="../assets/icons/subsidy.svg" alt=""></div>
+        <p class="card-title">補助金申請サポート</p>
+        <p class="card-text">設備投資を伴う導入は補助金の対象となる場合があります。あわせてご相談ください。</p>
+        <a href="subsidy.html" class="card-link">詳しく見る &rsaquo;</a>
       </div>
     </div>
   </div>
@@ -434,7 +400,7 @@
     <div class="cta-block" data-reveal>
       <span class="section-label">Get Started</span>
       <h2>まずは無料のAI診断から</h2>
-      <p>導入計画と合わせて、活用できそうな補助金についても無料診断でご案内します。</p>
+      <p>貴社の条件でオンプレミスAIが成り立つかどうか、無料診断で一緒に整理します。</p>
       <div class="cta-actions">
         <a href="../lp/index.html" class="btn btn-primary">無料AI診断を申し込む</a>
         <a href="../contact.html" class="btn btn-secondary">無料相談を予約する</a>
