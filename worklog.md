@@ -64,3 +64,10 @@
 - 全站改名：補助金申請サポート→補助金活用サポート（25文件）
 - subsidy.html重写：当社担当＝制度整理+技术要件整理+橋渡し（无料相談から）／提携専門家担当＝书类作成支援・申请手续（费用另计、契约前明示）；明记「当社は申請書類の作成代行・申請代行は行いません」；役割分担notice、FAQ、進め方、料金表两行制同步更新
 - index卡片/pricing表行/PROJECT_PLAN 3.4同步更新
+
+## 2026-07-31 GitHub Pages临时公开链接加密码门
+- 新規: gate.html（密码输入页、单体自包含不依赖design-system.css、noindex）、js/gate.js（会话级门禁）
+- 机制: 仅在 *.github.io 域名生效（本地预览/本番域名不受影响）；密码以SHA-256哈希存码内不存明文；sessionStorage记住会话；gate.html带open redirect防护（仅允许站内绝对路径）
+- 接入: 全22公开页<head>最前部插入gate.js（templates 3文件不接入）
+- 新規: .gitignore（handover/ 不push到公开仓库——内含提携先未公开信息；.DS_Store）
+- [注意] 静态托管的前端门禁可被读源码绕过，仅作临时预览的简易防窥，非正式安全措施

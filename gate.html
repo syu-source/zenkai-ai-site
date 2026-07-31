@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>閲覧パスワード｜ZENKAI AI パートナーズ（プレビュー）</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>
+/* ゲートページ専用スタイル（design-system.cssには依存しない・単体で完結） */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  background: #0D1424;
+  color: #E8EDF6;
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP", Meiryo, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.gate-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+}
+.gate-card h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+.gate-card p.lead {
+  font-size: 13px;
+  color: #9AA7BD;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.gate-form { display: flex; flex-direction: column; gap: 12px; }
+.gate-form input[type="password"] {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  color: #E8EDF6;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  outline: none;
+  text-align: center;
+  letter-spacing: 0.08em;
+}
+.gate-form input[type="password"]:focus { border-color: #4DA3FF; }
+.gate-form button {
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #0B1E3A;
+  background: linear-gradient(135deg, #4DA3FF, #7CE0D3);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.gate-form button:hover { opacity: 0.9; }
+.gate-error {
+  font-size: 12px;
+  color: #FF7A8A;
+  min-height: 18px;
+}
+.gate-note {
+  margin-top: 24px;
+  font-size: 11px;
+  color: #6B7893;
+  line-height: 1.7;
+}
+</style>
+</head>
+<body>
+<main class="gate-card">
+  <h1>閲覧パスワード</h1>
+  <p class="lead">このサイトは公開前のプレビュー版です。<br>お知らせしたパスワードを入力してください。</p>
+  <form class="gate-form" id="gateForm" autocomplete="off">
+    <input type="password" id="gatePass" placeholder="パスワード" autofocus required>
+    <div class="gate-error" id="gateError"></div>
+    <button type="submit">閲覧する</button>
+  </form>
+  <p class="gate-note">ZENKAI AI パートナーズ（仮）サイト プレビュー</p>
+</main>
+<script>
+(function () {
+  var HASH = 'd4355bd37616187bd0c655ea8fa90efe6ee3123f54df2bddfdd8dc2e05e840a1';
+  var form = document.getElementById('gateForm');
+  var input = document.getElementById('gatePass');
+  var errEl = document.getElementById('gateError');
+
+  function dest() {
+    var to = new URLSearchParams(location.search).get('to') || '';
+    to = decodeURIComponent(to);
+    /* オープンリダイレクト防止: サイト内の絶対パスのみ許可 */
+    if (to.charAt(0) !== '/' || to.charAt(1) === '/') return '/zenkai-ai-site/';
+    return to;
+  }
+
+  function sha256hex(str) {
+    var data = new TextEncoder().encode(str);
+    return crypto.subtle.digest('SHA-256', data).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    sha256hex(input.value).then(function (hex) {
+      if (hex === HASH) {
+        try { sessionStorage.setItem('zk-gate', 'ok'); } catch (err) {}
+        location.replace(dest());
+      } else {
+        errEl.textContent = 'パスワードが違います。';
+        input.value = '';
+        input.focus();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
