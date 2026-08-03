@@ -1,0 +1,3 @@
+# さくらサーバ用（GitHub Pagesでは無視される）
+# ディレクトリ一覧の表示を禁止
+Options -Indexes

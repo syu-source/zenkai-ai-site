@@ -97,11 +97,16 @@ body {
   var input = document.getElementById('gatePass');
   var errEl = document.getElementById('gateError');
 
+  function siteRoot() {
+    if (/\.sakura\.ne\.jp$/.test(location.hostname)) return '/zenkai-os04/';
+    return '/zenkai-ai-site/';
+  }
+
   function dest() {
     var to = new URLSearchParams(location.search).get('to') || '';
     to = decodeURIComponent(to);
     /* オープンリダイレクト防止: サイト内の絶対パスのみ許可 */
-    if (to.charAt(0) !== '/' || to.charAt(1) === '/') return '/zenkai-ai-site/';
+    if (to.charAt(0) !== '/' || to.charAt(1) === '/') return siteRoot();
     return to;
   }
 

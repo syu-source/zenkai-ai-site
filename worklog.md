@@ -72,3 +72,26 @@
 - 新規: .gitignore（handover/ 不push到公开仓库——内含提携先未公开信息；.DS_Store）
 - [注意] 静态托管的前端门禁可被读源码绕过，仅作临时预览的简易防窥，非正式安全措施
 - 检收（真实浏览器实测GitHub Pages线上）: 直访子页被拦截跳gate、错误密码显示「パスワードが違います。」、正确密码跳回原请求页、同会话再访问首页不再要密码。附带确认：three.js粒子背景在真实浏览器正常渲染（此前headless未确认项就此关闭）
+
+## 2026-07-31 二人协作体制搭建（同事另一台电脑加入开发）
+- [決策] 用户确认：同事电脑共用 syu-source GitHub账号（gh auth login同号）；公开仓库内部文档（含ライツ社名的worklog等）**不清理维持现状**（用户知悉公开状态并接受）；现有公开仓库直接作为协作主仓库
+- 新規: .claude/skills/handover/、.claude/skills/start/（个人技能复制进项目随仓库同步，两台电脑都能用/handover /start）
+- 变更: .gitignore解除handover/忽略（交接书是跨电脑传上下文的桥梁，随仓库共享；敏感度与用户决定保留的worklog同级）
+- 新規: docs/协作开发指南.md（同事上手步骤：gh登录/克隆/git config真名/Claude Code登录/日常pull-start-handover-push流程/注意事项）
+- CLAUDE.md新增「共同開発規則」节（开工pull收工push、/handover→/start交接流、共号下git config user.name区分提交人、秘密不入仓）
+- 本机git身份设定: repo-local user.name朱文彬 / info@zenkai-fudosan.com（此前为主机名自动生成值）
+- [注意] 预览密码故意不写入任何仓库文件（口头传达）；同一Claude账号两人共享用量限额
+
+## 2026-07-31 さくらサーバ部署准备（挂正式域名前的服务器落地）
+- 用户提供ABC BusinessHub服务器交接文档＋Windows侧公钥；本机无对应私钥→按交接文档「每位开发者自己的密钥」原则，生成本机专用部署密钥 ~/.ssh/zenkai_sakura（ed25519）、~/.ssh/config 加 Host zenkai-sakura 别名
+- 部署目标: /home/abc-materia/www/zenkai-ai/（仮URL https://abc-materia.sakura.ne.jp/zenkai-ai/；businesshub项目目录不碰）
+- gate.js/gate.html 多host化: sakura.ne.jp 上也启用密码门（站点ROOT按hostname解析）；将来挂正式域名→两个规则都不匹配→密码门自动失效（即正式公开）
+- 新規: .htaccess（Options -Indexes；GitHub Pages侧被忽略无害）、scripts/deploy-sakura.sh（白名单staging＋rsync --delete镜像＋内部文档混入自检，CLAUDE.md/worklog/handover/research/docs/templates/.git绝不上服务器）
+- .gitignore追加: ABC_BusinessHub_*.md / id_ed25519*.pub（服务器基础设施文档不入公开仓库）
+- staging本地验证: 60文件、0内部文档混入
+- 公钥授权: 用户在Windows侧（已有可用密钥）执行一条ssh命令把Mac新公钥追加到服务器authorized_keys，Mac即获免密访问
+- 部署完成并检收（2026-07-31 14:35）: 60文件rsync到位；curl全200、css/目录列表403（.htaccess生效无500）；真实浏览器实测＝sakura域名密码门生效→正确密码放行跳回原页→首页three.js粒子正常→services子页CSS/插画/相对路径全部正常
+- 上线URL: https://abc-materia.sakura.ne.jp/zenkai-ai/（正式域名后续在さくら控制面板指向 www/zenkai-ai 文件夹）
+- [決策] 文件夹改名 zenkai-ai→**zenkai-os04**（用户命名体系: 既有zenkai-os=os01、本站=os04；拼法用户选定zenkai-os04）。服务器mv＋gate.js/gate.html的sakura ROOT改/zenkai-os04/＋deploy脚本REMOTE_DIR同步→重部署
+- 改名后检收: 新URL全200、旧URL 404、未授权访问正确跳/zenkai-os04/gate.html、密码放行跳回原请求页
+- **最终URL: https://abc-materia.sakura.ne.jp/zenkai-os04/**（挂正式域名时指向 www/zenkai-os04）
