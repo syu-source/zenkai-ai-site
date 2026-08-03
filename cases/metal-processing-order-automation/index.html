@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="../../js/gate.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>手入力から、受注・生産進捗をひとつに｜導入事例｜ZENKAI AI パートナーズ</title>
+<meta name="description" content="FAX注文の読取から、生産数量、検査合格数、不良率までを一つの画面で把握できる仕組みを構築しました。">
+<link rel="canonical" href="https://zenkai-os.jp/cases/metal-processing-order-automation/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ZENKAI AI パートナーズ">
+<meta property="og:title" content="手入力から、受注・生産進捗をひとつに">
+<meta property="og:description" content="FAX注文の読取から、生産数量、検査合格数、不良率までを一つの画面で把握できる仕組みを構築しました。">
+<meta property="og:url" content="https://zenkai-os.jp/cases/metal-processing-order-automation/">
+<meta property="og:image" content="https://zenkai-os.jp/assets/ogp.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/design-system.css">
+<style>
+  .badge-real { color: var(--color-tea); background: rgba(62,156,110,.10); border-color: currentColor; }
+  .badge-scenario { color: var(--color-warning); background: rgba(224,164,88,.10); border-color: currentColor; }
+
+  .case-detail-hero { padding: clamp(4.5rem, 9vw, 8rem) 0 clamp(3rem, 6vw, 5rem); position: relative; overflow: hidden; }
+  .case-detail-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 80% 10%, rgba(34,211,238,.14), transparent 38%), radial-gradient(circle at 18% 70%, rgba(62,156,110,.10), transparent 34%); pointer-events: none; }
+  .case-detail-hero .container { position: relative; z-index: 1; }
+  .case-kicker { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem; margin-bottom: var(--space-5); }
+  .case-detail-hero h1 { max-width: 980px; }
+  .case-detail-lead { max-width: 780px; color: var(--color-text); font-size: clamp(1rem, 1.7vw, 1.2rem); line-height: 1.9; margin-top: var(--space-5); }
+  .case-scope { display: flex; align-items: flex-start; gap: .85rem; max-width: 980px; margin-top: var(--space-5); padding: .9rem 1rem; border: 1px solid rgba(34,211,238,.22); border-radius: var(--radius-md); background: rgba(34,211,238,.045); }
+  .case-scope dt { flex: 0 0 auto; color: var(--color-cyan); font-size: .76rem; font-weight: 700; letter-spacing: .08em; }
+  .case-scope dd { margin: 0; color: var(--color-text); font-size: .86rem; line-height: 1.7; }
+  .case-trust-note-detail { max-width: 980px; margin-top: var(--space-4); padding-left: .8rem; border-left: 2px solid rgba(62,156,110,.6); color: var(--color-text-muted); font-size: .76rem; line-height: 1.8; }
+  .case-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+  .case-article { display: grid; gap: var(--space-7); }
+  .case-section { padding: clamp(1.4rem, 3vw, 2.2rem); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); background: var(--glass-bg); }
+  .case-section h2 { font-size: clamp(1.35rem, 2.4vw, 1.8rem); margin-bottom: var(--space-4); }
+  .case-section p { color: var(--color-text); line-height: 2; }
+  .case-section p + p { margin-top: 1rem; }
+  .case-aside { position: sticky; top: 104px; padding: var(--space-5); border: 1px solid rgba(34,211,238,.28); border-radius: var(--radius-lg); background: rgba(13,20,36,.78); box-shadow: 0 18px 50px rgba(0,0,0,.2); }
+  .case-aside strong { display: block; color: var(--color-text-heading); margin-bottom: .65rem; }
+  .case-aside p { color: var(--color-text-muted); font-size: .9rem; line-height: 1.8; }
+  .case-aside .btn { width: 100%; margin-top: var(--space-4); }
+  .case-detail-cover,
+  .case-photo {
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    background: var(--glass-bg);
+  }
+  .case-detail-cover { max-width: 980px; margin-top: var(--space-7); }
+  .case-detail-cover img,
+  .case-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .case-detail-cover img { aspect-ratio: 16 / 9; object-fit: cover; }
+  .case-photo figcaption,
+  .case-detail-cover figcaption {
+    padding: .85rem 1rem;
+    color: var(--color-text-muted);
+    font-size: .82rem;
+    line-height: 1.7;
+  }
+  .case-photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+  .case-photo-gallery .case-photo img { aspect-ratio: 3 / 2; }
+  .case-meeting-photo { margin-top: var(--space-2); }
+  .case-meeting-photo img { aspect-ratio: 16 / 9; }
+  .case-placeholder-label { display: inline-flex; margin: .85rem 1rem 0; padding: .28rem .55rem; border: 1px solid rgba(224,164,88,.35); border-radius: 999px; color: var(--color-warning); background: rgba(224,164,88,.08); font-size: .72rem; font-weight: 700; }
+  .scenario-note { margin-top: var(--space-5); padding: var(--space-4); border-left: 3px solid var(--color-warning); background: rgba(224,164,88,.08); color: var(--color-text); line-height: 1.8; }
+  .back-link { display: inline-flex; align-items: center; gap: .45rem; color: var(--color-cyan); text-decoration: none; font-weight: 700; }
+  @media (max-width: 860px) {
+    .case-layout { grid-template-columns: 1fr; }
+    .case-aside { position: static; }
+    .case-photo-gallery { grid-template-columns: 1fr; }
+  }
+
+</style>
+</head>
+<body>
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="../../index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
+      <img src="../../assets/logo.svg" alt="ZENKAI AI パートナーズ" width="160" height="34">
+    </a>
+    <nav class="nav-primary" aria-label="メインナビゲーション">
+      <ul>
+        <li><a href="../../index.html">ホーム</a></li>
+        <li><a href="../../index.html#services">サービス</a></li>
+        <li><a href="../../index.html#industries">業界別</a></li>
+        <li><a href="../../cases.html">導入事例</a></li>
+        <li><a href="../../pricing.html">料金</a></li>
+        <li><a href="../../company.html">会社概要</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="../../contact.html" class="btn btn-primary btn-sm header-cta">無料相談</a>
+      <button type="button" class="hamburger" aria-label="メニューを開く" aria-controls="navMobile" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<nav class="nav-mobile" id="navMobile" aria-label="モバイルナビゲーション" data-lenis-prevent>
+  <ul>
+    <li><a href="../../index.html">ホーム</a></li>
+    <li><a href="../../index.html#services">サービス</a></li>
+    <li><a href="../../index.html#industries">業界別</a></li>
+    <li><a href="../../cases.html">導入事例</a></li>
+    <li><a href="../../pricing.html">料金</a></li>
+    <li><a href="../../company.html">会社概要</a></li>
+  </ul>
+  <a href="../../contact.html" class="btn btn-primary">無料相談</a>
+</nav>
+<nav class="container breadcrumb" aria-label="パンくずリスト">
+  <ol>
+    <li><a href="../../index.html">ホーム</a></li>
+    <li><a href="../../cases.html">導入事例</a></li>
+    <li aria-current="page">手入力から、受注・生産進捗をひとつに</li>
+  </ol>
+</nav>
+<main>
+  <section class="case-detail-hero">
+    <div class="container">
+      <div class="case-kicker">
+        <span class="badge badge-real">導入事例</span>
+        <span class="case-field">製造業（金属加工）</span>
+      </div>
+      <h1>手入力から、受注・生産進捗をひとつに</h1>
+      <p class="case-detail-lead">FAX注文の読取から、生産数量、検査合格数、不良率までを一つの画面で把握できる仕組みを構築しました。</p>
+      <dl class="case-scope" data-case-scope="metal-processing-order-automation">
+        <dt>支援範囲</dt>
+        <dd>現場調査／要件定義／システム開発／運用設計</dd>
+      </dl>
+      <p class="case-trust-note-detail">掲載している事例は、実際のプロジェクト経験に基づくものです。守秘義務に配慮し、社名・画面内データ・一部の数値を非公開または加工しています。掲載画像は業務内容をもとに再構成したイメージです。</p>
+
+
+      <figure class="case-detail-cover" data-case-photo="metal-factory-display.webp">
+        <img src="../../assets/cases/metal-factory-display.webp?v=20260801a" alt="金属加工工場の大型モニターに本日の生産進捗を表示する現場" width="1536" height="1024" loading="eager" decoding="async">
+        <figcaption>同じ進捗データを、現場から確認しやすい大型モニターへ表示します。</figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container case-layout">
+      <article class="case-article">
+
+          <section class="case-section" data-reveal>
+            <h2>課題</h2>
+            <p>取引先ごとに異なるFAX注文書を担当者が手入力し、受注情報と現場の生産状況が別々に管理されていました。</p>
+            <p>例えば1万個の注文に対して1箱200個で生産する場合、何箱完成し、何個が検査を通過し、不良品が何個発生したかをリアルタイムに共有できませんでした。</p>
+          </section>
+          <section class="case-section" data-reveal>
+            <h2>支援内容</h2>
+            <p>部長、課長、事務担当者、現場作業者へヒアリングし、それぞれの要望を整理して共通の運用ルールにまとめました。</p>
+            <p>AI-OCRでFAX注文書を読み取り、確認後に受注データへ登録。現場では箱単位の完成数と検査結果を簡単に入力できるようにしました。</p>
+            <p>工場の大型画面では、受注数量、完成数量、完成進捗、検査合格数、検査進捗、不良品数、不良率を選択して表示できるようにしました。</p>
+          </section>
+          <div class="case-photo-gallery" aria-label="導入事例の業務イメージ">
+
+            <figure class="case-photo " data-case-photo="metal-ai-order-intake.webp">
+              <img src="../../assets/cases/metal-ai-order-intake.webp?v=20260801a" alt="FAXとメールの注文内容をAI-OCRで読み取る匿名の業務イメージ" width="1536" height="1024" loading="lazy" decoding="async">
+
+              <figcaption>取引先ごとに異なる注文内容を読み取り、受注入力候補を自動生成します。</figcaption>
+            </figure>
+            <figure class="case-photo " data-case-photo="metal-production-dashboard.webp">
+              <img src="../../assets/cases/metal-production-dashboard.webp?v=20260801a" alt="受注・生産・検査進捗を同じ注文データで確認する管理画面" width="1536" height="1024" loading="lazy" decoding="async">
+
+              <figcaption>生産完了、検査合格、検査待ち、不良率を注文ごとに確認できる管理画面。</figcaption>
+            </figure>
+          </div>
+          <section class="case-section" data-reveal>
+            <h2>導入後</h2>
+            <p>事務所と現場が同じ受注情報と進捗を確認でき、電話や紙による進捗確認が減りました。</p>
+            <p>納期遅延の兆候、検査待ち、不良率の変化を早い段階で把握し、優先順位を調整できる運用へ移行しました。</p>
+          </section>
+
+            <figure class="case-photo case-meeting-photo" data-case-photo="metal-client-meeting-placeholder.webp">
+              <img src="../../assets/cases/metal-client-meeting-placeholder.webp?v=20260801a" alt="システム導入後に確認を行う両社責任者の匿名ミーティングイメージ" width="1536" height="1024" loading="lazy" decoding="async">
+              <span class="case-placeholder-label">お客様との写真（差し替え予定）</span>
+              <figcaption>後日、ZENKAI OS代表とお客様責任者の合照へ差し替え予定。</figcaption>
+            </figure>
+        <a class="back-link" href="../../cases.html">← 導入事例一覧へ戻る</a>
+      </article>
+      <aside class="case-aside">
+        <strong>同じような課題をお持ちですか</strong>
+        <p>業務の流れを確認し、現場に合う改善方法を一緒に整理します。まずはメールでもご相談いただけます。</p>
+        <a class="btn btn-primary" href="../../contact.html">無料相談へ</a>
+        <a class="btn btn-secondary" href="mailto:ai@zenkai-os.jp">ai@zenkai-os.jp</a>
+      </aside>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../../index.html" class="header-logo" aria-label="ZENKAI AI パートナーズ トップへ">
+          <img src="../../assets/logo-white.svg" alt="ZENKAI AI パートナーズ" width="150" height="32">
+        </a>
+        <p>現場を知っているAI会社。不動産・製造業の実業経験を活かし、静岡の中小企業のAI導入・DX化を伴走支援します。</p>
+        <span class="badge badge-shizuoka mt-4">静岡発</span>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">メニュー</p>
+        <ul class="footer-links">
+          <li><a href="../../index.html">ホーム</a></li>
+          <li><a href="../../cases.html">導入事例</a></li>
+          <li><a href="../../pricing.html">料金目安</a></li>
+          <li><a href="../../company.html">会社概要</a></li>
+          <li><a href="../../contact.html">お問い合わせ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">運営会社</p>
+        <dl class="footer-company">
+          <dt>会社名</dt><dd>ZENKAI不動産株式会社</dd>
+          <dt>所在地</dt><dd>静岡市駿河区中田1-1-8<br>リブロBLDG 301</dd>
+          <dt>営業時間</dt><dd>9:00〜18:00（水曜定休）</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2026 ZENKAI不動産株式会社</p>
+      <div class="footer-legal"><a href="../../privacy.html">プライバシーポリシー</a></div>
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.25/dist/lenis.min.js"></script>
+<script src="../../js/main.js"></script>
+<script src="../../js/effects.js"></script>
+</body>
+</html>

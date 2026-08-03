@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /
+
+# OS04 is a password-protected preview. Replace with Allow: / when the approved
+# build is deployed to the formal domain.
+Sitemap: https://zenkai-os.jp/sitemap.xml

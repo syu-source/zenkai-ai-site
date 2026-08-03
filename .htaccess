@@ -1,3 +1,18 @@
 # さくらサーバ用（GitHub Pagesでは無視される）
 # ディレクトリ一覧の表示を禁止
 Options -Indexes
+
+# HTMLは更新確認を優先し、古い事例ページが残らないようにする
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow, noarchive"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  <FilesMatch "\.(?:html?)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>

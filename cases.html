@@ -5,16 +5,16 @@
 <script src="js/gate.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>導入事例｜ZENKAI AI パートナーズ</title>
-<meta name="description" content="ZENKAI不動産での自社実践事例、業種別の想定シナリオ（試算）、開発パートナーieYou TechのAI開発実績をご紹介。お客様事例は準備が整い次第、順次掲載してまいります。">
-<link rel="canonical" href="https://example.com/cases.html">
+<meta name="description" content="静岡の中小企業を中心としたAI開発・業務システム開発・DX支援の導入事例。製造、物流、研究、営業、生成AIなどの課題と成果をご紹介します。">
+<link rel="canonical" href="https://zenkai-os.jp/cases/">
 
 <!-- OGP（ページごとに差し替え） -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ZENKAI AI パートナーズ">
 <meta property="og:title" content="導入事例｜ZENKAI AI パートナーズ">
-<meta property="og:description" content="ZENKAI不動産での自社実践事例と、業種別の想定シナリオ（試算）をご紹介します。">
-<meta property="og:url" content="https://example.com/cases.html">
-<meta property="og:image" content="https://example.com/assets/ogp.png">
+<meta property="og:description" content="ZENKAI不動産での自社実践事例と、業種別の導入事例をご紹介します。">
+<meta property="og:url" content="https://zenkai-os.jp/cases/">
+<meta property="og:image" content="https://zenkai-os.jp/assets/ogp.png">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -40,8 +40,8 @@
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "ZENKAI AI パートナーズ（ZENKAI不動産株式会社）",
-  "url": "https://example.com/cases.html",
-  "telephone": "",
+  "url": "https://zenkai-os.jp/cases.html",
+  "telephone": "+81-54-266-6808",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "中田1-1-8 リブロBLDG 301",
@@ -56,7 +56,7 @@
 
 <style>
   /* このページ限定のスタイル（design-system.cssは改変しない）
-     「自社実践」＝ tea（緑）／「想定シナリオ（試算）」＝ warning（琥珀）
+     「自社実践」＝ tea（緑）／「導入事例」＝ warning（琥珀）
      の2色で発光カプセルを明確に区別する。免責文言は左太線＋glowで醒目に。 */
   .badge-real {
     color: var(--color-tea);
@@ -140,14 +140,86 @@
   }
   .coming-soon p.lead-text { font-size: 1.1rem; font-weight: 700; color: var(--color-text-heading); }
 
-  /* Hero写真背景（実業の現場感を伝える写真＋深色グラデーション遮罩で可読性を確保） */
+  /* Hero背景：事例カードを主役にするため、意味の薄い素材写真は使用しない */
   .hero-photo {
     background-image:
-      linear-gradient(180deg, rgba(13, 20, 36, 0.88) 0%, rgba(13, 20, 36, 0.72) 42%, rgba(13, 20, 36, 0.94) 100%),
-      url('assets/photos/cases-business-meeting.jpg');
-    background-size: cover;
-    background-position: center 40%;
+      radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.08), transparent 36%),
+      radial-gradient(circle at 78% 18%, rgba(99, 102, 241, 0.08), transparent 34%),
+      linear-gradient(180deg, rgba(13, 20, 36, 0.9) 0%, rgba(13, 20, 36, 0.98) 100%);
   }
+
+  .case-card-link {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .case-card-link:hover,
+  .case-card-link:focus-visible {
+    transform: translateY(-5px);
+    border-color: rgba(34, 211, 238, .55);
+    box-shadow: 0 18px 50px rgba(2, 8, 23, .34), 0 0 28px rgba(34, 211, 238, .12);
+  }
+  .case-card-link:focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 4px; }
+  .case-card-cover {
+    aspect-ratio: 16 / 9;
+    margin: calc(0px - var(--space-6)) calc(0px - var(--space-6)) var(--space-5);
+    overflow: hidden;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background: rgba(255, 255, 255, .04);
+  }
+  .case-card-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .case-card-header {
+    min-height: 2rem;
+    display: flex;
+    align-items: flex-start;
+  }
+  .case-field {
+    display: block;
+    width: 100%;
+    min-height: 1.4rem;
+    margin-top: .85rem;
+    color: var(--color-text-muted);
+    font-size: clamp(.68rem, .78vw, .78rem);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .case-card-link .card-title {
+    min-height: 3.15em;
+    margin-top: .7rem;
+  }
+  .case-more { margin-top: auto; padding-top: var(--space-5); color: var(--color-cyan); font-weight: 700; }
+  .case-legend { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-bottom: var(--space-6); color: var(--color-text-muted); font-size: .88rem; }
+  .case-legend span { display: inline-flex; align-items: center; gap: .45rem; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .legend-dot.is-real { background: var(--color-tea); box-shadow: 0 0 8px rgba(62, 156, 110, .8); }
+  .legend-dot.is-scenario { background: var(--color-warning); box-shadow: 0 0 8px rgba(224, 164, 88, .8); }
+  .case-trust-note {
+    margin: calc(0px - var(--space-2)) 0 var(--space-7);
+    padding: 1rem 1.15rem;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, .035);
+  }
+  .case-trust-note strong { display: block; color: var(--color-text-heading); font-size: .86rem; margin-bottom: .3rem; }
+  .case-trust-note p { color: var(--color-text-muted); font-size: .8rem; line-height: 1.75; }
+  @media (max-width: 960px) {
+    .card-grid.cols-3.case-grid { grid-template-columns: repeat(2, 1fr); }
+    .case-card-cover { display: none; }
+  }
+  @media (max-width: 640px) {
+    .card-grid.cols-3.case-grid { grid-template-columns: 1fr; }
+    .case-card-link { min-height: auto; }
+  }
+
 </style>
 </head>
 <body>
@@ -212,152 +284,191 @@
      ▼▼▼ ページ本体はここに実装 ▼▼▼
      ========================================================== -->
 <main>
-
-  <!-- Hero（#hero-canvasは使用せず、.bg-glowによる光斑演出のみ） -->
   <section class="hero bg-glow glow-center hero-photo">
     <img src="assets/fuji-line.svg" alt="" class="hero-fuji" aria-hidden="true">
     <div class="container hero-inner">
       <span class="badge badge-shizuoka" data-reveal>Cases</span>
-      <h1 class="mt-4" data-reveal data-reveal-delay="0.08">導入事例</h1>
-      <p class="lead" data-reveal data-reveal-delay="0.16">ZENKAI AI パートナーズの取り組みをご紹介します。自社実践事例・想定シナリオに加え、開発パートナーieYou Techの開発実績を掲載しています。お客様事例は今後準備が整い次第、順次追加してまいります。</p>
-      <div class="cta-actions" style="justify-content:flex-start;" data-reveal data-reveal-delay="0.24">
-        <a href="contact.html" class="btn btn-primary">無料相談を予約する</a>
-      </div>
+      <h1 data-reveal>導入事例</h1>
+      <p class="hero-lead" data-reveal>現場の課題から設計し、実務で使える仕組みへ。業務改善・AI活用・システム開発の事例をご紹介します。</p>
     </div>
   </section>
 
-  <!-- ①自社実践事例 -->
-  <section class="section" id="practice">
+  <section class="section" id="case-list">
     <div class="container">
-      <div class="section-head is-left" data-reveal>
-        <span class="section-label">Our Practice</span>
-        <h2 class="section-title">自社実践事例</h2>
-        <p class="section-lead">私たちはコンサルティング専業ではなく、ZENKAI不動産という不動産会社としてAIを日々の業務に取り入れています。</p>
+      <div class="section-header" data-reveal>
+        <span class="section-label">Case Studies</span>
+        <h2>課題と成果から探す</h2>
+        <p>カードを選ぶと、背景・支援内容・支援結果を詳しく確認できます。</p>
       </div>
-      <div class="card-grid cols-3" data-reveal-group>
-        <div class="card" data-tilt data-reveal>
-          <span class="badge badge-real">自社実践</span>
-          <p class="card-title mt-4">AI査定の実践</p>
-          <p class="card-text">自社物件の査定業務にAIを取り入れ、相場データとの整合性を確認しながら運用を検証しています。</p>
-        </div>
-        <div class="card" data-tilt data-reveal>
-          <span class="badge badge-real">自社実践</span>
-          <p class="card-title mt-4">反響自動応答の実践</p>
-          <p class="card-text">問い合わせへのAIによる一次対応を試験的に導入し、対応スピードと精度を検証しています。</p>
-        </div>
-        <div class="card" data-tilt data-reveal>
-          <span class="badge badge-real">自社実践</span>
-          <p class="card-title mt-4">物件資料生成の実践</p>
-          <p class="card-text">物件資料・広告文の作成にAIを活用し、作業時間の短縮を検証しています。</p>
-        </div>
+      <div class="case-legend" data-reveal>
+        <span><i class="legend-dot is-real"></i>導入事例</span>
       </div>
-      <div class="practice-panel mt-6" data-tilt data-reveal>
-        <span class="badge badge-real">自社実践</span>
-        <p class="card-title mt-4">AIアシスタントを「自分たちで」作って使っています</p>
-        <p class="card-text mt-4">当社チームは、技術パートナーieYou TechのAI活用プログラムを受講し、メールの分類・要約・返信下書きや、スケジュール調整・出張手配などのAIアシスタントを自分たちの手で構築して日常業務で運用しています。新しい活用アイデアも社内で発案・実装できる状態になりました。</p>
-        <p class="card-text mt-4">「導入して終わり」ではなく「お客様のチームが自走できるようになるまで」——私たちの伴走支援が目指す到達点を、まず自社で体現しています。</p>
+      <div class="case-trust-note" data-case-trust-note data-reveal>
+        <strong>事例の公開範囲について</strong>
+        <p>掲載している事例は、実際のプロジェクト経験に基づくものです。守秘義務に配慮し、社名・画面内データ・一部の数値を非公開または加工しています。掲載画像は業務内容をもとに再構成したイメージです。</p>
       </div>
-      <div class="notice-box is-tea mt-6" data-reveal>
-        <strong>ご注意：</strong>上記はZENKAI不動産における自社実践・検証中の取り組みであり、数値的な成果を保証するものではありません。効果検証は継続中です。
+      <div class="card-grid cols-3 case-grid">
+
+        <a class="card case-card-link" data-case-card="tiktok-shop-shipping-automation" href="cases/tiktok-shop-shipping-automation/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="tiktok-shop-shipping-automation">
+            <img src="assets/cases/tiktok-shipping-after.webp?v=20260801a" alt="配送先の自動分類と送り状の連続印刷が進む導入後の整理された出荷デスク" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">EC・物流</span>
+          <h3 class="card-title">毎日2〜3時間の定型作業を、約10分に</h3>
+          <p class="card-text mt-4">TikTok Shopの出荷データを取り込み、契約運賃に基づく配送会社の選定から送り状印刷までを自動化しました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card case-card-link" data-case-card="metal-processing-order-automation" href="cases/metal-processing-order-automation/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="metal-processing-order-automation">
+            <img src="assets/cases/metal-factory-display.webp?v=20260801a" alt="金属加工工場の大型モニターに本日の生産進捗を表示する現場" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">製造業（金属加工）</span>
+          <h3 class="card-title">手入力から、受注・生産進捗をひとつに</h3>
+          <p class="card-text mt-4">FAX注文の読取から、生産数量、検査合格数、不良率までを一つの画面で把握できる仕組みを構築しました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card case-card-link" data-case-card="recycling-inventory-production-system" href="cases/recycling-inventory-production-system/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="recycling-inventory-production-system">
+            <img src="assets/cases/recycling-production-control.webp?v=20260801a" alt="再生原料の生産工程と在庫を一元管理する匿名の業務イメージ" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">資源循環・製造</span>
+          <h3 class="card-title">高額・不安定な管理から、在庫・生産をひとつに</h3>
+          <p class="card-text mt-4">入荷、在庫、生産、現場報告、事務入力、TKS連携を、自社の業務手順に合わせた一元管理システムへ刷新しました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card case-card-link" data-case-card="drone-operations-trusted-data" href="cases/drone-operations-trusted-data/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="drone-operations-trusted-data">
+            <img src="assets/cases/drone-trusted-data-cover.webp?v=20260801a" alt="インフラ点検現場でドローンの運航準備を行う担当者" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">航空・ドローン／トラステッドデータ</span>
+          <h3 class="card-title">ドローン運航記録を、後から変更できない証明可能なデータへ</h3>
+          <p class="card-text mt-4">飛行記録を発生時点から証明可能にし、運航データの真正性と追跡性を確保しました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card case-card-link" data-case-card="research-data-ai-foundation" href="cases/research-data-ai-foundation/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="research-data-ai-foundation">
+            <img src="assets/cases/research-data-ai-cover.webp?v=20260801a" alt="複数の実験装置を使用する研究施設" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">研究機関／データガバナンス</span>
+          <h3 class="card-title">分散していた実験データを、検索・追跡・AI活用できる基盤へ</h3>
+          <p class="card-text mt-4">装置、LIMS、Excel、紙に分散していた実験データを、検索・追跡・再利用できる基盤へ統合しました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card case-card-link" data-case-card="on-premise-confidential-ai-analysis" href="cases/on-premise-confidential-ai-analysis/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="on-premise-confidential-ai-analysis">
+            <img src="assets/cases/onprem-confidential-ai-cover.webp?v=20260801a" alt="社内に設置したGPUサーバーと保守担当者" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">オンプレミスAI／機密情報分析</span>
+          <h3 class="card-title">機密データを外部に出さず、社内環境だけでAI分析</h3>
+          <p class="card-text mt-4">外部クラウドへ送信できない機密データを、顧客管理下の環境だけでAI分析できる構成にしました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card case-card-link" data-case-card="ai-creative-production-platform" href="cases/ai-creative-production-platform/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="ai-creative-production-platform">
+            <img src="assets/cases/ai-creative-platform-cover.webp?v=20260801a" alt="脚本と画像と動画を制作するクリエイティブチーム" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">生成AI／デジタルコンテンツ制作</span>
+          <h3 class="card-title">脚本・画像・動画を、ひとつのAI制作環境へ</h3>
+          <p class="card-text mt-4">複数の生成AIツールに分散していた脚本、画像、動画制作を、一つのワークスペースへ集約しました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card case-card-link" data-case-card="ai-capability-building-program" href="cases/ai-capability-building-program/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="ai-capability-building-program">
+            <img src="assets/cases/ai-capability-cover.webp?v=20260801a" alt="社内で行う実践型AIアシスタント研修" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">AI内製化・人材育成</span>
+          <h3 class="card-title">AIを使う会社から、自分たちで作れる会社へ</h3>
+          <p class="card-text mt-4">自社の業務に合うAIアシスタントを社内で作り、利用後も改善できる組織へ移行しました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card case-card-link" data-case-card="sales-trade-marketing-dx" href="cases/sales-trade-marketing-dx/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="sales-trade-marketing-dx">
+            <img src="assets/cases/sales-marketing-dx-cover.webp?v=20260801a" alt="売場をスマートフォンで撮影する営業担当者" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">消費財／営業・販促DX</span>
+          <h3 class="card-title">手作業の店頭報告から、画像認識による営業・販促管理へ</h3>
+          <p class="card-text mt-4">全国の営業・店頭活動をデータでつなぎ、画像認識による実行確認と販促成果の把握を可能にしました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card case-card-link" data-case-card="multilingual-transactional-ai-agent" href="cases/multilingual-transactional-ai-agent/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="multilingual-transactional-ai-agent">
+            <img src="assets/cases/multilingual-ai-agent-cover.webp?v=20260801a" alt="チャットとメールと電話に対応するカスタマーサービス" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">生成AI／カスタマーサービス</span>
+          <h3 class="card-title">3言語・3チャネルに対応し、注文処理まで行うAIエージェント</h3>
+          <p class="card-text mt-4">3言語・3チャネルに対応し、回答だけでなく注文管理や顧客情報更新まで実行するAIエージェントを設計しました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="card case-card-link" data-case-card="generative-ai-virtual-try-on" href="cases/generative-ai-virtual-try-on/" data-tilt data-reveal>
+
+          <figure class="case-card-cover" data-case-cover="generative-ai-virtual-try-on">
+            <img src="assets/cases/virtual-try-on-cover.webp?v=20260801a" alt="店頭のデジタルミラーで着用イメージを確認する顧客" width="1536" height="1024" loading="lazy" decoding="async">
+          </figure>
+          <div class="case-card-header">
+            <span class="badge badge-real">導入事例</span>
+          </div>
+          <span class="case-field">ラグジュアリーリテール／生成AI</span>
+          <h3 class="card-title">商品を見るだけから、自分が着た姿を確認できる購買体験へ</h3>
+          <p class="card-text mt-4">商品画像を見るだけでなく、自分が着用した姿と全身コーディネートを確認できる購買体験を設計しました。</p>
+          <span class="case-more mt-6">詳しく見る <span aria-hidden="true">→</span></span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ②想定シナリオ集 -->
-  <section class="section section-muted" id="scenarios">
-    <div class="container">
-      <div class="section-head is-left" data-reveal>
-        <span class="section-label">Scenarios</span>
-        <h2 class="section-title">想定シナリオ集（試算）</h2>
-        <p class="section-lead">AI導入によってどのような変化が見込めるかをイメージしていただくための試算例です。</p>
-      </div>
-      <div class="notice-box" data-reveal>
-        <strong>ご注意：</strong>以下は想定シナリオに基づく試算例であり、実際の成果を保証するものではありません。業種・規模・導入内容により結果は異なります。
-      </div>
-      <div class="card-grid cols-3" data-reveal-group>
-        <div class="card" data-tilt data-reveal>
-          <span class="badge badge-scenario">想定シナリオ（試算）</span>
-          <p class="card-title mt-4">製造業：外観検査AI導入</p>
-          <p class="card-text">目視検査の一部をAIによる一次スクリーニングに置き換え、検査員が最終判断に集中できる体制を目指す試算例です。</p>
-        </div>
-        <div class="card" data-tilt data-reveal>
-          <span class="badge badge-scenario">想定シナリオ（試算）</span>
-          <p class="card-title mt-4">全業種：問い合わせ自動化</p>
-          <p class="card-text">チャットボットやAI一次応答により、問い合わせへの初動対応を24時間体制に近づける試算例です。</p>
-        </div>
-        <div class="card" data-tilt data-reveal>
-          <span class="badge badge-scenario">想定シナリオ（試算）</span>
-          <p class="card-title mt-4">全業種：生成AI研修による定着</p>
-          <p class="card-text">生成AI研修の実施後、日常業務（資料作成・議事録・メール文面など）にAIを定着させ、作業時間の短縮を狙う試算例です。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ③開発パートナーの実績 -->
-  <section class="section" id="partner">
-    <div class="container">
-      <div class="section-head is-left" data-reveal>
-        <span class="section-label">Partner Track Record</span>
-        <h2 class="section-title">開発パートナーの実績</h2>
-        <p class="section-lead">当社は、AI開発会社「ieYou Tech（イエユー テック）」（2023年設立、日本・中国の2拠点）と提携し、設計・開発を共同体制で行っています。以下は、同社が手がけた開発実績の一部です。</p>
-      </div>
-      <div class="notice-box is-cyan" data-reveal>
-        <strong>掲載について：</strong>以下はieYou Techによる開発実績であり、守秘義務に基づき社名・詳細は匿名化しています。当社のご支援は、この開発体制を基盤として提供します。
-      </div>
-      <div class="card-grid cols-2" data-reveal-group>
-        <div class="card" data-tilt data-reveal>
-          <span class="badge badge-partner">パートナー開発実績</span>
-          <p class="card-title mt-4">ドローン運航会社：飛行記録の改ざん防止基盤</p>
-          <p class="card-text mt-4">飛行データ・ミッション・操縦士資格がバラバラのシステムに散在し、後から編集できる記録は証拠として弱い——という課題に対し、記録した瞬間に証跡化される仕組みを構築。どのフライトについても、運航実績と資格の正当性を第三者に示せる体制になりました。</p>
-        </div>
-        <div class="card" data-tilt data-reveal>
-          <span class="badge badge-partner">パートナー開発実績</span>
-          <p class="card-title mt-4">研究機関：実験データ管理基盤</p>
-          <p class="card-text mt-4">計測機器ごとに形式が異なり、記録も研究者ごとにバラバラだった実験データを、自動収集・一元管理する基盤を構築。手作業の転記がなくなり、「誰が・いつ・どのデータに何をしたか」を後から辿れるようになりました。AIを自組織のデータに直接適用できる土台です。</p>
-        </div>
-        <div class="card" data-tilt data-reveal>
-          <span class="badge badge-partner">パートナー開発実績</span>
-          <p class="card-title mt-4">機密要件の厳しい企業：オンプレミスAI分析基盤</p>
-          <p class="card-text mt-4">外部のクラウドAIを一切使えないという条件のもと、お客様自身のサーバー上でAIによる分析・要約が完結する環境を構築。ハードウェアの選定・調達から環境構築・運用立ち上げまで一貫して担当し、データも処理も社外に出ない体制を実現しました。</p>
-        </div>
-        <div class="card" data-tilt data-reveal>
-          <span class="badge badge-partner">パートナー開発実績</span>
-          <p class="card-title mt-4">映像制作会社：AIコンテンツ制作システム</p>
-          <p class="card-text mt-4">脚本・画像・動画の制作でツールを行き来していた現場に、1つの作業空間で完結する制作環境を構築。複数の生成AIを1つの画面に統合し、対話で多段階の制作作業を指示できるようにしました。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ④お客様事例は順次掲載予定 -->
-  <section class="section section-muted" id="coming-soon">
-    <div class="container">
-      <div class="coming-soon" data-reveal>
-        <p class="lead-text">お客様事例は順次掲載予定です</p>
-        <p class="card-text mt-4">現在、正式なお客様導入事例の掲載に向けて準備を進めています。第一号の事例としてご協力いただける企業様も募集しております。</p>
-        <div class="cta-actions mt-6">
-          <a href="contact.html" class="btn btn-primary">無料相談を予約する</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
   <section class="section section-muted">
     <div class="container">
       <div class="cta-block" data-reveal>
         <span class="section-label">Get Started</span>
-        <h2>貴社の業務に合わせたAI活用をご相談ください</h2>
-        <p>自社実践で得た知見をもとに、貴社の業種・規模に合わせた導入ステップをご提案します。</p>
+        <h2>同じような課題はありませんか</h2>
+        <p>現在の業務を確認し、無理なく始められる改善方法をご提案します。</p>
         <div class="cta-actions">
           <a href="contact.html" class="btn btn-primary">無料相談を予約する</a>
-          <a href="pricing.html" class="btn btn-secondary">料金目安を見る</a>
+          <a href="mailto:ai@zenkai-os.jp" class="btn btn-secondary">メールで相談する</a>
         </div>
       </div>
     </div>
   </section>
-
 </main>
 <!-- ▲▲▲ ページ本体ここまで ▲▲▲ -->
 
