@@ -70,8 +70,7 @@
     const required = {
       contact_name: 'ご担当者名を入力してください。',
       email: '正しいメールアドレスを入力してください。',
-      phone: '電話番号を入力してください。',
-      message: 'ご相談内容を10文字以上で入力してください。',
+      message: 'ご相談内容を入力してください。',
       privacy_consent: 'プライバシーポリシーへの同意が必要です。'
     };
     for (const [name, message] of Object.entries(required)) {
@@ -87,8 +86,8 @@
       setFieldError('email', '正しいメールアドレスを入力してください。');
       valid = false;
     }
-    if (form.elements.message.value.trim().length < 10) {
-      setFieldError('message', 'ご相談内容を10文字以上で入力してください。');
+    if (!form.elements.message.value.trim()) {
+      setFieldError('message', 'ご相談内容を入力してください。');
       valid = false;
     }
     return validateFile() && valid;

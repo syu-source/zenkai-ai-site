@@ -19,8 +19,8 @@ mkdir -p "$STAGING"
 cd "$PROJECT_DIR"
 
 # 公開対象（ホワイトリスト方式）
-cp index.html cases.html company.html contact.html download.html pricing.html privacy.html gate.html .htaccess "$STAGING/"
-cp -R css js assets lp services industries "$STAGING/"
+cp index.html cases.html company.html contact.html download.html pricing.html privacy.html gate.html .htaccess robots.txt sitemap.xml "$STAGING/"
+cp -R css js assets lp services industries cases api "$STAGING/"
 
 # 万一の混入チェック: ステージングに内部文書が無いことを確認
 for bad in CLAUDE.md PROJECT_PLAN.md worklog.md handover research docs templates .git .claude; do
@@ -34,7 +34,8 @@ echo "--- staging contents ---"
 find "$STAGING" -maxdepth 1 | sort
 
 ssh "$REMOTE" "mkdir -p $REMOTE_DIR"
-rsync -az --delete "$STAGING/" "$REMOTE:$REMOTE_DIR/"
+# api/config.php はサーバ側の秘密情報。--delete で消えないよう保護する。
+rsync -az --delete --filter='P api/config.php' "$STAGING/" "$REMOTE:$REMOTE_DIR/"
 
 echo "--- deployed. verify: ---"
 echo "https://abc-materia.sakura.ne.jp/zenkai-os04/"

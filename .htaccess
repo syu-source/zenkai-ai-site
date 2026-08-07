@@ -4,6 +4,10 @@ Options -Indexes
 
 # HTMLは更新確認を優先し、古い事例ページが残らないようにする
 <IfModule mod_headers.c>
+  # ============================================================
+  # 【本番公開時に必ず削除】プレビュー専用のnoindex。
+  # 正式ドメイン公開時はこの行を削除し、robots.txtのDisallowも解除すること
+  # ============================================================
   Header always set X-Robots-Tag "noindex, nofollow, noarchive"
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"

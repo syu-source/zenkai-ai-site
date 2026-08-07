@@ -129,8 +129,63 @@
   .diagnosis-note h3 { color: var(--color-text-heading); font-size: 1.1rem; }
   .diagnosis-note ul { display: grid; gap: .85rem; margin-top: var(--space-4); padding: 0; list-style: none; }
   .diagnosis-note li { position: relative; padding-left: 1.4rem; color: var(--color-text); font-size: .88rem; line-height: 1.75; }
-  .diagnosis-note li::before { content: '✓'; position: absolute; left: 0; color: var(--color-cyan); font-weight: 800; }
+  .diagnosis-note li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .3em;
+    width: .85rem;
+    height: .85rem;
+    background-color: var(--color-cyan);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
   .hp-field { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+
+  /* お電話でのご相談ブロック */
+  .ct-phone {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+    padding: var(--space-5) var(--space-6);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--glass-bg-strong);
+    box-shadow: var(--shadow-lg);
+  }
+  .ct-phone__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(34,211,238,.12);
+    color: var(--color-cyan);
+  }
+  .ct-phone__icon svg { width: 26px; height: 26px; }
+  .ct-phone__body { flex: 1 1 auto; }
+  .ct-phone__body p.ct-phone__note { margin: 0 0 .35rem; color: var(--color-text-muted); font-size: .85rem; }
+  .ct-phone__number {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .5rem;
+    color: var(--color-text-heading);
+    font-size: clamp(1.5rem, 2.4vw + 1rem, 2rem);
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: .02em;
+  }
+  .ct-phone__number:hover { color: var(--color-cyan); }
+  .ct-phone__hours { margin: .35rem 0 0; color: var(--color-text); font-size: .85rem; }
+  @media (max-width: 560px) {
+    .ct-phone { flex-direction: column; align-items: flex-start; text-align: left; }
+  }
 
   /* 対応時間などのカード */
   .ct-other {
@@ -172,7 +227,7 @@
         <li><a href="index.html">ホーム</a></li>
         <li><a href="index.html#services">サービス</a></li>
         <li><a href="index.html#industries">業界別</a></li>
-        <li><a href="cases.html">導入事例</a></li>
+        <li><a href="cases.html">開発実績</a></li>
         <li><a href="pricing.html">料金</a></li>
         <li><a href="company.html">会社概要</a></li>
       </ul>
@@ -195,7 +250,7 @@
     <li><a href="index.html">ホーム</a></li>
     <li><a href="index.html#services">サービス</a></li>
     <li><a href="index.html#industries">業界別</a></li>
-    <li><a href="cases.html">導入事例</a></li>
+    <li><a href="cases.html">開発実績</a></li>
     <li><a href="pricing.html">料金</a></li>
     <li><a href="company.html">会社概要</a></li>
   </ul>
@@ -229,6 +284,17 @@
       <div class="ct-promise" data-reveal data-reveal-delay="0.18">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
         <span>1営業日以内にご返信します（営業時間9:00〜18:00、水曜定休）</span>
+      </div>
+
+      <div class="ct-phone" data-reveal data-reveal-delay="0.22">
+        <span class="ct-phone__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </span>
+        <div class="ct-phone__body">
+          <p class="ct-phone__note">フォームが苦手な方は、お電話で直接ご相談ください</p>
+          <a class="ct-phone__number" href="tel:0542666808">お電話でのご相談　054-266-6808</a>
+          <p class="ct-phone__hours">受付 9:00〜18:00（水曜定休）</p>
+        </div>
       </div>
     </div>
   </section>
@@ -271,14 +337,14 @@
                 <p class="field-error" data-error-for="email"></p>
               </div>
               <div class="form-row">
-                <label for="phone">電話番号 <span class="form-required">必須</span></label>
-                <input class="form-control" id="phone" name="phone" type="tel" maxlength="30" inputmode="tel" autocomplete="tel" required placeholder="例：054-266-6808">
+                <label for="phone">電話番号 <span class="form-optional">任意</span></label>
+                <input class="form-control" id="phone" name="phone" type="tel" maxlength="30" inputmode="tel" autocomplete="tel" placeholder="例：054-266-6808">
                 <p class="field-error" data-error-for="phone"></p>
               </div>
               <div class="form-row is-wide">
                 <label for="message">ご相談内容 <span class="form-required">必須</span></label>
-                <textarea class="form-control" id="message" name="message" minlength="10" maxlength="4000" required placeholder="現在の業務、時間がかかっている作業、AI・システム化で改善したいことなどをご記入ください。"></textarea>
-                <p class="form-hint">10〜4000文字。機密情報や個人番号、パスワードは記載しないでください。</p>
+                <textarea class="form-control" id="message" name="message" minlength="1" maxlength="4000" required placeholder="例：FAXの受注入力を自動化したい"></textarea>
+                <p class="form-hint">4000文字以内。機密情報や個人番号、パスワードは記載しないでください。</p>
                 <p class="field-error" data-error-for="message"></p>
               </div>
               <div class="form-row is-wide">
@@ -389,7 +455,7 @@
           <li><a href="industries/manufacturing.html">製造業向け</a></li>
           <li><a href="industries/real-estate.html">不動産・建築業向け</a></li>
           <li><a href="industries/local.html">静岡地場産業向け</a></li>
-          <li><a href="cases.html">導入事例</a></li>
+          <li><a href="cases.html">開発実績</a></li>
           <li><a href="pricing.html">料金目安</a></li>
           <li><a href="company.html">会社概要</a></li>
           <li><a href="download.html">資料ダウンロード</a></li>

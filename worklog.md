@@ -1,5 +1,14 @@
 # worklog
 
+## 2026-08-07 OS04审核版：定性修正＋信任改进两轮实装（审核分支上，未合并main未部署）
+- [決策] 用户4项拍板：①案例统一「開発実績」定性（不再自称導入事例）②下架3件被否决前公司案例（virtual-try-on/multilingual-agent/sales-trade-marketing）③ZENKAI OS品牌暂不采用、页面可见文字回退ZENKAI AIパートナーズ（zenkai-os.jp域名URL暂留、挂域名前再定）④电话054-266-6808确认真实、写入CLAUDE.md事实基准
+- 第一轮实装（sonnet子代理）：3案例下架（11→8件）；全站「導入事例→開発実績」（title/badge/breadcrumb/导航/footer）；案例页trust-note统一「当社開発チームが手がけた開発実績」口径；api邮件模板品牌回退；CONTACT_TO_EMAIL默认改info@zenkai-fudosan.com；sitemap死链修复（/cases/、/contact/→实际html，30条全核对）；contact的✓改SVG mask；.htaccess加「本番公開時必ず削除」noindex注释；deploy脚本白名单补cases/api/robots/sitemap＋rsync加--filter='P api/config.php'保护服务器配置；代表照AI感处理（选v1、960px+胶片颗粒σ5+暖调+JPEG q82、2.1MB→270KB）；assets/cases未引用PNG全清（仓库瘦身约40MB）
+- 5人格信任审查（金属加工社长/食品工厂长/物流部长/不动产同行社长/塑料二代专务，并行子代理）：高频不信任点＝假客户合照占位（「差し替え予定」标签当实绩公开）、首页「実績少」vs案例页11件的自相矛盾、ieYou中国拠点藏太深与机密主张矛盾、要相談无价格下限、电话必填吓退谨慎派、FDE/RAG黑话；高频加分点＝数据出典标注、90日削除承诺、不做申请代行、宅建免许可查
+- 第二轮实装（sonnet子代理，仅做不需新事实的项）：假合照figure×3＋placeholder图删除；index自社実践口径改写（区分「导入支援待积累」与「開発実績已公开」，消除矛盾）；marquee术语通俗化（生成AI/業務自動化/社内データ活用AI/伴走支援）；PoC/LIMS首现加日文括注；contact页新增「お電話でのご相談」块（054-266-6808前置）；表单降门槛（电话任意化、相談内容10字下限撤销＋示例placeholder，HTML/JS/PHP三层校验同步）；onpremise/automation两页FAQ新增开发体制说明（既有口径前置+链会社概要）；LP footer加「運営会社について」退路
+- 検収（主会話独立验证）：emoji=0、「差し替え予定」=0、導入事例自称=0、ZENKAI OS残留=0、案例8/8、sitemap全对应、sh -n通过、表单phone.required=false/msg minlength=1实测、contact电话块/開発実績页/index口径截图目视OK、代表照前后对比目视OK
+- 遗留（需用户提供事实才能补的信任要素）：保守标准范围与费用、IoT/オンプレ价格下限、ieYou数据保管场所/权限的技术担保表述、工程师体制人数、TikTok案例处理件数母数、补助金不採択时费用模式、真实客户合照/证言
+- [注意] 仍未合并main、未部署服务器——等用户批准
+
 ## 2026-08-03 OS04审核版同步
 - [分支] `os04-review-20260803`：保留 `main` 原版不变，将当前OS04完成版作为同事审核用新版同步。
 - 新版包含：11件真实导入事例及详情页、案例图片、代表者照片、Google Maps嵌入、安全附件表单、多标签页CSRF修复、Sakura PHP邮件发送。

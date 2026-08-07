@@ -80,13 +80,13 @@ function validate_fields(array $input): array
         || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = '正しいメールアドレスを入力してください。';
     }
-    if ($data['phone'] === '' || mb_strlen($data['phone']) > 30
-        || !preg_match('/^[0-9０-９+＋()（）\-ー―−\s]+$/u', $data['phone'])) {
+    if ($data['phone'] !== '' && (mb_strlen($data['phone']) > 30
+        || !preg_match('/^[0-9０-９+＋()（）\-ー―−\s]+$/u', $data['phone']))) {
         $errors['phone'] = '正しい電話番号を入力してください。';
     }
     $messageLength = mb_strlen($data['message']);
-    if ($messageLength < 10 || $messageLength > 4000) {
-        $errors['message'] = 'ご相談内容は10〜4000文字で入力してください。';
+    if ($messageLength < 1 || $messageLength > 4000) {
+        $errors['message'] = 'ご相談内容は4000文字以内で入力してください。';
     }
     if (!in_array($data['inquiry_type'], ['ai-diagnosis', 'document-request', 'general'], true)) {
         $data['inquiry_type'] = 'general';

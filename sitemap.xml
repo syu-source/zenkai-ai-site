@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://zenkai-os.jp/</loc></url>
-  <url><loc>https://zenkai-os.jp/cases/</loc></url>
+  <url><loc>https://zenkai-os.jp/cases.html</loc></url>
   <url><loc>https://zenkai-os.jp/company.html</loc></url>
-  <url><loc>https://zenkai-os.jp/contact/</loc></url>
+  <url><loc>https://zenkai-os.jp/contact.html</loc></url>
   <url><loc>https://zenkai-os.jp/download.html</loc></url>
   <url><loc>https://zenkai-os.jp/pricing.html</loc></url>
   <url><loc>https://zenkai-os.jp/privacy.html</loc></url>
@@ -30,7 +30,4 @@
   <url><loc>https://zenkai-os.jp/cases/on-premise-confidential-ai-analysis/</loc></url>
   <url><loc>https://zenkai-os.jp/cases/ai-creative-production-platform/</loc></url>
   <url><loc>https://zenkai-os.jp/cases/ai-capability-building-program/</loc></url>
-  <url><loc>https://zenkai-os.jp/cases/sales-trade-marketing-dx/</loc></url>
-  <url><loc>https://zenkai-os.jp/cases/multilingual-transactional-ai-agent/</loc></url>
-  <url><loc>https://zenkai-os.jp/cases/generative-ai-virtual-try-on/</loc></url>
 </urlset>
