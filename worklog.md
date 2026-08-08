@@ -1,5 +1,13 @@
 # worklog
 
+## 2026-08-08 遗留项收尾（TikTok母数/OGP图/提醒机制）＋代表回归待办固化
+- [決策] 用户（同事侧）指示：①保守费用感②IoT・オンプレ价格下限③ieYou数据担保→**等老板8/16后回来亲自定，Claude届时主动提醒**（已存memory＋本地定时任务2026-08-17 09:30双保险）；TikTok案例母数=日均约80件（用户提供）；代表照处理版定稿
+- TikTok案例页補記「1日あたり約80件の出荷に対して」（80件→2〜3h→10分，成果数字有了分母）
+- assets/ogp.png替换：原为onprem案例封面复制品（2.2MB无关图）→PIL新制品牌OGP（1200×630、51KB、深紺渐变+シアン装饰+ヒラギノ字体、目视验收通过）
+- 确认同事已完成：LP5处CTA和download页接入contact表单（form-placeholder清零）、TimeRex引用清零（自建表单方案取代）
+- PROJECT_PLAN.md变更履历补记（7/26起）＋PHP表单架构追认待定＋代表回归5项遗留决策固化
+- 状态：审核分支os04-review-20260803已含全部修复，**仍未合并main、未部署**——等代表批准
+
 ## 2026-08-07 OS04审核版：定性修正＋信任改进两轮实装（审核分支上，未合并main未部署）
 - [決策] 用户4项拍板：①案例统一「開発実績」定性（不再自称導入事例）②下架3件被否决前公司案例（virtual-try-on/multilingual-agent/sales-trade-marketing）③ZENKAI OS品牌暂不采用、页面可见文字回退ZENKAI AIパートナーズ（zenkai-os.jp域名URL暂留、挂域名前再定）④电话054-266-6808确认真实、写入CLAUDE.md事实基准
 - 第一轮实装（sonnet子代理）：3案例下架（11→8件）；全站「導入事例→開発実績」（title/badge/breadcrumb/导航/footer）；案例页trust-note统一「当社開発チームが手がけた開発実績」口径；api邮件模板品牌回退；CONTACT_TO_EMAIL默认改info@zenkai-fudosan.com；sitemap死链修复（/cases/、/contact/→实际html，30条全核对）；contact的✓改SVG mask；.htaccess加「本番公開時必ず削除」noindex注释；deploy脚本白名单补cases/api/robots/sitemap＋rsync加--filter='P api/config.php'保护服务器配置；代表照AI感处理（选v1、960px+胶片颗粒σ5+暖调+JPEG q82、2.1MB→270KB）；assets/cases未引用PNG全清（仓库瘦身约40MB）
