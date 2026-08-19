@@ -1,5 +1,14 @@
 # worklog
 
+## 2026-08-19 品牌正式定名ZENKAI OS＋三项对客承诺上站（代表4项决裁全部落地）
+- [決策] 代表拍板：①品牌正式名ZENKAI OS（域名zenkai-os.jp已取得）②保守＝纳品后3ヶ月无偿＋月額3万円〜プラン ③IoT 50万円〜／オンプレミスAI 300万円〜 ④ieYou数据＝日本国内保管・海外拠点不接触实数据・开发用匿名化样本
+- 实装（sonnet子代理，42文件）：logo.svg/logo-white.svg改字（AI→OS、副文字「AI開発・伴走支援」）；全站title/og/JSON-LD/footer/gate/邮件模板品牌切换（含（仮）去除）；OGP图重做（ZENKAI OS版1200×630/119KB）；保守条款三页FAQ统一文言；价格下限pricing+iot+onpremise四处同步；数据国内保管承诺四处统一口径
+- 主会話单行微调：assets/favicon.svg的title旧品牌名残留（子代理范围外遗留，按单行例外规则直接修正）
+- js/*.js文件头注释仍含旧名（内部注释不对外，暂留）
+- 検収：ZENKAI AI残留=0（html/php/svg）、三项承诺grep全中、logo渲染目视无溢出、OGP目视OK、emoji=0
+- 部署＋线上确认：新title/新logo/保守文言/价格/数据承诺/OGP全部线上生效、config.php完好；CLAUDE.md事実基準・PROJECT_PLAN変更履歴同步更新；已完成决策的memory清理
+- 剩余最后一步：代表在さくら面板把zenkai-os.jp挂到www/zenkai-os04＋配SSL→我删noindex/解robots→正式公开
+
 ## 2026-08-19 代表复归：修正版部署上线＋合并main（步骤1、2完成）
 - 代表（朱文彬）8/16复归后指示逐步接手，批准执行
 - 部署: os04-review修正版（2077cb8）替换服务器上8/3违规旧版；线上检收全绿＝「開発実績」标题、8件卡片、3件否决案例404、关键页/OGP/代表照全200、表单接口无token正确403、api/config.php完好（rsync保护规则生效）
