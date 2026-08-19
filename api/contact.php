@@ -78,7 +78,7 @@ $labels = [
 ];
 $typeLabel = $labels[$data['inquiry_type']] ?? $labels['general'];
 $companyLabel = $data['company_name'] !== '' ? $data['company_name'] : '会社名未記入';
-$subject = '【ZENKAI AIパートナーズ／' . $typeLabel . '】' . $companyLabel . '・' . $data['contact_name'] . ' 様';
+$subject = '【ZENKAI OS／' . $typeLabel . '】' . $companyLabel . '・' . $data['contact_name'] . ' 様';
 $rows = [
     ['お問い合わせ種別', $typeLabel],
     ['会社名', $companyLabel],
@@ -93,12 +93,12 @@ foreach ($rows as [$label, $value]) {
         . escape_html($value) . '</td></tr>';
 }
 $html = '<div style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;color:#111827;line-height:1.7">'
-    . '<h2>ZENKAI AIパートナーズ ウェブサイトからのお問い合わせ</h2><table style="border-collapse:collapse;max-width:680px;width:100%">'
+    . '<h2>ZENKAI OS ウェブサイトからのお問い合わせ</h2><table style="border-collapse:collapse;max-width:680px;width:100%">'
     . $tableRows . '</table><h3 style="margin-top:24px">ご相談内容</h3><div style="white-space:pre-wrap;border-left:4px solid #d94255;padding:12px 16px;background:#f8fafc">'
     . escape_html($data['message']) . '</div></div>';
 
 $payload = [
-    'from' => (string)($config['CONTACT_FROM_EMAIL'] ?? 'ZENKAI AIパートナーズ <onboarding@resend.dev>'),
+    'from' => (string)($config['CONTACT_FROM_EMAIL'] ?? 'ZENKAI OS <onboarding@resend.dev>'),
     'to' => [(string)($config['CONTACT_TO_EMAIL'] ?? 'info@zenkai-fudosan.com')],
     'reply_to' => $data['email'],
     'subject' => $subject,
@@ -119,7 +119,7 @@ if ($attachment !== null) {
 $transport = (string)($config['CONTACT_TRANSPORT'] ?? 'resend');
 if ($transport === 'mail') {
     $mailFrom = (string)($config['CONTACT_MAIL_FROM']
-        ?? 'ZENKAI AIパートナーズ <abc-materia@abc-materia.sakura.ne.jp>');
+        ?? 'ZENKAI OS <abc-materia@abc-materia.sakura.ne.jp>');
     $nativeAttachment = isset($payload['attachments'][0]) ? [
         'filename' => (string)$payload['attachments'][0]['filename'],
         'mime' => (string)($attachment['mime'] ?? 'application/octet-stream'),
@@ -128,7 +128,7 @@ if ($transport === 'mail') {
     $mailMessage = build_native_mail_message($html, $mailFrom, $data['email'], $nativeAttachment);
     $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
     if (!mail((string)$payload['to'][0], $encodedSubject, $mailMessage['body'], $mailMessage['headers'])) {
-        error_log('[ZENKAI AI Partners form] PHP mail failed for recipient: ' . (string)$payload['to'][0]);
+        error_log('[ZENKAI OS form] PHP mail failed for recipient: ' . (string)$payload['to'][0]);
         json_response(['ok' => false, 'error' => '送信できませんでした。時間をおいて再度お試しください。'], 502);
     }
     json_response(['ok' => true], 200);
@@ -136,7 +136,7 @@ if ($transport === 'mail') {
 
 $apiKey = trim((string)($config['RESEND_API_KEY'] ?? ''));
 if ($apiKey === '') {
-    error_log('[ZENKAI AI Partners form] RESEND_API_KEY is not configured.');
+    error_log('[ZENKAI OS form] RESEND_API_KEY is not configured.');
     json_response(['ok' => false, 'error' => '現在送信機能を利用できません。メールでお問い合わせください。'], 503);
 }
 
@@ -157,7 +157,7 @@ $status = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
 $error = curl_error($ch);
 curl_close($ch);
 if ($response === false || $status < 200 || $status >= 300) {
-    error_log('[ZENKAI AI Partners form] mail delivery failed status=' . $status . ' error=' . $error);
+    error_log('[ZENKAI OS form] mail delivery failed status=' . $status . ' error=' . $error);
     json_response(['ok' => false, 'error' => '送信できませんでした。時間をおいて再度お試しください。'], 502);
 }
 
