@@ -1,5 +1,11 @@
 # worklog
 
+## 2026-08-19 [fix] btn-primary左端の1px色段差（用户截图报告）
+- 症状: 無料相談等の主按钮左弧端に紫色の細い段差が露出（全站共通、右端はシアンで背景に溶け目立たず）
+- 原因: .btnの`border:1px solid transparent`とグラデーション背景の描画原点不一致——渐变按padding-box起算、1px边框环由边缘色延伸填充，圆弧端头产生1px色阶断层。分层排除实验（原样/去border/改clip/去shadow各4倍放大截图）确证，box-shadow无罪
+- 修复: .btn-primaryに`background-origin/background-clip: border-box`追加（design-system.css保护文件由主会話直接修改——2行+注释，依单行级例外规则，其余按钮类不受影响）
+- 検収: 4倍放大截图＝左端平滑无段差、btn-secondary并排高度对齐不变；部署后线上确认
+
 ## 2026-08-19 品牌正式定名ZENKAI OS＋三项对客承诺上站（代表4项决裁全部落地）
 - [決策] 代表拍板：①品牌正式名ZENKAI OS（域名zenkai-os.jp已取得）②保守＝纳品后3ヶ月无偿＋月額3万円〜プラン ③IoT 50万円〜／オンプレミスAI 300万円〜 ④ieYou数据＝日本国内保管・海外拠点不接触实数据・开发用匿名化样本
 - 实装（sonnet子代理，42文件）：logo.svg/logo-white.svg改字（AI→OS、副文字「AI開発・伴走支援」）；全站title/og/JSON-LD/footer/gate/邮件模板品牌切换（含（仮）去除）；OGP图重做（ZENKAI OS版1200×630/119KB）；保守条款三页FAQ统一文言；价格下限pricing+iot+onpremise四处同步；数据国内保管承诺四处统一口径

@@ -507,6 +507,10 @@ h1, h2, h3, h4 {
 
 .btn-primary {
   background: var(--gradient-accent);
+  /* .btnの透明1pxボーダーとグラデーションの描画原点のズレで、丸端に1pxの色段差が
+     出るのを防ぐ（グラデーションをborder-box基準で描画・クリップする） */
+  background-origin: border-box;
+  background-clip: border-box;
   color: #fff;
   box-shadow: var(--glow-accent-sm);
 }
