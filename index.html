@@ -76,6 +76,46 @@
   .stat-desc { margin-top: var(--space-3); color: var(--color-text); font-size: 0.92rem; text-align: left; }
   .stat-source { margin-top: var(--space-3); text-align: left; }
 
+  /* 統計リングチャート（stroke-dasharray は js/index-viz.js が半径から実算出）
+     数字テキストは従来通り [data-counter] のカウントアップを維持し、
+     リングはその外周を同期して満たす。 */
+  .stat-ring {
+    position: relative;
+    width: clamp(104px, 27vw, 148px);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto var(--space-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .stat-ring__svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    overflow: visible;
+  }
+  .stat-ring__track {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.10);
+    stroke-width: 7;
+  }
+  .stat-ring__value {
+    fill: none;
+    stroke-width: 7;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.55));
+    transition: stroke-dashoffset 1.6s var(--ease-out-expo);
+  }
+  .stat-ring .stat-number {
+    position: relative;
+    font-size: clamp(1.35rem, 3.4vw, 1.95rem);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stat-ring__value { transition: none; }
+  }
+
   /* --- 選ばれる理由 --- */
   .reason-subtag {
     display: inline-block;
@@ -86,11 +126,59 @@
     color: var(--color-cyan);
     margin-top: var(--space-2);
   }
+  /* カード下部の細い幾何装飾（線＋回路状グリフ。控えめに） */
+  .reason-deco {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+    pointer-events: none;
+  }
+  .reason-deco__line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.55), rgba(34, 211, 238, 0.35) 60%, rgba(34, 211, 238, 0));
+  }
+  .reason-deco__glyph {
+    flex: none;
+    width: 46px;
+    height: 18px;
+    opacity: 0.85;
+  }
+  .reason-card { display: flex; flex-direction: column; }
+  .reason-card .reason-deco { margin-top: auto; padding-top: var(--space-5); }
+  .reason-card .reason-subtag { align-self: flex-start; }
 
   /* --- サービス一覧（11件） --- */
   .service-card { display: flex; flex-direction: column; }
   .service-card .card-text { flex: 1; }
   .service-card .card-fee { margin-top: var(--space-3); font-size: 0.8rem; font-weight: 700; color: var(--color-cyan); }
+
+  /* 各サービスのイメージ図をカード右下の背景装飾として重ねる。
+     マスクで左上（テキスト側）へ向けて消し込み、可読性を最優先する。 */
+  .service-card .service-illust {
+    position: absolute;
+    z-index: 0;
+    right: -6%;
+    bottom: -6%;
+    width: 66%;
+    max-width: 240px;
+    height: auto;
+    opacity: 0.19;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to top left, #000 0%, rgba(0, 0, 0, 0.85) 34%, rgba(0, 0, 0, 0.22) 66%, transparent 92%);
+    mask-image: linear-gradient(to top left, #000 0%, rgba(0, 0, 0, 0.85) 34%, rgba(0, 0, 0, 0.22) 66%, transparent 92%);
+    transition: opacity var(--duration-slow) var(--ease-standard),
+                transform var(--duration-slow) var(--ease-out-expo);
+  }
+  .service-card:hover .service-illust {
+    opacity: 0.32;
+    transform: scale(1.06) translate(-2%, -3%);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .service-card .service-illust { transition: none; }
+    .service-card:hover .service-illust { transform: none; }
+  }
 
   /* --- 業界別 --- */
   .industry-card { text-decoration: none; display: flex; flex-direction: column; min-height: 240px; }
@@ -98,8 +186,37 @@
   .industry-card .badge { align-self: flex-start; }
   .industry-card .card-link { margin-top: auto; padding-top: var(--space-4); }
 
+  /* カード上部の写真帯（各業界ページのヒーロー写真と同一）。
+     下方向へマスクで消し込み、カード面へ自然に溶かす。 */
+  .industry-photo {
+    display: block;
+    position: relative;
+    margin: calc(var(--space-6) * -1) calc(var(--space-6) * -1) var(--space-5);
+    height: 152px;
+    overflow: hidden;
+  }
+  .industry-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.82) saturate(0.92);
+    transform: scale(1.02);
+    transition: transform var(--duration-slow) var(--ease-out-expo);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, rgba(0, 0, 0, 0.5) 74%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 40%, rgba(0, 0, 0, 0.5) 74%, transparent 100%);
+  }
+  .industry-card:hover .industry-photo img { transform: scale(1.08); }
+  @media (prefers-reduced-motion: reduce) {
+    .industry-photo img { transition: none; }
+    .industry-card:hover .industry-photo img { transform: scale(1.02); }
+  }
+  @media (max-width: 767px) {
+    .industry-photo { height: 132px; }
+  }
+
   /* --- 導入の流れ --- */
-  .flow-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-5); counter-reset: flow; }
+  .flow-grid { position: relative; display: grid; grid-template-columns: 1fr; gap: var(--space-5); counter-reset: flow; }
   @media (min-width: 768px) {
     .flow-grid { grid-template-columns: repeat(4, 1fr); }
   }
@@ -135,6 +252,99 @@
   }
   .flow-step h3 { font-size: 1rem; color: var(--color-text-heading); }
   .flow-step p { margin-top: var(--space-2); color: var(--color-text-muted); font-size: 0.88rem; }
+
+  /* 各ステップの線アイコン（assets/icons をカード右上に控えめに配置） */
+  .flow-step .flow-icon {
+    position: absolute;
+    top: var(--space-6);
+    right: var(--space-5);
+    width: 26px;
+    height: 26px;
+    opacity: 0.4;
+    pointer-events: none;
+    /* .card-icon と同じシアン着色（img内の currentColor=黒 を変換） */
+    filter: brightness(0) saturate(100%) invert(85%) sepia(35%) saturate(1000%) hue-rotate(140deg) brightness(1.05);
+    transition: opacity var(--duration-base) var(--ease-standard);
+  }
+  .flow-step:hover .flow-icon { opacity: 0.85; }
+
+  /* ステップ間の発光コネクトライン。
+     カード（.flow-step）より前に配置しているため、カード背面＝隙間だけに見える。
+     PC: 番号円（上52px / 左44px）の高さで水平に。SP: 番号円の左位置で垂直に。 */
+  .flow-line {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    top: 52px;
+    left: calc(var(--space-5) + 19px);
+    width: 2px;
+    bottom: 52px;
+    background: linear-gradient(180deg,
+      rgba(99, 102, 241, 0) 0%,
+      rgba(99, 102, 241, 0.55) 8%,
+      rgba(34, 211, 238, 0.55) 92%,
+      rgba(34, 211, 238, 0) 100%);
+  }
+  .flow-line__pulse {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 7px;
+    height: 7px;
+    margin-left: -3.5px;
+    border-radius: 50%;
+    background: var(--color-cyan);
+    box-shadow: 0 0 12px 3px rgba(34, 211, 238, 0.65);
+    animation: flow-pulse-v 5s linear infinite;
+  }
+  @keyframes flow-pulse-v {
+    0% { top: 0; opacity: 0; }
+    8% { opacity: 1; }
+    92% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+  @media (min-width: 768px) {
+    .flow-line {
+      /* 番号円の中心は上から 52px（padding 2rem + 円40pxの半径20px）。
+         線は太さ2pxなので 1px 上げて中心を揃える。 */
+      top: 51px;
+      bottom: auto;
+      left: 44px;
+      right: calc(25% - (var(--space-5) * 0.75) - 44px);
+      width: auto;
+      height: 2px;
+      background: linear-gradient(90deg,
+        rgba(99, 102, 241, 0) 0%,
+        rgba(99, 102, 241, 0.6) 6%,
+        rgba(34, 211, 238, 0.6) 94%,
+        rgba(34, 211, 238, 0) 100%);
+    }
+    .flow-line__pulse {
+      left: 0;
+      top: 50%;
+      margin-left: 0;
+      margin-top: -3.5px;
+      animation: flow-pulse-h 5s linear infinite;
+    }
+    @keyframes flow-pulse-h {
+      0% { left: 0; opacity: 0; }
+      8% { opacity: 1; }
+      92% { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .flow-line__pulse { display: none; }
+  }
+
+  /* 共有SVGグラデーション定義（ページ内の各SVGから url(#…) で参照） */
+  .viz-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
 
   /* --- 料金目安 --- */
   .pricing-cta-row { margin-top: var(--space-6); text-align: center; }
@@ -205,6 +415,22 @@
 </style>
 </head>
 <body>
+
+<!-- ==========================================================
+     共有SVGグラデーション定義（各インラインSVGから url(#…) で参照）
+     ========================================================== -->
+<svg class="viz-defs" aria-hidden="true" focusable="false" width="0" height="0">
+  <defs>
+    <linearGradient id="vizRingGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+    <linearGradient id="vizGlyphGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+</svg>
 
 <!-- ==========================================================
      ヘッダー（全ページ共通・改変時は他ページとの整合に注意）
@@ -309,17 +535,35 @@
 
     <div class="stat-grid cols-3" data-reveal-group>
       <div class="stat-card glass" data-tilt data-reveal>
-        <p class="stat-number"><span data-counter="20.4" data-counter-suffix="%">0</span></p>
+        <div class="stat-ring" data-ring="20.4">
+          <svg class="stat-ring__svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="stat-ring__track" cx="60" cy="60" r="52"/>
+            <circle class="stat-ring__value" cx="60" cy="60" r="52" stroke="url(#vizRingGrad)"/>
+          </svg>
+          <p class="stat-number"><span data-counter="20.4" data-counter-suffix="%">0</span></p>
+        </div>
         <p class="stat-desc">中小企業のAI導入率。導入検討中を含めても39.0%にとどまります。導入目的の第1位は「業務効率化」87.0%。</p>
         <p class="note stat-source">出典：中小企業基盤整備機構（中小機構）2026年3月調査</p>
       </div>
       <div class="stat-card glass" data-tilt data-reveal>
-        <p class="stat-number"><span data-counter="50.4" data-counter-suffix="%">50.4%</span></p>
+        <div class="stat-ring" data-ring="50.4">
+          <svg class="stat-ring__svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="stat-ring__track" cx="60" cy="60" r="52"/>
+            <circle class="stat-ring__value" cx="60" cy="60" r="52" stroke="url(#vizRingGrad)"/>
+          </svg>
+          <p class="stat-number"><span data-counter="50.4" data-counter-suffix="%">50.4%</span></p>
+        </div>
         <p class="stat-desc">生成AI活用の懸念・課題で最も多いのは「情報の正確性」。次いで「専門人材・ノウハウ不足」41.3%。</p>
         <p class="note stat-source">出典：帝国データバンク「生成AIの活用状況調査」2026年5月公表</p>
       </div>
       <div class="stat-card glass" data-tilt data-reveal>
-        <p class="stat-number"><span data-counter="18.9" data-counter-suffix="%">0</span></p>
+        <div class="stat-ring" data-ring="18.9">
+          <svg class="stat-ring__svg" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+            <circle class="stat-ring__track" cx="60" cy="60" r="52"/>
+            <circle class="stat-ring__value" cx="60" cy="60" r="52" stroke="url(#vizRingGrad)"/>
+          </svg>
+          <p class="stat-number"><span data-counter="18.9" data-counter-suffix="%">0</span></p>
+        </div>
         <p class="stat-desc">DXに「既に取り組んでいる」中小企業の割合。「取組む予定はない」企業も31.5%——着手はまだこれからです。</p>
         <p class="note stat-source">出典：中小企業基盤整備機構「中小企業のDX推進に関する調査（2025年）」2026年2月公表</p>
       </div>
@@ -343,18 +587,45 @@
         <div class="card-icon"><img src="assets/icons/realestate.svg" alt=""></div>
         <p class="card-title">実業経験に基づく提案</p>
         <p class="card-text">グループとして不動産（ZENKAI不動産）・プラスチックリサイクル製造（ABCマテリアル）を実際に経営。現場のオペレーションを理解した上でAI活用を設計します。</p>
+        <div class="reason-deco" aria-hidden="true">
+          <span class="reason-deco__line"></span>
+          <svg class="reason-deco__glyph" viewBox="0 0 46 18" focusable="false">
+            <path d="M1 13h10l5-8h10l5 8h13" fill="none" stroke="url(#vizGlyphGrad)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="11" cy="13" r="1.8" fill="#6366F1"/>
+            <circle cx="26" cy="5" r="1.8" fill="#4C8CE8"/>
+            <circle cx="44" cy="13" r="2.4" fill="#22D3EE"/>
+          </svg>
+        </div>
       </div>
       <div class="card reason-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/engineer.svg" alt=""></div>
         <p class="card-title">伴走型・AIエンジニア常駐支援</p>
         <p class="card-text">導入して終わりではなく、AIエンジニアが日単位・週単位で常駐・伴走し、現場に定着するまで併走します。</p>
         <span class="reason-subtag">Forward Deployed Engineer（FDE）型支援</span>
+        <div class="reason-deco" aria-hidden="true">
+          <span class="reason-deco__line"></span>
+          <svg class="reason-deco__glyph" viewBox="0 0 46 18" focusable="false">
+            <path d="M1 5h12l5 8h10l5-8h12" fill="none" stroke="url(#vizGlyphGrad)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="13" cy="5" r="1.8" fill="#6366F1"/>
+            <circle cx="23" cy="13" r="1.8" fill="#4C8CE8"/>
+            <circle cx="44" cy="5" r="2.4" fill="#22D3EE"/>
+          </svg>
+        </div>
       </div>
       <div class="card reason-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/subsidy.svg" alt=""></div>
         <p class="card-title">補助金活用サポート</p>
         <p class="card-text">デジタル化・AI導入補助金、静岡県・静岡市の各種制度など、実質負担を軽減する補助金活用をあわせてご提案します。</p>
         <p class="note mt-4">最新の公募要領をご確認ください</p>
+        <div class="reason-deco" aria-hidden="true">
+          <span class="reason-deco__line"></span>
+          <svg class="reason-deco__glyph" viewBox="0 0 46 18" focusable="false">
+            <path d="M1 13h8l4-6 5 9 5-11 4 8h18" fill="none" stroke="url(#vizGlyphGrad)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="13" r="1.8" fill="#6366F1"/>
+            <circle cx="23" cy="5" r="1.8" fill="#4C8CE8"/>
+            <circle cx="44" cy="13" r="2.4" fill="#22D3EE"/>
+          </svg>
+        </div>
       </div>
     </div>
   </div>
@@ -378,6 +649,7 @@
         <p class="card-text">需要の整理から、ソフト・ハード・開発環境の選定までを伴走支援します。</p>
         <p class="card-fee">初回診断無料／顧問月額10万円〜</p>
         <a href="services/consulting.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/consulting.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
       <div class="card service-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/engineer.svg" alt=""></div>
@@ -385,6 +657,7 @@
         <p class="card-text">日単位・週単位でAI人材を実地または遠隔で派遣する伴走型支援です（FDE型）。</p>
         <p class="card-fee">1日8万円〜（要相談）</p>
         <a href="services/engineer-support.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/engineer.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
       <div class="card service-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/tool.svg" alt=""></div>
@@ -392,6 +665,7 @@
         <p class="card-text">日々の定型業務を、小さなツール開発で自動化・省力化します。</p>
         <p class="card-fee">30万円〜</p>
         <a href="services/automation-tools.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/automation.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
       <div class="card service-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/dx.svg" alt=""></div>
@@ -399,6 +673,7 @@
         <p class="card-text">Google Workspaceなど基盤整備から、AI連携までまとめて支援します。</p>
         <p class="card-fee">要相談</p>
         <a href="services/dx-google.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/dx.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
       <div class="card service-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/sfa.svg" alt=""></div>
@@ -406,6 +681,7 @@
         <p class="card-text">ルート営業・日報・稟議など日本の商習慣に合わせた営業支援システムを構築します。</p>
         <p class="card-fee">50万円〜</p>
         <a href="services/sfa.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/sfa.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
       <div class="card service-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/iot.svg" alt=""></div>
@@ -413,6 +689,7 @@
         <p class="card-text">製造・物流現場のセンサー・機器導入とデータ活用を支援します。</p>
         <p class="card-fee">要相談</p>
         <a href="services/iot.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/iot.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
       <div class="card service-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/training.svg" alt=""></div>
@@ -420,6 +697,7 @@
         <p class="card-text">生成AIの基礎から実務活用までを、社内に定着する形でご支援します。</p>
         <p class="card-fee">5万円〜／回</p>
         <a href="services/training.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/training.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
       <div class="card service-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/inspection.svg" alt=""></div>
@@ -427,6 +705,7 @@
         <p class="card-text">製造業向けに、外観検査や図面認識のAI活用をPoC（試作検証）から支援します。</p>
         <p class="card-fee">PoC 100万円〜</p>
         <a href="services/inspection.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/inspection.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
       <div class="card service-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/realestate.svg" alt=""></div>
@@ -434,6 +713,7 @@
         <p class="card-text">AI査定・反響自動応答・物件資料生成など、不動産会社向けのAI活用をパッケージで支援します。</p>
         <p class="card-fee">要相談</p>
         <a href="services/real-estate-ai.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/realestate.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
       <div class="card service-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/subsidy.svg" alt=""></div>
@@ -441,6 +721,7 @@
         <p class="card-text">活用できる制度の整理と技術面の要件整理を当社が担当し、申請支援は提携専門家（認定支援機関等）と連携します。</p>
         <p class="card-fee">無料相談から</p>
         <a href="services/subsidy.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/subsidy.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
       <div class="card service-card" data-tilt data-reveal>
         <div class="card-icon"><img src="assets/icons/onpremise.svg" alt=""></div>
@@ -448,6 +729,7 @@
         <p class="card-text">データを外部に出せない企業向けに、社内サーバーで完結するプライベートAI環境を構築します。</p>
         <p class="card-fee">要相談</p>
         <a href="services/onpremise-ai.html" class="card-link">詳しく見る &rsaquo;</a>
+        <img class="service-illust" src="assets/illustrations/onpremise.svg" alt="" aria-hidden="true" width="480" height="360" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -466,18 +748,21 @@
 
     <div class="card-grid cols-3" data-reveal-group>
       <a href="industries/manufacturing.html" class="card industry-card" data-tilt data-reveal>
+        <span class="industry-photo" aria-hidden="true"><img src="assets/photos/manufacturing-factory-line.jpg" alt="" loading="lazy" decoding="async"></span>
         <span class="badge badge-on-navy">製造業向け</span>
         <h3 class="card-title mt-4">製造業</h3>
         <p class="card-text">外観検査・図面認識・IoT活用など、静岡が全国4位を誇るものづくりの現場にAIを実装します。</p>
         <span class="card-link">詳しく見る &rsaquo;</span>
       </a>
       <a href="industries/real-estate.html" class="card industry-card" data-tilt data-reveal>
+        <span class="industry-photo" aria-hidden="true"><img src="assets/photos/real-estate-office-building.jpg" alt="" loading="lazy" decoding="async"></span>
         <span class="badge badge-on-navy">不動産・建築業向け</span>
         <h3 class="card-title mt-4">不動産・建築業</h3>
         <p class="card-text">AI査定・反響対応・物件資料生成など、自社実践に基づいた不動産業向けAI活用をご案内します。</p>
         <span class="card-link">詳しく見る &rsaquo;</span>
       </a>
       <a href="industries/local.html" class="card industry-card" data-tilt data-reveal>
+        <span class="industry-photo" aria-hidden="true"><img src="assets/photos/local-tea-plantation.jpg" alt="" loading="lazy" decoding="async"></span>
         <span class="badge badge-on-navy">静岡地場産業向け</span>
         <h3 class="card-title mt-4">静岡地場産業</h3>
         <p class="card-text">茶・食品／水産・物流など、静岡の地場産業に合わせたAI導入・業務効率化を支援します。</p>
@@ -499,19 +784,25 @@
     </div>
 
     <div class="flow-grid" data-reveal-group>
+      <!-- コネクトライン。カードより前に置くことで背面（＝隙間のみ可視）になる -->
+      <div class="flow-line" aria-hidden="true" data-reveal><span class="flow-line__pulse"></span></div>
       <div class="flow-step" data-tilt data-reveal>
+        <img class="flow-icon" src="assets/icons/consulting.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" decoding="async">
         <h3>無料診断</h3>
         <p>現状の業務・課題をヒアリングし、AI活用の可能性を整理します。</p>
       </div>
       <div class="flow-step" data-tilt data-reveal>
+        <img class="flow-icon" src="assets/icons/subsidy.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" decoding="async">
         <h3>ご提案・補助金確認</h3>
         <p>具体的な進め方とあわせて、活用できる補助金制度をご案内します。</p>
       </div>
       <div class="flow-step" data-tilt data-reveal>
+        <img class="flow-icon" src="assets/icons/tool.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" decoding="async">
         <h3>スモールスタート（PoC）</h3>
         <p>小さな範囲で効果を検証しながら、無理のない規模で導入します。</p>
       </div>
       <div class="flow-step" data-tilt data-reveal>
+        <img class="flow-icon" src="assets/icons/engineer.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" decoding="async">
         <h3>伴走・定着</h3>
         <p>AIエンジニアが伴走し、現場で使い続けられる状態まで定着支援します。</p>
       </div>
@@ -713,6 +1004,7 @@
 
 <script src="js/main.js"></script>
 <script src="js/effects.js"></script>
+<script src="js/index-viz.js"></script>
 <script type="module" src="js/hero-bg.js"></script>
 </body>
 </html>

@@ -1,5 +1,12 @@
 # worklog
 
+## 2026-08-24 首页视觉改造方案B（用户「素っ気ない」反馈→代表检收通过上线）
+- [決策] 代表选定方案B（素材复用＋数据可视化）；8/19发注（opus）中途被用户暂停、8/24续作完成
+- 实装: ①统计3卡SVG环形进度图（dasharray按20.4/50.4/18.9实算、IO滚动填充）②理由3卡底部几何装饰 ③服务11卡融入assets/illustrations对应插画（opacity .19、hover .32、z-index:0不挡点击）④行业3卡顶部照片带152px（与行业页hero同款、深色渐变融卡）⑤流程4步发光连线＋流动光点＋步骤图标（移动端左侧竖线串联）
+- 范围: 仅index.html页内样式（+296行）＋新建js/index-viz.js（92行）；design-system.css/effects.js等共用层零改动
+- 検収: 环形百分比与数字独立检算一致、连线与圆心几何实测对齐、elementFromPoint确认插画不拦截点击、tilt/reveal无冻结复发、prefers-reduced-motion全适配（CDP媒体模拟实测）、移动端真390px（CDP override）无横向溢出、emoji=0、console error=0；代表目视4区块截图后批准
+- 已知取舍: 服务卡插画偏含蓄（规格内）、统计数字为入环缩小一号——代表看图接受；移动端流程竖线尾部多伸约88px但被卡片完全遮挡无可见瑕疵
+
 ## 2026-08-19 [fix] btn-primary左端の1px色段差（用户截图报告）
 - 症状: 無料相談等の主按钮左弧端に紫色の細い段差が露出（全站共通、右端はシアンで背景に溶け目立たず）
 - 原因: .btnの`border:1px solid transparent`とグラデーション背景の描画原点不一致——渐变按padding-box起算、1px边框环由边缘色延伸填充，圆弧端头产生1px色阶断层。分层排除实验（原样/去border/改clip/去shadow各4倍放大截图）确证，box-shadow无罪
